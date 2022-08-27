@@ -56,9 +56,10 @@
 			<div id="app" class="row">
 				<article class="col-6 col-12-xsmall work-item" v-for="post in feed" :v-text="post.title">
 					<a :href="post.guid" class="image fit thumb" target="_blank">
-						<img :src="post.thumbnail" alt="" />
+						<img :src="post.thumbnail" alt="" width="300" height="280" />
 					</a>
 					<h3>{{ post.title }}</h3>
+					<!-- <p>{{ post.description}}</p> -->
 				</article>
 			</div>
 			<ul class="actions">

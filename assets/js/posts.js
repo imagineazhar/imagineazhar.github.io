@@ -1,8 +1,14 @@
-var app = new Vue({
-  el: '#app',
+var app1 = new Vue({
+  el: '#app1',
   data: {
-      feed: [],
-      posts: []
+      posts: [],
+      excerpt: function (text) {
+        text = text.replace(/<[^>]*>/g, '');
+        // text = text.slice(text.indexOf('.')+1, 144)
+        text = text.slice(0, 160)
+        // console.log('Excerpt: ' + text)
+        return text;
+    }
   },
   created: function () {
       const url = {rss: "https://medium.com/feed/@imagineazhar"}
@@ -12,8 +18,8 @@ var app = new Vue({
       axios.get(data)
           .then(function (response) {
               // handle success
-              this.feed = response.data.items
-              console.log(this.feed)
+              this.posts = response.data.items
+            //   console.log(this.posts)
           }.bind(this))
           .catch(function (error) {
               // handle error

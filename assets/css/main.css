@@ -3010,7 +3010,7 @@ input, select, textarea {
 					}
 
 				#header > .inner {
-					margin-bottom: 0;
+					/* margin-bottom: 0; */
 				}
 
 		/* Footer */

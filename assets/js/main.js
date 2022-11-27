@@ -11,6 +11,7 @@
 		$header = $('#header'),
 		$footer = $('#footer'),
 		$main = $('#main'),
+		$nav = $('#nav'),
 		settings = {
 
 			// Parallax background effect?
@@ -51,13 +52,21 @@
 		}
 
 	// Footer.
+
+		// Original breakpoint settings for <=medium
 		breakpoints.on('<=medium', function() {
 			$footer.insertAfter($main);
 		});
 
+		// Custom breakpoint settings for <=medium
+		// breakpoints.on('<=medium', function() {
+		// 	$footer.insertAfter($header);
+		// });
+
 		breakpoints.on('>medium', function() {
 			$footer.appendTo($header);
-		});
+		}); 
+		
 
 	// Header.
 
@@ -92,6 +101,17 @@
 				});
 
 			}
+
+		// Nav.
+
+		breakpoints.on('<=medium', function() {
+			$nav.css('flex-direction', 'row');
+			$nav.css('justify-content', 'center');
+		});
+
+		breakpoints.on('>medium', function() {
+			$nav.css('flex-direction', 'column');
+		}); 
 
 	// Main Sections: Two.
 

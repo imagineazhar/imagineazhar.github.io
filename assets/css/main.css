@@ -83,7 +83,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #F0EBE3;
+		background: #EEEEEE;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -98,7 +98,7 @@ input, select, textarea {
 		}
 
 	body, input, select, textarea {
-		color: #636363;
+		color: #181823;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
@@ -111,13 +111,13 @@ input, select, textarea {
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		border-bottom: dotted 1px;
-		color: #49bf9d;
+		color: #EEEEEE;
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #49bf9d !important;
+			color: #E9F8F9 !important;
 			text-decoration: none;
 		}
 
@@ -135,7 +135,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #636363;
+		color: #181823;
 		font-weight: 400;
 		line-height: 1em;
 		margin: 0 0 1em 0;

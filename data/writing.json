@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cognitive-load-dashboards",
+    "title": "The Cognitive Load of Dashboards",
+    "description": "How to design analytical interfaces that enhance rather than overwhelm decision-makers.",
+    "link": "#",
+    "published": "2024-01-15",
+    "featured": true
+  },
+  {
+    "id": "metrics-to-meaning",
+    "title": "From Metrics to Meaning",
+    "description": "Building narrative frameworks that transform raw data into strategic insights.",
+    "link": "#",
+    "published": "2024-02-01",
+    "featured": true
+  },
+  {
+    "id": "scaling-analytics-systems",
+    "title": "Scaling Analytics Systems",
+    "description": "Designing enterprise-grade analytical platforms that grow with organizational complexity.",
+    "link": "#",
+    "published": "2024-02-15",
+    "featured": true
+  }
+]

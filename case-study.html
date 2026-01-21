@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>Muhammad Azhar - Case Study: [Project Name]</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Case study: [Project Name] - Data visualization and analytics implementation by Muhammad Azhar">
+	<meta name="keywords" content="Business Intelligence, Tableau, Data Visualization, Case Study, Analytics">
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/profile_img.png" type="image/x-icon">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.13"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="is-preload">
+
+	<!-- Navigation -->
+	<nav id="nav" class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="nav-logo">Muhammad Azhar</a>
+			<ul class="nav-menu">
+				<li><a href="index.html#projects" class="nav-link">Work</a></li>
+				<li><a href="index.html#writing" class="nav-link">Writing</a></li>
+				<li><a href="index.html#about" class="nav-link">About</a></li>
+				<li><a href="index.html#contact" class="nav-link">Contact</a></li>
+			</ul>
+			<div class="nav-toggle">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Case Study Header -->
+	<section class="case-study-header section">
+		<div class="container">
+			<div class="case-study-intro">
+				<div class="case-study-meta">
+					<span class="case-study-category">[Primary Technology]</span>
+					<span class="case-study-year">[Year]</span>
+				</div>
+				<h1 class="case-study-title">[Project Title]</h1>
+				<p class="case-study-subtitle">[One-line description of the business impact]</p>
+				<div class="case-study-tags">
+					<span class="tech-tag" v-for="tech in project.technologies" :key="tech">{{ tech }}</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Main Content -->
+	<div id="main">
+
+		<!-- 1. Context -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">01</span>
+					<h2>Context</h2>
+				</div>
+
+				<div class="context-grid">
+					<div class="context-item">
+						<h3>Organization Type</h3>
+						<p class="context-value">[Organization Type - e.g., Fortune 500 Financial Services, Healthcare System, Manufacturing Enterprise]</p>
+					</div>
+					<div class="context-item">
+						<h3>Business Problem</h3>
+						<p class="context-description">[Clear statement of the core business challenge that needed to be solved]</p>
+					</div>
+					<div class="context-item">
+						<h3>Audience</h3>
+						<p class="context-value">[Who the dashboard was built for - e.g., C-suite executives, operations managers, department leads]</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. The Analytical Challenge -->
+		<section class="case-study-section section section-alt">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">02</span>
+					<h2>The Analytical Challenge</h2>
+				</div>
+
+				<div class="challenge-grid">
+					<div class="challenge-item">
+						<h3>What Was Unclear</h3>
+						<p>[Specific insights or metrics that were missing or difficult to access before the solution]</p>
+					</div>
+					<div class="challenge-item">
+						<h3>Decisions Being Blocked</h3>
+						<p>[Key business decisions that couldn't be made effectively due to lack of visibility or data access]</p>
+					</div>
+					<div class="challenge-item">
+						<h3>Data Complexity</h3>
+						<p>[Technical challenges like data silos, inconsistent formats, volume issues, or integration problems]</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. Design & System Thinking -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">03</span>
+					<h2>Design & System Thinking</h2>
+				</div>
+
+				<div class="design-thinking-grid">
+					<div class="design-item">
+						<h3>Metric Selection Logic</h3>
+						<p>[Why these specific KPIs were chosen and how they align with business objectives]</p>
+						<ul class="design-list">
+							<li>[Key metric 1] - [rationale]</li>
+							<li>[Key metric 2] - [rationale]</li>
+							<li>[Key metric 3] - [rationale]</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Layout Reasoning</h3>
+						<p>[How the information hierarchy was structured to guide user attention and decision-making]</p>
+						<ul class="design-list">
+							<li>[Layout principle 1] - [why it was chosen]</li>
+							<li>[Layout principle 2] - [why it was chosen]</li>
+							<li>[Layout principle 3] - [why it was chosen]</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Tradeoffs Made</h3>
+						<p>[Balancing decisions between competing priorities like speed vs. depth, simplicity vs. detail]</p>
+						<ul class="design-list">
+							<li>[Tradeoff 1] - [decision and reasoning]</li>
+							<li>[Tradeoff 2] - [decision and reasoning]</li>
+							<li>[Tradeoff 3] - [decision and reasoning]</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 4. Outcome -->
+		<section class="case-study-section section section-alt">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">04</span>
+					<h2>Outcome</h2>
+				</div>
+
+				<div class="outcome-grid">
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">[Quantifiable Result]</span>
+							<span class="metric-label">[Metric Name]</span>
+						</div>
+						<p class="outcome-description">[Explanation of the improvement and its business impact]</p>
+					</div>
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">[Time/Percentage]</span>
+							<span class="metric-label">[Improvement Area]</span>
+						</div>
+						<p class="outcome-description">[How this change affected decision-making or operations]</p>
+					</div>
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">[User Adoption Rate]</span>
+							<span class="metric-label">[Usage Metric]</span>
+						</div>
+						<p class="outcome-description">[How well the solution was adopted and integrated into workflows]</p>
+					</div>
+				</div>
+
+				<div class="outcome-quote">
+					<blockquote>
+						<p>"[Direct quote from stakeholder about the impact and value delivered]"</p>
+						<cite>— [Stakeholder Title], [Organization Type]</cite>
+					</blockquote>
+				</div>
+			</div>
+		</section>
+
+		<!-- 5. Visuals -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">05</span>
+					<h2>Visuals</h2>
+				</div>
+
+				<div class="visuals-grid">
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/[project-slug]/screenshot-1.jpg" alt="[Screenshot description]" />
+							<div class="visual-caption">
+								<p>[Brief description of what this screenshot shows and why it's important]</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/[project-slug]/screenshot-2.jpg" alt="[Screenshot description]" />
+							<div class="visual-caption">
+								<p>[Brief description of what this screenshot shows and why it's important]</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/[project-slug]/screenshot-3.jpg" alt="[Screenshot description]" />
+							<div class="visual-caption">
+								<p>[Brief description of what this screenshot shows and why it's important]</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Optional 4th visual -->
+					<div class="visual-item" v-if="hasFourthVisual">
+						<div class="visual-image">
+							<img src="images/case-studies/[project-slug]/screenshot-4.jpg" alt="[Screenshot description]" />
+							<div class="visual-caption">
+								<p>[Brief description of what this screenshot shows and why it's important]</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Next Case Study / Back to Work -->
+		<section class="case-study-navigation section section-alt">
+			<div class="container">
+				<div class="navigation-grid">
+					<div class="nav-item">
+						<a href="index.html#projects" class="btn btn-secondary">
+							<span>← Back to Work</span>
+						</a>
+					</div>
+					<div class="nav-item">
+						<a href="[next-case-study-url]" class="btn btn-primary" v-if="nextCaseStudy">
+							<span>Next Case Study →</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Muhammad Azhar</h3>
+					<p>Lead Data Visualization & Analytics Strategy<br>
+					Transforming data into actionable insights for complex organizations.</p>
+					<div class="footer-social">
+						<a href="https://www.linkedin.com/in/imagineazhar" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a href="https://twitter.com/imagineazhar" target="_blank" rel="noopener" aria-label="Twitter">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="https://github.com/imagineazhar" target="_blank" rel="noopener" aria-label="GitHub">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://medium.com/@imagineazhar" target="_blank" rel="noopener" aria-label="Medium">
+							<i class="fab fa-medium"></i>
+						</a>
+					</div>
+				</div>
+				<div class="footer-section">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="index.html#projects">Selected Work</a></li>
+						<li><a href="index.html#writing">Writing & Thinking</a></li>
+						<li><a href="index.html#about">About</a></li>
+						<li><a href="index.html#contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Services</h4>
+					<ul>
+						<li>Data Visualization</li>
+						<li>Business Intelligence</li>
+						<li>Analytics Strategy</li>
+						<li>Dashboard Design</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Get in Touch</h4>
+					<p>Ready to transform your data?</p>
+					<a href="index.html#contact" class="footer-cta">Start a Conversation</a>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="copyright">
+					<p>&copy; 2024 Muhammad Azhar. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

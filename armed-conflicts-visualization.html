@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>Muhammad Azhar - Case Study: Lives Lost in Armed Conflicts — 2024</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Case study: Lives Lost in Armed Conflicts — 2024 - Interactive data visualization examining the human cost of armed conflict">
+	<meta name="keywords" content="Data Visualization, Data Journalism, Conflict Data, Tableau, Interactive Design, Armed Conflicts">
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/profile_img.png" type="image/x-icon">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.13"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="is-preload">
+
+	<!-- Navigation -->
+	<nav id="nav" class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="nav-logo">Muhammad Azhar</a>
+			<ul class="nav-menu">
+				<li><a href="index.html#projects" class="nav-link">Work</a></li>
+				<li><a href="index.html#writing" class="nav-link">Writing</a></li>
+				<li><a href="index.html#about" class="nav-link">About</a></li>
+				<li><a href="index.html#contact" class="nav-link">Contact</a></li>
+			</ul>
+			<div class="nav-toggle">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Case Study Header -->
+	<section class="case-study-header section">
+		<div class="container">
+			<div class="case-study-intro">
+				<div class="case-study-meta">
+					<span class="case-study-category">Tableau</span>
+					<span class="case-study-year">2024</span>
+				</div>
+				<h1 class="case-study-title">Lives Lost in Armed Conflicts — 2024</h1>
+				<p class="case-study-subtitle">An interactive data visualization examining the human cost of armed conflict through publicly available data.</p>
+				<div class="case-study-tags">
+					<span class="tech-tag">Tableau</span>
+					<span class="tech-tag">Data Journalism</span>
+					<span class="tech-tag">Conflict Datasets</span>
+					<span class="tech-tag">Interactive Design</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Main Content -->
+	<div id="main">
+
+		<!-- 1. Context -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">01</span>
+					<h2>Context</h2>
+				</div>
+
+				<div class="context-details">
+					<p>This project explores lives lost in armed conflicts in 2024, using publicly available data to surface patterns, scale, and geographic distribution of fatalities. The objective was not to provide political analysis, but to present the data in a way that allows viewers to grasp the magnitude of loss and compare conflicts without abstraction.</p>
+					<div class="context-tools">
+						<h4>Tools & Role</h4>
+						<p><strong>Tools:</strong> Tableau, public conflict datasets</p>
+						<p><strong>Role:</strong> Concept, analysis, design, and development</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+		<!-- 2. Design & System Thinking -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">02</span>
+					<h2>Design & System Thinking</h2>
+				</div>
+
+				<div class="design-thinking-grid">
+					<div class="design-item">
+						<h3>Focus on Comparability, Not Commentary</h3>
+						<p>The visualization was designed to allow users to compare conflicts across regions, relative scale of lives lost, and distribution patterns over time and geography.</p>
+						<ul class="design-list">
+							<li><strong>No subjective framing</strong> - Data speaks for itself without narrative overlays</li>
+							<li><strong>Regional comparisons</strong> - Side-by-side conflict analysis</li>
+							<li><strong>Scale visualization</strong> - Magnitude representation without distortion</li>
+							<li><strong>Temporal patterns</strong> - Distribution over time and geography</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Visual Restraint by Design</h3>
+						<p>Given the subject matter, visual decisions were intentionally conservative to ensure focus remained on the data rather than dramatic effects.</p>
+						<ul class="design-list">
+							<li><strong>Limited color palette</strong> - Minimal, respectful color usage</li>
+							<li><strong>Clean layouts</strong> - Uncluttered, readable design</li>
+							<li><strong>Decorative minimalism</strong> - Avoidance of visual embellishments</li>
+							<li><strong>Clarity over spectacle</strong> - Accuracy prioritized over dramatic effect</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Interactive Exploration Over Static Storytelling</h3>
+						<p>Rather than prescribing a single narrative, the visualization enables independent exploration and organic movement between overview and detail.</p>
+						<ul class="design-list">
+							<li><strong>User-driven exploration</strong> - Independent conflict investigation</li>
+							<li><strong>Flexible filtering</strong> - Focus on regions of interest</li>
+							<li><strong>Organic navigation</strong> - Overview to detail transitions</li>
+							<li><strong>Interpretive freedom</strong> - No forced conclusions or narratives</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="design-accessibility">
+					<h3>Accessibility and Clarity</h3>
+					<p>The dashboard was structured to be readable without prior context, with clear labels, intuitive interactions, and minimal technical terminology.</p>
+				</div>
+			</div>
+		</section>
+
+
+
+		<!-- 4. Visuals -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">04</span>
+					<h2>Visuals</h2>
+				</div>
+
+
+
+				<div class="tableau-embed">
+					<div class='tableauPlaceholder' id='viz1768843462816' style='position: relative'><noscript><a href='#'><img alt='Lives Lost ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Li&#47;LivesLostinArmedConflicts2024&#47;LivesLost&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='LivesLostinArmedConflicts2024&#47;LivesLost' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Li&#47;LivesLostinArmedConflicts2024&#47;LivesLost&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>
+					<script type='text/javascript'>
+						var divElement = document.getElementById('viz1768843462816');
+						var vizElement = divElement.getElementsByTagName('object')[0];
+						vizElement.style.width='2000px';vizElement.style.height='800px';
+						var scriptElement = document.createElement('script');
+						scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+						vizElement.parentNode.insertBefore(scriptElement, vizElement);
+					</script>
+				</div>
+
+				<div class="key-takeaway">
+					<h3>Key Takeaway</h3>
+					<p>Data journalism is most effective when it reduces abstraction. By presenting conflict-related data in a clear, comparative, and interactive form, this project aims to help viewers better understand scale—without editorializing or sensationalizing the underlying data.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Next Case Study / Back to Work -->
+		<section class="case-study-navigation section section-alt">
+			<div class="container">
+				<div class="navigation-grid">
+					<div class="nav-item">
+						<a href="index.html#projects" class="btn btn-secondary">
+							<span>← Back to Work</span>
+						</a>
+					</div>
+					<div class="nav-item">
+						<a href="fx-derivatives-performance.html" class="btn btn-primary">
+							<span>Next Case Study →</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Muhammad Azhar</h3>
+					<p>Lead Data Visualization & Analytics Strategy<br>
+					Transforming data into actionable insights for complex organizations.</p>
+					<div class="footer-social">
+						<a href="https://www.linkedin.com/in/imagineazhar" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a href="https://twitter.com/imagineazhar" target="_blank" rel="noopener" aria-label="Twitter">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="https://github.com/imagineazhar" target="_blank" rel="noopener" aria-label="GitHub">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://medium.com/@imagineazhar" target="_blank" rel="noopener" aria-label="Medium">
+							<i class="fab fa-medium"></i>
+						</a>
+					</div>
+				</div>
+				<div class="footer-section">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="index.html#projects">Selected Work</a></li>
+						<li><a href="index.html#writing">Writing & Thinking</a></li>
+						<li><a href="index.html#about">About</a></li>
+						<li><a href="index.html#contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Services</h4>
+					<ul>
+						<li>Data Visualization</li>
+						<li>Business Intelligence</li>
+						<li>Analytics Strategy</li>
+						<li>Dashboard Design</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Get in Touch</h4>
+					<p>Ready to transform your data?</p>
+					<a href="index.html#contact" class="footer-cta">Start a Conversation</a>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="copyright">
+					<p>&copy; 2024 Muhammad Azhar. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

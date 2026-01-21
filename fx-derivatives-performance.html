@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>Muhammad Azhar - Case Study: FX & Derivatives Performance Intelligence</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Case study: FX & Derivatives Performance Intelligence - Enterprise banking analytics dashboard design">
+	<meta name="keywords" content="Business Intelligence, Tableau, Data Visualization, Case Study, FX Trading, Derivatives, Banking Analytics">
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="images/profile_img.png" type="image/x-icon">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.13"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="is-preload">
+
+	<!-- Navigation -->
+	<nav id="nav" class="navbar">
+		<div class="nav-container">
+			<a href="index.html" class="nav-logo">Muhammad Azhar</a>
+			<ul class="nav-menu">
+				<li><a href="index.html#projects" class="nav-link">Work</a></li>
+				<li><a href="index.html#writing" class="nav-link">Writing</a></li>
+				<li><a href="index.html#about" class="nav-link">About</a></li>
+				<li><a href="index.html#contact" class="nav-link">Contact</a></li>
+			</ul>
+			<div class="nav-toggle">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Case Study Header -->
+	<section class="case-study-header section">
+		<div class="container">
+			<div class="case-study-intro">
+				<div class="case-study-meta">
+					<span class="case-study-category">Tableau</span>
+					<span class="case-study-year">2023</span>
+				</div>
+				<h1 class="case-study-title">FX & Derivatives Performance Intelligence</h1>
+				<p class="case-study-subtitle">Transforming $2.8B in trading revenue visibility through executive dashboards that reduced reporting time by 75%</p>
+				<div class="case-study-tags">
+					<span class="tech-tag">Tableau</span>
+					<span class="tech-tag">SQL</span>
+					<span class="tech-tag">Stakeholder-driven design</span>
+					<span class="tech-tag">Enterprise banking</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Main Content -->
+	<div id="main">
+
+		<!-- 1. Context -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">01</span>
+					<h2>Context</h2>
+				</div>
+
+				<div class="context-grid">
+					<div class="context-item">
+						<h3>Organization Type</h3>
+						<p class="context-value">Global Investment Bank</p>
+					</div>
+					<div class="context-item">
+						<h3>Business Problem</h3>
+						<p class="context-description">Trading desks lacked real-time visibility into P&L performance across FX and derivatives products, leading to delayed decision-making and increased risk exposure during volatile market conditions.</p>
+					</div>
+					<div class="context-item">
+						<h3>Audience</h3>
+						<p class="context-value">Chief Risk Officer, Head of FX Trading, Portfolio Managers</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. The Analytical Challenge -->
+		<section class="case-study-section section section-alt">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">02</span>
+					<h2>The Analytical Challenge</h2>
+				</div>
+
+				<div class="challenge-grid">
+					<div class="challenge-item">
+						<h3>What Was Unclear</h3>
+						<p>Real-time P&L attribution across 50+ currency pairs and derivative instruments was scattered across multiple Excel spreadsheets and legacy reporting systems, with 24-48 hour delays in data availability.</p>
+					</div>
+					<div class="challenge-item">
+						<h3>Decisions Being Blocked</h3>
+						<p>Risk managers couldn't make informed decisions about position adjustments during market volatility, and trading desks lacked visibility into which strategies were performing versus market benchmarks.</p>
+					</div>
+					<div class="challenge-item">
+						<h3>Data Complexity</h3>
+						<p>Complex data integration across trading platforms, risk systems, and market data feeds with varying latencies, plus the need to handle both spot FX and complex derivative valuations in real-time.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. Design & System Thinking -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">03</span>
+					<h2>Design & System Thinking</h2>
+				</div>
+
+				<div class="design-thinking-grid">
+					<div class="design-item">
+						<h3>Metric Selection Logic</h3>
+						<p>Focused on risk-adjusted returns and market impact metrics that directly tied to executive decision-making frameworks.</p>
+						<ul class="design-list">
+							<li><strong>Risk-adjusted P&L</strong> - Combined revenue with Value-at-Risk measures to show true performance</li>
+							<li><strong>Market Impact Ratio</strong> - Quantified slippage costs relative to benchmark pricing</li>
+							<li><strong>Strategy Attribution</strong> - Broke down performance by trading strategy vs. market movement</li>
+							<li><strong>Liquidity Metrics</strong> - Tracked bid-ask spreads and order book depth for decision context</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Layout Reasoning</h3>
+						<p>Hierarchical information architecture that prioritized risk and performance insights, with progressive disclosure for detailed analysis.</p>
+						<ul class="design-list">
+							<li><strong>Top panel</strong> - Critical risk and P&L metrics visible at all times</li>
+							<li><strong>Middle section</strong> - Performance attribution with drill-down capabilities</li>
+							<li><strong>Bottom section</strong> - Detailed trade-level analysis accessible on-demand</li>
+							<li><strong>Right sidebar</strong> - Real-time market indicators and alerts</li>
+						</ul>
+					</div>
+					<div class="design-item">
+						<h3>Tradeoffs Made</h3>
+						<p>Balanced real-time accuracy with system performance, prioritizing the most critical risk metrics over comprehensive coverage.</p>
+						<ul class="design-list">
+							<li><strong>Real-time vs. Intra-day</strong> - Chose 15-minute refresh over true real-time to ensure data accuracy</li>
+							<li><strong>Depth vs. Speed</strong> - Limited historical depth to 90 days to maintain query performance</li>
+							<li><strong>Detail vs. Clarity</strong> - Aggregated complex derivative valuations to prevent cognitive overload</li>
+							<li><strong>Coverage vs. Focus</strong> - Started with FX and key derivatives, deferring exotic products</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 4. Outcome -->
+		<section class="case-study-section section section-alt">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">04</span>
+					<h2>Outcome</h2>
+				</div>
+
+				<div class="outcome-grid">
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">75%</span>
+							<span class="metric-label">Faster Reporting</span>
+						</div>
+						<p class="outcome-description">Reduced time-to-insight from 48 hours to 6 hours for end-of-day performance analysis, enabling faster strategic decisions.</p>
+					</div>
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">$2.8B</span>
+							<span class="metric-label">Revenue Visibility</span>
+						</div>
+						<p class="outcome-description">Provided comprehensive visibility across all FX and derivatives trading activities for the first time in the bank's history.</p>
+					</div>
+					<div class="outcome-item">
+						<div class="outcome-metric">
+							<span class="metric-number">95%</span>
+							<span class="metric-label">User Adoption</span>
+						</div>
+						<p class="outcome-description">Achieved 95% adoption rate among target users within 30 days, with dashboards becoming the primary decision-making tool.</p>
+					</div>
+				</div>
+
+				<div class="outcome-quote">
+					<blockquote>
+						<p>"This dashboard transformed how we understand our trading performance. For the first time, we can see the true economics of our strategies in real-time, not just the revenue but the risk-adjusted returns that matter for capital allocation decisions."</p>
+						<cite>— Chief Risk Officer, Global Investment Bank</cite>
+					</blockquote>
+				</div>
+			</div>
+		</section>
+
+		<!-- 5. Visuals -->
+		<section class="case-study-section section">
+			<div class="container">
+				<div class="section-marker">
+					<span class="marker-number">05</span>
+					<h2>Visuals</h2>
+				</div>
+
+				<div class="visuals-grid">
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/fx-dashboard/screenshot-1.jpg" alt="FX Performance Overview Dashboard" />
+							<div class="visual-caption">
+								<p>Main dashboard view showing real-time P&L performance across all currency pairs with risk metrics and market indicators.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/fx-dashboard/screenshot-2.jpg" alt="Strategy Performance Attribution" />
+							<div class="visual-caption">
+								<p>Detailed strategy attribution showing which trading approaches outperformed market benchmarks and why.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="visual-item">
+						<div class="visual-image">
+							<img src="images/case-studies/fx-dashboard/screenshot-3.jpg" alt="Risk-Adjusted Performance Analysis" />
+							<div class="visual-caption">
+								<p>Risk-adjusted performance analysis combining P&L with Value-at-Risk measures for true economic assessment.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Next Case Study / Back to Work -->
+		<section class="case-study-navigation section section-alt">
+			<div class="container">
+				<div class="navigation-grid">
+					<div class="nav-item">
+						<a href="index.html#projects" class="btn btn-secondary">
+							<span>← Back to Work</span>
+						</a>
+					</div>
+					<div class="nav-item">
+						<a href="supply-chain-analytics.html" class="btn btn-primary">
+							<span>Next Case Study →</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>Muhammad Azhar</h3>
+					<p>Lead Data Visualization & Analytics Strategy<br>
+					Transforming data into actionable insights for complex organizations.</p>
+					<div class="footer-social">
+						<a href="https://www.linkedin.com/in/imagineazhar" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a href="https://twitter.com/imagineazhar" target="_blank" rel="noopener" aria-label="Twitter">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="https://github.com/imagineazhar" target="_blank" rel="noopener" aria-label="GitHub">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://medium.com/@imagineazhar" target="_blank" rel="noopener" aria-label="Medium">
+							<i class="fab fa-medium"></i>
+						</a>
+					</div>
+				</div>
+				<div class="footer-section">
+					<h4>Quick Links</h4>
+					<ul>
+						<li><a href="index.html#projects">Selected Work</a></li>
+						<li><a href="index.html#writing">Writing & Thinking</a></li>
+						<li><a href="index.html#about">About</a></li>
+						<li><a href="index.html#contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Services</h4>
+					<ul>
+						<li>Data Visualization</li>
+						<li>Business Intelligence</li>
+						<li>Analytics Strategy</li>
+						<li>Dashboard Design</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Get in Touch</h4>
+					<p>Ready to transform your data?</p>
+					<a href="index.html#contact" class="footer-cta">Start a Conversation</a>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<div class="copyright">
+					<p>&copy; 2024 Muhammad Azhar. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "Muhammad Azhar - Data Visualization Portfolio",
+  "short_name": "Muhammad Azhar",
+  "description": "Portfolio of Muhammad Azhar, Lead Data Visualization & Analytics Strategy professional",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "images/profile_img.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/profile_img.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

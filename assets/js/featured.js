@@ -1,5 +1,5 @@
 var app2 = new Vue({
-  el: '#app2',
+  el: '#featured',
   data: {
       feed: [
             {
@@ -19,26 +19,5 @@ var app2 = new Vue({
             }
         ]
   },
-//   created: function () {
-//       const url = {rss: "https://public.tableau.com/app/profile/m.azhar"}
-//       const data = "https://public.tableau.com/profile/api/m.azhar"
-//       // let res = []
 
-//       axios.get(data)
-//           .then(function (response) {
-//               // handle success
-//               this.feed = response.data.items
-//               console.log(this.feed)
-//           }.bind(this))
-//           .catch(function (error) {
-//               // handle error
-//               console.log(error);
-//           })
-//           .finally(function () {
-//               // always executed
-//               // this.feed.map((items, index) => {
-//               //     console.log('#' + index + ' - ' + feed[index].title)
-//               // })
-//           });
-//   },
 })

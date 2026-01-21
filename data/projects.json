@@ -1,0 +1,21 @@
+[
+  {
+    "id": "fx-derivatives-performance",
+    "title": "FX & Derivatives Performance Intelligence",
+    "description": "Designing executive dashboards to monitor revenue, risk, and trading performance across global markets.",
+    "technologies": ["Tableau", "SQL", "Stakeholder-driven design", "Enterprise banking"],
+    "link": "fx-derivatives-performance.html",
+    "featured": true,
+    "year": 2023
+  },
+ 
+  {
+    "id": "armed-conflicts-visualization",
+    "title": "Lives Lost in Armed Conflicts — 2024",
+    "description": "An interactive data visualization examining the human cost of armed conflict through publicly available data.",
+    "technologies": ["Tableau", "Data Journalism", "Conflict Datasets", "Interactive Design"],
+    "link": "armed-conflicts-visualization.html",
+    "featured": true,
+    "year": "2024"
+  }
+]

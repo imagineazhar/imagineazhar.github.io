@@ -1,0 +1,100 @@
+// =============================================================================
+// MAIN SCSS FILE - Modern Portfolio Website
+// =============================================================================
+// Author: Muhammad Azhar
+// Description: Main stylesheet for a modern, accessible portfolio website
+// Features: Responsive design, accessibility compliance, performance optimized
+// Dependencies: libs/vars.scss, libs/functions.scss, libs/mixins.scss, libs/vendor.scss
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// 1. DEPENDENCIES & LIBRARIES
+// -----------------------------------------------------------------------------
+
+@import 'libs/vars';
+@import 'libs/functions';
+@import 'libs/mixins';
+@import 'libs/vendor';
+@import 'libs/breakpoints';
+@import 'libs/typography';
+@import 'libs/html-grid';
+
+// External Fonts & Icons
+@import url('fontawesome-all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+// -----------------------------------------------------------------------------
+// 2. DESIGN TOKENS & VARIABLES
+// -----------------------------------------------------------------------------
+// This section defines the core design tokens used throughout the site.
+// All colors, typography, spacing, and other design values are centralized here
+// for consistency and easy maintenance.
+//
+// Color Palette:
+// - Primary: Main brand color for CTAs and important elements
+// - Accent: Secondary color for highlights and links
+// - Text colors: Hierarchy from dark to light for readability
+// - Backgrounds: Clean, minimal backgrounds with subtle variations
+//
+// Spacing Scale: 8px base unit for consistent rhythm
+// Typography: Inter font family with optimized line heights
+// Breakpoints: Mobile-first responsive design
+// -----------------------------------------------------------------------------
+
+// Color Palette - Professional & Trust-Building
+$primary-color: var(--color-primary);
+$accent-color: var(--color-accent);
+$secondary-color: #2d3748; // Charcoal
+
+// Text Colors
+$text-color: #2d3748; // Dark Gray
+$text-light: #718096; // Medium Gray
+
+// Background Colors
+$bg-color: #ffffff; // Pure White
+$bg-alt: #f7fafc; // Light Gray Background
+
+// Utility Colors
+$border-color: #e2e8f0; // Light Border
+$success-color: #38a169; // Green for CTAs
+$shadow: rgba(0, 0, 0, 0.1);
+
+// Typography Scale
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.6;
+
+// Heading Sizes
+$h1-size: 3rem;
+$h2-size: 2.25rem;
+$h3-size: 1.875rem;
+$h4-size: 1.5rem;
+$h5-size: 1.25rem;
+$h6-size: 1rem;
+
+// Spacing Scale (8px base)
+$space-xs: 0.5rem; // 8px
+$space-sm: 1rem; // 16px
+$space-md: 1.5rem; // 24px
+$space-lg: 2rem; // 32px
+$space-xl: 3rem; // 48px
+$space-2xl: 4rem; // 64px
+$space-3xl: 6rem; // 96px
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1200px;
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Z-Index Scale
+$z-index-base: 1;
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;

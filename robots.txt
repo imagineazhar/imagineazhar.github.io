@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block admin and development files
+Disallow: /admin.html
+Disallow: /temp.css
+Disallow: /test_minimal.scss
+Disallow: /assets/css/main_temp.css
+Disallow: /cms-cli.js
+Disallow: /create-case-study.sh
+
+# Allow sitemap
+Sitemap: https://imagineazhar.github.io/sitemap.xml

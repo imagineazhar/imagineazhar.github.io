@@ -22,12 +22,12 @@
 .about-horizontal {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-8);
+  gap: clamp(3rem, 6vw, 4rem); /* Content→section: 48–64px */
   align-items: center;
 }
 
 .about-text p {
-  margin-bottom: var(--space-4);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem); /* Paragraph spacing: 16–24px */
   line-height: 1.6;
   color: #666666;
 }
@@ -47,7 +47,7 @@
 @media (max-width: 768px) {
   .about-horizontal {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    gap: clamp(2rem, 4vw, 3rem); /* Content→section: 32–48px for mobile */
   }
 
   .about-image img {
@@ -89,35 +89,32 @@
    ================================================================= */
 
 :root {
-  /* Apple-Inspired Spacing Scale - Generous & Breathing Room */
-  --space-1: 0.25rem;   /* 4px - Micro spacing */
-  --space-2: 0.5rem;    /* 8px - Small gaps */
-  --space-3: 0.75rem;   /* 12px - Component spacing */
-  --space-4: 1rem;      /* 16px - Content padding */
-  --space-5: 1.25rem;   /* 20px - Button padding */
-  --space-6: 1.5rem;    /* 24px - Medium spacing */
-  --space-7: 2rem;      /* 32px - Large gaps */
-  --space-8: 2.5rem;    /* 40px - Section gaps */
-  --space-9: 3rem;      /* 48px - Container padding */
-  --space-10: 4rem;     /* 64px - Major sections */
-  --space-11: 4.5rem;   /* 72px - Hero elements */
-  --space-12: 6rem;     /* 96px - Large containers */
-  --space-13: 8rem;     /* 128px - Maximum spacing */
+  /* 8px Spacing Scale - All values are multiples of 8px */
+  --space-1: 0.5rem;    /* 8px - Smallest gap */
+  --space-2: 1rem;      /* 16px - Small spacing */
+  --space-3: 1.5rem;    /* 24px - Component spacing */
+  --space-4: 2rem;      /* 32px - Content padding */
+  --space-5: 2.5rem;    /* 40px - Section gaps */
+  --space-6: 3rem;      /* 48px - Container padding */
+  --space-7: 4rem;      /* 64px - Major sections */
+  --space-8: 5rem;      /* 80px - Large sections */
+  --space-9: 6rem;      /* 96px - Hero/feature */
+  --space-10: 8rem;     /* 128px - Maximum spacing */
 
   /* Color System */
   --color-accent: #ff8c00;        /* Orange accent - single consistent color */
   --color-accent-hover: #cc7000;  /* Darker orange on hover */
 
-  /* Apple-Inspired Section Spacing - Generous Whitespace */
-  --section-spacing-xs: clamp(3rem, 8vh, 4rem);     /* 48px - 64px - Compact sections */
-  --section-spacing-sm: clamp(4rem, 10vh, 5rem);    /* 64px - 80px - Content sections */
-  --section-spacing-md: clamp(5rem, 12vh, 6rem);    /* 80px - 96px - Feature sections */
-  --section-spacing-lg: clamp(7rem, 15vh, 8rem);    /* 112px - 128px - Hero sections */
-  --section-spacing-xl: clamp(9rem, 18vh, 11rem);   /* 144px - 176px - Landing pages */
+  /* 8px-based Section Spacing */
+  --section-spacing-xs: clamp(2rem, 6vh, 3rem);     /* 32px - 48px - Compact sections */
+  --section-spacing-sm: clamp(3rem, 8vh, 4rem);     /* 48px - 64px - Content sections */
+  --section-spacing-md: clamp(4rem, 10vh, 5rem);    /* 64px - 80px - Feature sections */
+  --section-spacing-lg: clamp(5rem, 12vh, 6rem);    /* 80px - 96px - Hero sections */
+  --section-spacing-xl: clamp(8rem, 16vh, 10rem);   /* 128px - 160px - Landing pages */
 
-  /* Apple-Inspired Container Spacing - Breathing Room */
-  --container-padding-xs: clamp(1.5rem, 3vw, 2rem);   /* 24px - 32px - Tight containers */
-  --container-padding-sm: clamp(2rem, 4vw, 2.5rem);   /* 32px - 40px - Content containers */
+  /* 8px-based Container Spacing */
+  --container-padding-xs: clamp(1rem, 2vw, 1.5rem);   /* 16px - 24px - Tight containers */
+  --container-padding-sm: clamp(1.5rem, 3vw, 2rem);   /* 24px - 32px - Content containers */
   --container-padding-md: clamp(2.5rem, 5vw, 3.5rem); /* 40px - 56px - Feature containers */
   --container-padding-lg: clamp(3.5rem, 7vw, 5rem);   /* 56px - 80px - Hero containers */
   --container-padding-xl: clamp(5rem, 10vw, 7rem);    /* 80px - 112px - Landing containers */
@@ -574,9 +571,13 @@
 
 /* Global Typography Updates */
 body {
+  /* Enable tabular numerals and disable stylistic alternates for all numbers */
+  body, h1, h2, h3, h4, h5, h6, p, li, td, th, .project-title, .project-description, .case-study-title, .case-study-meta, .metric-label, .label, label, .phase-marker, .marker-number, .keypoint, .footer-section, .footer-cta {
+    font-feature-settings: "tnum" 1, "salt" 0 !important;
+  }
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   font-size: 16px !important;
-  line-height: 1.8 !important;
+  line-height: 1.6 !important;
   color: #1a1a1a !important;
   background-color: #fefefe !important;
 }
@@ -584,7 +585,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif !important;
   font-weight: 600 !important;
-  line-height: 1.3 !important;
+  line-height: 1.25 !important;
   margin: 0 0 var(--space-6) 0 !important;
   color: #1a1a1a !important;
 }
@@ -599,7 +600,8 @@ h6 { font-size: 1rem !important; }
 p {
   margin: 0 0 var(--space-6) 0 !important;
   color: #666666 !important;
-  line-height: 1.8 !important;
+  line-height: 1.6 !important;
+  line-height: 1.6 !important;
 }
 
 a {
@@ -614,20 +616,22 @@ a:hover {
 
 /* Section Spacing Updates */
 .section {
-  padding: var(--section-spacing-xl) 0 !important;
+  /* Content→section: 48–64px */
+  padding: clamp(3rem, 8vw, 4rem) 0 !important;
 }
 
 .section-alt {
   background-color: #fafafa !important;
-  padding: var(--section-spacing-xl) 0 !important;
+  padding: clamp(3rem, 8vw, 4rem) 0 !important;
 }
 
 .section-header {
-  margin-bottom: var(--section-spacing-lg) !important;
+  margin-bottom: clamp(3rem, 6vw, 4rem) !important; /* Content→section: 48–64px */
 }
 
 .section-header h2 {
-  margin-bottom: var(--section-spacing-xs) !important;
+  /* Heading→content: 16–24px */
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem) !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
   line-height: 1.2 !important;
@@ -652,7 +656,7 @@ a:hover {
 
 /* Grid Spacing Updates */
 .grid {
-  gap: var(--space-7) !important;
+  gap: clamp(2rem, 4vw, 3rem) !important; /* Content→section: 32–48px */
 }
 
 /* Button Updates */
@@ -834,8 +838,8 @@ a:hover,
 .case-study-meta {
   display: flex !important;
   justify-content: center !important;
-  gap: var(--space-6) !important;
-  margin-bottom: var(--space-6) !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important; /* List items: 16–24px */
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem) !important; /* Heading→content: 16–24px */
   font-size: 0.9rem !important;
   color: #666666 !important;
   text-transform: uppercase !important;
@@ -856,7 +860,7 @@ a:hover,
 
 .case-study-title {
   font-size: clamp(2.5rem, 5vw, 4rem) !important;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem) !important; /* Heading→content: 16–24px */
   line-height: 1.2 !important;
   letter-spacing: -0.02em !important;
 }
@@ -875,7 +879,7 @@ a:hover,
   display: flex !important;
   justify-content: center !important;
   flex-wrap: wrap !important;
-  gap: 0.75rem !important;
+  gap: clamp(0.5rem, 2vw, 1rem) !important; /* List items: 8–16px */
 }
 
 /* Case Study Sections */
@@ -929,7 +933,7 @@ a:hover,
 
 .context-item h3 {
   font-size: 1.125rem !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: clamp(0.5rem, 1vw, 1rem) !important; /* Heading→content: 8–16px */
   color: #1a1a1a !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
@@ -971,7 +975,7 @@ a:hover,
 
 .challenge-item h3 {
   font-size: 1.25rem !important;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; /* Heading→content: 16–24px */
   color: #1a1a1a !important;
   font-weight: 600 !important;
 }
@@ -1861,6 +1865,70 @@ a:hover,
 }
 
 @media (max-width: 480px) {
+  /* Case Study Responsive Tweaks */
+  .case-study-header {
+    padding: var(--section-spacing-md) 0 !important;
+  }
+  .case-study-title {
+    font-size: clamp(1.5rem, 7vw, 2.25rem) !important;
+    margin-bottom: 1rem !important;
+  }
+  .case-study-subtitle {
+    font-size: clamp(1rem, 4vw, 1.1rem) !important;
+    margin-bottom: 1.25rem !important;
+    max-width: 95vw !important;
+  }
+  .case-study-section {
+    padding: var(--section-spacing-md) 0 !important;
+  }
+  .case-study-section h2 {
+    font-size: clamp(1.25rem, 6vw, 1.5rem) !important;
+  }
+  .section-marker {
+    margin-bottom: 2rem !important;
+    gap: 0.75rem !important;
+  }
+  .marker-number {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+  }
+  .context-grid,
+  .challenge-grid,
+  .outcome-grid,
+  .visuals-grid {
+    gap: 1.25rem !important;
+  }
+  .context-item,
+  .challenge-item,
+  .design-item,
+  .outcome-item {
+    padding: 1rem !important;
+  }
+  .visual-caption {
+    padding: 0.75rem !important;
+  }
+  .outcome-quote blockquote {
+    font-size: 1rem !important;
+    padding: 1rem !important;
+  }
+  .key-takeaway {
+    padding: 1rem !important;
+  }
+  .case-study-meta {
+    font-size: 0.8rem !important;
+    gap: 0.5rem !important;
+  }
+  .case-study-tags {
+    gap: 0.5rem !important;
+  }
+  .visual-image img {
+    border-radius: 6px !important;
+  }
+  .case-study-navigation {
+    padding: 2rem 0 !important;
+  }
+}
   .contact-toggle-btn {
     padding: 1.25rem 1.5rem;
     font-size: 1rem;

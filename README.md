@@ -1,2 +1,0 @@
-# Muhammad Azhar
-## Data Analyst

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Logo } from "@/app/components/Logo";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,102 +32,11 @@ export function Navbar() {
             to="/"
             className="flex items-center gap-3 group"
           >
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 240 240"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <Logo 
+              size={40} 
+              variant="color" 
               className="transition-transform group-hover:scale-110"
-            >
-              {/* Central Spark */}
-              <circle cx="120" cy="120" r="8" fill="#FA9819" />
-
-              {/* Expanding Signal Waves */}
-              <g>
-                <path
-                  d="M 120 80 Q 140 90, 145 110 Q 148 120, 145 130 Q 140 150, 120 160 Q 100 150, 95 130 Q 92 120, 95 110 Q 100 90, 120 80 Z"
-                  stroke="#FA9819"
-                  strokeWidth="2"
-                  fill="none"
-                  opacity="0.6"
-                />
-                <path
-                  d="M 120 60 Q 155 70, 165 110 Q 170 120, 165 130 Q 155 170, 120 180 Q 85 170, 75 130 Q 70 120, 75 110 Q 85 70, 120 60 Z"
-                  stroke="#48749E"
-                  strokeWidth="2"
-                  fill="none"
-                  opacity="0.5"
-                />
-              </g>
-
-              {/* Flowing Data Streams */}
-              <g opacity="0.8">
-                <path
-                  d="M 125 115 Q 145 100, 165 95 Q 175 93, 180 98"
-                  stroke="#FA9819"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle cx="180" cy="98" r="4" fill="#FA9819" />
-
-                <path
-                  d="M 128 120 Q 155 120, 175 118 Q 185 117, 190 120"
-                  stroke="#FA9819"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle
-                  cx="190"
-                  cy="120"
-                  r="4"
-                  fill="#FA9819"
-                />
-
-                <path
-                  d="M 125 125 Q 145 140, 165 145 Q 175 147, 180 142"
-                  stroke="#FA9819"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle
-                  cx="180"
-                  cy="142"
-                  r="4"
-                  fill="#FA9819"
-                />
-
-                <path
-                  d="M 115 115 Q 95 100, 75 95 Q 65 93, 60 98"
-                  stroke="#48749E"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle cx="60" cy="98" r="4" fill="#48749E" />
-
-                <path
-                  d="M 112 120 Q 85 120, 65 118 Q 55 117, 50 120"
-                  stroke="#48749E"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle cx="50" cy="120" r="4" fill="#48749E" />
-
-                <path
-                  d="M 115 125 Q 95 140, 75 145 Q 65 147, 60 142"
-                  stroke="#48749E"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <circle cx="60" cy="142" r="4" fill="#48749E" />
-              </g>
-            </svg>
+            />
             <span className="text-xl font-semibold text-[#1E3D59]">
               Muhammad Azhar
             </span>

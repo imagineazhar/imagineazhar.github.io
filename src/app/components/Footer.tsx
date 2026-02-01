@@ -79,7 +79,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="pt-8 border-t border-[#48749E]/20">
+      <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-[#48749E]/20">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-600">
             © 2024 DataViz Portfolio. All rights reserved.

@@ -1,7 +1,7 @@
 
-  # Data Analytics Consultant Log
+  # Portfolio
 
-  This is a code bundle for Data Analytics Consultant Log. The original project is available at https://www.figma.com/design/zmb6Xf1o1pd0CGK4llqZ78/Data-Analytics-Consultant-Log.
+  This is a code bundle for Portfolio. The original project is available at https://www.figma.com/design/zmb6Xf1o1pd0CGK4llqZ78/Portfolio.
 
   ## Running the code
 

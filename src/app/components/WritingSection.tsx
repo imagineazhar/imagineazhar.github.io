@@ -1,7 +1,6 @@
 import { Calendar, Clock, ArrowRight, ExternalLink, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Parser from "rss-parser";
-import { motion } from "motion/react";
 
 interface Article {
   title: string;
@@ -229,17 +228,15 @@ export function WritingSection() {
 
             {/* See More on Medium Button */}
             <div className="text-center">
-              <motion.a
+              <a
                 href="https://medium.com/@imagineazhar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <span>See more on Medium</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
+              </a>
             </div>
           </>
         )}

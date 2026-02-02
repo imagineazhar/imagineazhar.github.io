@@ -29,12 +29,12 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    id: "healthcare-analytics-dashboard",
-    title: "Healthcare Analytics Dashboard",
-    client: "Regional Medical Center",
-    category: "Healthcare",
-    description: "Comprehensive patient care analytics platform visualizing treatment outcomes, resource utilization, and operational efficiency metrics across 12 departments.",
-    tools: ["Tableau", "Python", "SQL"],
+    id: "1",
+    title: "FX Performance Dashboard",
+    client: "Treasury Team",
+    category: "Banking",
+    description: "Helping leadership understand currency exposure and performance drivers",
+    tools: ["Tableau", "SQL"],
     metrics: ["40% faster diagnosis", "25% cost reduction", "95% user adoption"],
     image: "https://images.unsplash.com/photo-1698306642516-9841228dcff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwZGF0YSUyMGFuYWx5dGljcyUyMGRpc3BsYXl8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
     overview: "A regional medical center needed to consolidate patient data from 12 departments into a unified analytics platform. The goal was to improve diagnostic accuracy, reduce operational costs, and provide real-time insights into patient outcomes and resource allocation.",
@@ -60,14 +60,10 @@ export const caseStudies: CaseStudy[] = [
       {
         metric: "95% User Adoption",
         description: "Within 3 months, 95% of clinical staff were actively using the dashboard daily, with minimal training required"
-      },
-      {
-        metric: "99.7% Uptime",
-        description: "Mission-critical reliability ensures healthcare professionals always have access to patient data"
       }
     ],
     testimonial: {
-      quote: "This dashboard has fundamentally changed how we deliver patient care. Having all critical information visible at a glance has not only saved time but has directly contributed to better patient outcomes.",
+      quote: "This dashboard has fundamentally changed Treasury team analyzed currency exposure.",
       author: "Dr. Sarah Mitchell",
       role: "Chief Medical Officer, Regional Medical Center"
     },
@@ -76,9 +72,9 @@ export const caseStudies: CaseStudy[] = [
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
       "https://images.unsplash.com/photo-1504813184591-01572f98c85f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
     ],
-    tags: ["Healthcare", "Real-time Analytics", "User Experience", "Patient Care"],
+    tags: ["Banking", "Real-time Analytics", "User Experience"],
     duration: "6 months",
-    team: "4 data analysts, 2 designers, 3 developers"
+    team: "2 data analysts, 1 designers, 1 developer"
   },
   {
     id: "financial-performance-dashboard",

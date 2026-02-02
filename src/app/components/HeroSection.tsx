@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, FileDown } from "lucide-react";
+import { ArrowRight, Headset , FileDown } from "lucide-react";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -187,9 +187,10 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          Transforming Data into
+         Designing analytics to help
+          
           <span className="block mt-3 text-black">
-            Visual Stories
+            leaders make better decisions.
           </span>
         </motion.h1>
 
@@ -200,7 +201,16 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          I help organizations see what matters and decide faster through well-designed analytics.
+          I work at the intersection of data analysis, visualization, and business.
+        </motion.p>
+
+        <motion.p
+           className="text-sm sm:text-sm md:text-sm text-gray-600 max-w-sm mx-auto mb-12 leading-[1.6]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+         Visual Analytics, Data Strategy, Data Visualizations.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -226,8 +236,8 @@ export function HeroSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Mail className="w-5 h-5" />
-            Schedule a Call
+            Get in touch
+            <Headset  className="w-5 h-5" />
           </motion.a>
         </motion.div>
       </div>

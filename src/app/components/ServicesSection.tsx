@@ -1,4 +1,10 @@
-import { BarChart3, Layout, Lightbulb, TrendingUp, Database } from "lucide-react";
+import {
+  BarChart3,
+  Layout,
+  Lightbulb,
+  TrendingUp,
+  Database,
+} from "lucide-react";
 
 const services = [
   {
@@ -31,14 +37,27 @@ export function ServicesSection() {
           {/* Left Column */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="text-sm uppercase tracking-wider mb-4 font-light" style={{ fontFamily: 'var(--font-primary)' }}>
-                Services.
-              </p>
-              <h2 className="text-5xl md:text-6xl mb-6 leading-tight" style={{ fontFamily: 'var(--font-secondary)' }}>
-                Areas of expertise
+              <h2
+                className="text-5xl md:text-6xl mb-6 leading-tight"
+                style={{ fontFamily: "var(--font-secondary)" }}
+              >
+               Services.
               </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-12" style={{ fontFamily: 'var(--font-primary)' }}>
-                I transform complex data into clear, impactful insights. Explore the services that help organizations grow, connect, and inspire.
+              <p
+                className="text-gray-400 text-lg leading-relaxed mb-12"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                I transform complex data into clear, impactful
+                insights. Explore the services that help
+                organizations grow, connect, and inspire.
+              </p>
+              <p
+                className="text-gray-400 text-lg leading-relaxed mb-12"
+                style={{ fontFamily: "var(--font-primary)" }}
+              >
+                Tools and tecnologies are chosen based on
+                context, contraints, and business needs (not
+                prefernce).
               </p>
             </div>
             <div>
@@ -47,7 +66,7 @@ export function ServicesSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all duration-300 font-medium"
-                style={{ fontFamily: 'var(--font-primary)' }}
+                style={{ fontFamily: "var(--font-primary)" }}
               >
                 Let's work Together
               </a>
@@ -59,10 +78,18 @@ export function ServicesSection() {
             {services.map((service, index) => (
               <div key={service.title}>
                 <div className="flex items-center justify-between py-8">
-                  <span className="text-xl md:text-2xl" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <span
+                    className="text-xl md:text-2xl"
+                    style={{
+                      fontFamily: "var(--font-primary)",
+                    }}
+                  >
                     {service.title}
                   </span>
-                  <service.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+                  <service.icon
+                    className="w-6 h-6 text-white"
+                    strokeWidth={1.5}
+                  />
                 </div>
                 {index < services.length - 1 && (
                   <div className="border-t border-gray-800" />

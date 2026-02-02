@@ -19,9 +19,7 @@ export function SelectedWork() {
           <div className="h-1 w-16 bg-black mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Selected Work</h2>
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
-            A curated collection of data visualization projects spanning healthcare, finance, 
-            technology, and retail. Each project represents a unique challenge in transforming 
-            complex data into actionable insights.
+            A small selection of projects where analytics and design were used to calrify decisions.
           </p>
         </div>
 

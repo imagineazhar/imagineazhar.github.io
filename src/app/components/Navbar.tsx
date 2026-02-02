@@ -78,10 +78,12 @@ export function Navbar() {
               Writing
             </a>
             <a
-              href="#contact"
+              href="https://cal.com/muhammad-azhar-tbumar/15min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md ml-2"
             >
-              Contact
+              Book a Call
             </a>
           </div>
 
@@ -139,11 +141,13 @@ export function Navbar() {
                 Writing
               </a>
               <a
-                href="#contact"
+                href="https://cal.com/muhammad-azhar-tbumar/15min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 text-center mt-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                Book a Call
               </a>
             </div>
           </div>

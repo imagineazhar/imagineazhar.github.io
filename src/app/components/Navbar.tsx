@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Ghost } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "@/app/components/Logo";
 
@@ -24,7 +24,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200" style={{ fontFamily: 'var(--font-primary)' }}>
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -32,10 +32,9 @@ export function Navbar() {
             to="/"
             className="flex items-center gap-3 group"
           >
-            <Logo 
-              size={40} 
-              variant="mono" 
-              className="transition-transform group-hover:scale-110"
+            <Ghost 
+              size={24} 
+              className="transition-transform group-hover:scale-110 text-black"
             />
             <span className="text-xl font-semibold text-black">
               Muhammad Azhar

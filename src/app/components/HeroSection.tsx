@@ -219,14 +219,17 @@ export function HeroSection() {
             View Portfolio
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
-          <motion.button 
+          <motion.a 
+            href="https://cal.com/muhammad-azhar-tbumar/15min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 bg-white text-black text-base font-medium border-2 border-black rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md min-w-[200px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <Mail className="w-5 h-5" />
             Get in Touch
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
 

@@ -3,6 +3,7 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { caseStudies } from "@/app/data/caseStudies";
+import { motion } from "motion/react";
 
 export function SelectedWork() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -106,15 +107,17 @@ export function SelectedWork() {
 
         {/* View All CTA */}
         <div className="text-center mt-12">
-          <a 
+          <motion.a 
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
             className="group px-8 py-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             View All Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </motion.a>
         </div>
       </div>
       

@@ -38,13 +38,15 @@ export function CaseStudyPage() {
       {/* Back Navigation */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-6">
-          <button
+          <motion.button
             onClick={() => navigate("/")}
             className="group inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
+            whileHover={{ x: -4 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="text-base font-medium">Back to Home</span>
-          </button>
+          </motion.button>
         </div>
       </div>
 

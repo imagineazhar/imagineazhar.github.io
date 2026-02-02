@@ -1,5 +1,6 @@
 import { Mail, Linkedin, Github, FileDown } from "lucide-react";
 import { XIcon } from "@/app/components/icons/XIcon";
+import { motion } from "motion/react";
 
 export function Footer() {
   return (
@@ -20,9 +21,11 @@ export function Footer() {
           {/* Contact Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {/* Email Card */}
-            <a 
+            <motion.a 
               href="mailto:hello@dataviz.com"
               className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -4 }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-white transition-colors duration-300">
@@ -33,12 +36,14 @@ export function Footer() {
                   <p className="text-sm text-gray-400 leading-[1.5]">2muhammadazhar@gmail.com</p>
                 </div>
               </div>
-            </a>
+            </motion.a>
 
             {/* Resume Download Card */}
-            <a 
+            <motion.a 
               href="#"
               className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -4 }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-white transition-colors duration-300">
@@ -49,35 +54,41 @@ export function Footer() {
                   <p className="text-sm text-gray-400 leading-[1.5]">View my full credentials</p>
                 </div>
               </div>
-            </a>
+            </motion.a>
           </div>
 
           {/* Social Media Links */}
           <div className="flex gap-3">
-            <a 
+            <motion.a 
               href="https://linkedin.com/in/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
             >
               <Linkedin className="w-5 h-5" />
-            </a>
-            <a 
+            </motion.a>
+            <motion.a 
               href="https://twitter.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
             >
               <XIcon className="w-5 h-5" />
-            </a>
-            <a 
+            </motion.a>
+            <motion.a 
               href="https://github.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
             >
               <Github className="w-5 h-5" />
-            </a>
+            </motion.a>
           </div>
         </div>
       </div>

@@ -49,8 +49,8 @@ export function WritingSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <h2 className="text-4xl md:text-5xl mb-6">Writing & Thinking</h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2]">Writing & Thinking</h2>
+          <p className="text-base sm:text-lg text-slate-600 leading-[1.6]">
             Exploring the intersection of design, data, and human perception. Thoughts on best practices, 
             technical deep-dives, and lessons learned from real-world projects.
           </p>
@@ -65,19 +65,19 @@ export function WritingSection() {
             >
               {/* Category Badge */}
               <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 bg-[#C6EBF7]/50 text-xs font-medium text-slate-700 rounded-full group-hover:bg-[#FA9819] group-hover:text-white transition-colors">
+                <span className="px-3 py-1 bg-[#C6EBF7]/50 text-xs font-medium text-slate-700 rounded-full group-hover:bg-[#FA9819] group-hover:text-white transition-colors leading-none">
                   {article.category}
                 </span>
                 <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-[#FA9819] opacity-0 group-hover:opacity-100 transition-all" />
               </div>
 
               {/* Title */}
-              <h3 className="text-xl mb-3 group-hover:text-slate-600 transition-colors">
+              <h3 className="text-xl font-medium mb-3 group-hover:text-slate-600 transition-colors leading-[1.3]">
                 {article.title}
               </h3>
 
               {/* Excerpt */}
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+              <p className="text-slate-600 text-sm leading-[1.5] mb-4">
                 {article.excerpt}
               </p>
 
@@ -86,7 +86,7 @@ export function WritingSection() {
                 {article.tags.map((tag, tagIndex) => (
                   <span
                     key={tagIndex}
-                    className="text-xs text-slate-500"
+                    className="text-xs text-slate-500 leading-none"
                   >
                     #{tag}
                   </span>
@@ -114,7 +114,7 @@ export function WritingSection() {
             href="https://medium.com/@imagineazhar"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-[#FA9819] text-white rounded-lg hover:bg-[#e8890f] transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-[#FA9819] text-white text-base font-medium rounded-lg hover:bg-[#e8890f] transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <span>See more on Medium</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

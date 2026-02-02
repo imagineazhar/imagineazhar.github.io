@@ -7,8 +7,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl mb-6">Let's Connect</h2>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2]">Let's Connect</h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-[1.6] max-w-2xl mx-auto">
               Interested in collaborating on your next data visualization project? 
               I'm currently accepting new clients for consulting engagements.
             </p>
@@ -26,8 +26,8 @@ export function Footer() {
                   <Mail className="w-6 h-6 text-[#1E3D59] group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg mb-1">Email Me</h3>
-                  <p className="text-sm text-slate-600">2muhammadazhar@gmail.com</p>
+                  <h3 className="text-lg font-medium mb-1 leading-[1.3]">Email Me</h3>
+                  <p className="text-sm text-slate-600 leading-[1.5]">2muhammadazhar@gmail.com</p>
                 </div>
               </div>
             </a>
@@ -42,8 +42,8 @@ export function Footer() {
                   <FileDown className="w-6 h-6 text-[#1E3D59] group-hover:text-white transition-colors duration-300" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg mb-1">Download Resume</h3>
-                  <p className="text-sm text-slate-600">View my full credentials</p>
+                  <h3 className="text-lg font-medium mb-1 leading-[1.3]">Download Resume</h3>
+                  <p className="text-sm text-slate-600 leading-[1.5]">View my full credentials</p>
                 </div>
               </div>
             </a>

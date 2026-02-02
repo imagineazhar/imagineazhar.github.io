@@ -24,7 +24,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#E8EBEF]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -34,10 +34,10 @@ export function Navbar() {
           >
             <Logo 
               size={40} 
-              variant="color" 
+              variant="mono" 
               className="transition-transform group-hover:scale-110"
             />
-            <span className="text-xl font-semibold text-[#1E3D59]">
+            <span className="text-xl font-semibold text-black">
               Muhammad Azhar
             </span>
           </Link>
@@ -46,40 +46,40 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/"
-              className="px-4 py-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors rounded-lg hover:bg-[#DEEEFE]"
+              className="px-4 py-2 text-gray-700 hover:text-black transition-colors rounded-lg hover:bg-gray-50"
             >
               Home
             </Link>
             <a
               href="#about"
-              className="px-4 py-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors rounded-lg hover:bg-[#DEEEFE]"
+              className="px-4 py-2 text-gray-700 hover:text-black transition-colors rounded-lg hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#about")}
             >
               About
             </a>
             <a
               href="#portfolio"
-              className="px-4 py-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors rounded-lg hover:bg-[#DEEEFE]"
+              className="px-4 py-2 text-gray-700 hover:text-black transition-colors rounded-lg hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#portfolio")}
             >
               Work
             </a>
             <Link
               to="/gallery"
-              className="px-4 py-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors rounded-lg hover:bg-[#DEEEFE]"
+              className="px-4 py-2 text-gray-700 hover:text-black transition-colors rounded-lg hover:bg-gray-50"
             >
               Gallery
             </Link>
             <a
               href="#writing"
-              className="px-4 py-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors rounded-lg hover:bg-[#DEEEFE]"
+              className="px-4 py-2 text-gray-700 hover:text-black transition-colors rounded-lg hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#writing")}
             >
               Writing
             </a>
             <a
               href="#contact"
-              className="px-6 py-2.5 bg-[#FA9819] text-white rounded-lg hover:bg-[#e8890f] transition-all duration-300 shadow-sm hover:shadow-md ml-2"
+              className="px-6 py-2.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md ml-2"
             >
               Contact
             </a>
@@ -88,7 +88,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-[#1E3D59] hover:text-[#FA9819] transition-colors"
+            className="md:hidden p-2 text-black hover:text-gray-700 transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -101,46 +101,46 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden pt-4 pb-2 border-t border-[#E8EBEF] mt-4">
+          <div className="md:hidden pt-4 pb-2 border-t border-gray-200 mt-4">
             <div className="flex flex-col gap-2">
               <Link
                 to="/"
-                className="px-4 py-3 text-[#1E3D59] hover:text-[#FA9819] hover:bg-[#DEEEFE] transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <a
                 href="#about"
-                className="px-4 py-3 text-[#1E3D59] hover:text-[#FA9819] hover:bg-[#DEEEFE] transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors rounded-lg"
                 onClick={(e) => handleHashNavigation(e, "#about")}
               >
                 About
               </a>
               <a
                 href="#portfolio"
-                className="px-4 py-3 text-[#1E3D59] hover:text-[#FA9819] hover:bg-[#DEEEFE] transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors rounded-lg"
                 onClick={(e) => handleHashNavigation(e, "#portfolio")}
               >
                 Work
               </a>
               <Link
                 to="/gallery"
-                className="px-4 py-3 text-[#1E3D59] hover:text-[#FA9819] hover:bg-[#DEEEFE] transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Gallery
               </Link>
               <a
                 href="#writing"
-                className="px-4 py-3 text-[#1E3D59] hover:text-[#FA9819] hover:bg-[#DEEEFE] transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors rounded-lg"
                 onClick={(e) => handleHashNavigation(e, "#writing")}
               >
                 Writing
               </a>
               <a
                 href="#contact"
-                className="px-6 py-3 bg-[#FA9819] text-white rounded-lg hover:bg-[#e8890f] transition-all duration-300 text-center mt-2"
+                className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 text-center mt-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact

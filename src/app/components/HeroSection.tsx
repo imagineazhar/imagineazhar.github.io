@@ -115,9 +115,9 @@ export function HeroSection() {
             y1={`${point.y}%`}
             x2={`${nextPoint.x}%`}
             y2={`${nextPoint.y}%`}
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            opacity="0.3"
+            stroke="#000000"
+            strokeWidth="0.5"
+            opacity="0.1"
           />
         );
       }
@@ -132,9 +132,9 @@ export function HeroSection() {
             y1={`${point.y}%`}
             x2={`${nextPoint.x}%`}
             y2={`${nextPoint.y}%`}
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            opacity="0.3"
+            stroke="#000000"
+            strokeWidth="0.5"
+            opacity="0.1"
           />
         );
       }
@@ -147,7 +147,7 @@ export function HeroSection() {
     <section 
       ref={sectionRef}
       id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#DEEEFE]/20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -158,15 +158,7 @@ export function HeroSection() {
           preserveAspectRatio="none"
         >
           <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FA9819" stopOpacity="0.6" />
-              <stop offset="50%" stopColor="#B6C9CF" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#FA9819" stopOpacity="0.6" />
-            </linearGradient>
-            <radialGradient id="pointGradient" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#FA9819" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#B6C9CF" stopOpacity="0.4" />
-            </radialGradient>
+            {/* Removed gradients - using solid colors */}
           </defs>
           
           {/* Draw lines */}
@@ -178,9 +170,9 @@ export function HeroSection() {
               key={`point-${point.id}`}
               cx={`${point.x}%`}
               cy={`${point.y}%`}
-              r="3"
-              fill="url(#pointGradient)"
-              opacity="0.5"
+              r="2"
+              fill="#000000"
+              opacity="0.15"
             />
           ))}
         </svg>
@@ -190,20 +182,20 @@ export function HeroSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
         {/* Headline */}
         <motion.h1 
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 tracking-tight leading-[1.1] font-medium"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 tracking-tight leading-[1.1] font-medium text-black"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
           Transforming Data into
-          <span className="block mt-3 bg-gradient-to-r from-[#FA9819] via-[#B6C9CF] to-[#FA9819] bg-clip-text text-transparent">
+          <span className="block mt-3 text-black">
             Visual Stories
           </span>
         </motion.h1>
 
         {/* Subheadline */}
         <motion.p 
-          className="text-lg sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto mb-12 leading-[1.6]"
+          className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 leading-[1.6]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -220,7 +212,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
           <motion.button 
-            className="group px-8 py-4 bg-[#FA9819] text-white text-base font-medium rounded-lg hover:bg-[#e8890f] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl min-w-[200px]"
+            className="group px-8 py-4 bg-black text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl min-w-[200px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -228,7 +220,7 @@ export function HeroSection() {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
           <motion.button 
-            className="px-8 py-4 bg-white text-slate-900 text-base font-medium border-2 border-[#B6C9CF] rounded-lg hover:border-[#FA9819] transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md min-w-[200px]"
+            className="px-8 py-4 bg-white text-black text-base font-medium border-2 border-black rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md min-w-[200px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -248,9 +240,9 @@ export function HeroSection() {
           ease: "easeInOut"
         }}
       >
-        <div className="w-6 h-10 border-2 border-[#B6C9CF] rounded-full p-1">
+        <div className="w-6 h-10 border-2 border-gray-300 rounded-full p-1">
           <motion.div 
-            className="w-1.5 h-3 bg-[#FA9819] rounded-full mx-auto"
+            className="w-1.5 h-3 bg-black rounded-full mx-auto"
             animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
             transition={{
               duration: 2,

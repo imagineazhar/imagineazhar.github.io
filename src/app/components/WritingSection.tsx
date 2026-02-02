@@ -136,12 +136,17 @@ export function WritingSection() {
   }, []);
 
   return (
-    <section id="writing" className="py-24 bg-white">
+    <section id="writing" className="relative py-32 bg-gray-50">
+      {/* Top separator */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gray-200"></div>
+      
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2]">Writing & Thinking</h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-[1.6]">
+          {/* Section accent line */}
+          <div className="h-1 w-16 bg-black mb-6"></div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Writing & Thinking</h2>
+          <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
             Exploring the intersection of design, data, and human perception. Thoughts on best practices, 
             technical deep-dives, and lessons learned from real-world projects.
           </p>
@@ -150,14 +155,14 @@ export function WritingSection() {
         {/* Loading State */}
         {loading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 text-[#FA9819] animate-spin" />
-            <span className="ml-3 text-slate-600">Loading articles from Medium...</span>
+            <Loader2 className="w-8 h-8 text-black animate-spin" />
+            <span className="ml-3 text-gray-600">Loading articles from Medium...</span>
           </div>
         )}
 
         {/* Error Message (if applicable) */}
         {error && !loading && (
-          <div className="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
+          <div className="mb-8 p-4 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 text-sm">
             {error}
           </div>
         )}
@@ -172,23 +177,23 @@ export function WritingSection() {
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group border border-[#B6C9CF]/50 rounded-xl p-6 hover:border-[#FA9819] hover:shadow-lg transition-all duration-300 cursor-pointer bg-white block"
+                  className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-black hover:shadow-lg transition-all duration-300 cursor-pointer block"
                 >
                   {/* Category Badge */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 bg-[#C6EBF7]/50 text-xs font-medium text-slate-700 rounded-full group-hover:bg-[#FA9819] group-hover:text-white transition-colors leading-none">
+                    <span className="px-3 py-1 bg-gray-100 text-xs font-medium text-gray-700 rounded-full group-hover:bg-black group-hover:text-white transition-colors leading-none">
                       {article.categories[0] || 'Article'}
                     </span>
-                    <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-[#FA9819] opacity-0 group-hover:opacity-100 transition-all" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-black opacity-0 group-hover:opacity-100 transition-all" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-medium mb-3 group-hover:text-slate-600 transition-colors leading-[1.3]">
+                  <h3 className="text-xl font-medium mb-3 text-black group-hover:text-gray-700 transition-colors leading-[1.3]">
                     {article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-slate-600 text-sm leading-[1.5] mb-4">
+                  <p className="text-gray-600 text-sm leading-[1.5] mb-4">
                     {article.excerpt}
                   </p>
 
@@ -198,7 +203,7 @@ export function WritingSection() {
                       {article.categories.slice(1, 4).map((category, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="text-xs text-slate-500 leading-none"
+                          className="text-xs text-gray-500 leading-none"
                         >
                           #{category}
                         </span>
@@ -207,7 +212,7 @@ export function WritingSection() {
                   )}
 
                   {/* Meta Info */}
-                  <div className="flex items-center gap-4 text-xs text-slate-500 pt-4 border-t border-slate-100">
+                  <div className="flex items-center gap-4 text-xs text-gray-500 pt-4 border-t border-gray-200">
                     <div className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
                       <span>{article.date}</span>
@@ -227,7 +232,7 @@ export function WritingSection() {
                 href="https://medium.com/@imagineazhar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#FA9819] text-white text-base font-medium rounded-lg hover:bg-[#e8890f] transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>See more on Medium</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

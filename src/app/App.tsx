@@ -3,6 +3,7 @@ import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { HomePage } from "@/app/pages/HomePage";
 import { GalleryPage } from "@/app/pages/GalleryPage";
+import { CaseStudyPage } from "@/app/pages/CaseStudyPage";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/case-study/:id" element={<CaseStudyPage />} />
         </Routes>
         <Footer />
       </div>

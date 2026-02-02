@@ -200,8 +200,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          I help data and engineering teams communicate insights with precision. 
-          My focus is on building visual systems that reduce cognitive load, accelerate decision‑making, and scale across the organization.
+          I help organizations see what matters and decide faster through well-designed analytics.
         </motion.p>
 
         {/* CTA Buttons */}

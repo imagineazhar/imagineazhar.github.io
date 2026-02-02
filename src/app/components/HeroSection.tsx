@@ -1,5 +1,4 @@
 import { ArrowRight, Mail, FileDown } from "lucide-react";
-import { Logo } from "@/app/components/Logo";
 import { motion } from "motion/react";
 
 export function HeroSection() {
@@ -210,16 +209,6 @@ export function HeroSection() {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center">
-        {/* Logo */}
-        <motion.div 
-          className="flex justify-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <Logo size={140} variant="color" animated className="drop-shadow-2xl" />
-        </motion.div>
-
         {/* Headline */}
         <motion.h1 
           className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"

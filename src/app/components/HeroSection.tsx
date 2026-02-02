@@ -1,30 +1,190 @@
 import { ArrowRight, Mail, FileDown } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useMotionValue, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+
+interface Point {
+  id: number;
+  x: number;
+  y: number;
+  baseX: number;
+  baseY: number;
+}
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const [points, setPoints] = useState<Point[]>([]);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Generate grid of points
+    const cols = 12;
+    const rows = 8;
+    const newPoints: Point[] = [];
+    
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        newPoints.push({
+          id: i * cols + j,
+          x: (j / (cols - 1)) * 100,
+          y: (i / (rows - 1)) * 100,
+          baseX: (j / (cols - 1)) * 100,
+          baseY: (i / (rows - 1)) * 100
+        });
+      }
+    }
+    
+    setPoints(newPoints);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!sectionRef.current || prefersReducedMotion) return;
+    
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+
+    // Update points based on mouse position (magnetic effect)
+    setPoints(prevPoints => 
+      prevPoints.map(point => {
+        const dx = point.baseX - x;
+        const dy = point.baseY - y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const maxDistance = 25; // Influence radius
+        
+        if (distance < maxDistance) {
+          const force = (1 - distance / maxDistance) * 3; // Magnetic strength
+          return {
+            ...point,
+            x: point.baseX + dx * force * 0.3,
+            y: point.baseY + dy * force * 0.3
+          };
+        }
+        
+        // Smoothly return to base position
+        return {
+          ...point,
+          x: point.x + (point.baseX - point.x) * 0.1,
+          y: point.y + (point.baseY - point.y) * 0.1
+        };
+      })
+    );
+  };
+
+  const handleMouseLeave = () => {
+    // Smoothly return all points to base position
+    setPoints(prevPoints => 
+      prevPoints.map(point => ({
+        ...point,
+        x: point.baseX,
+        y: point.baseY
+      }))
+    );
+  };
+
+  // Create lines between adjacent points
+  const createLines = () => {
+    const lines: JSX.Element[] = [];
+    const cols = 12;
+    const rows = 8;
+
+    points.forEach((point, index) => {
+      const row = Math.floor(index / cols);
+      const col = index % cols;
+
+      // Horizontal lines
+      if (col < cols - 1) {
+        const nextPoint = points[index + 1];
+        lines.push(
+          <motion.line
+            key={`h-${point.id}`}
+            x1={`${point.x}%`}
+            y1={`${point.y}%`}
+            x2={`${nextPoint.x}%`}
+            y2={`${nextPoint.y}%`}
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            opacity="0.3"
+          />
+        );
+      }
+
+      // Vertical lines
+      if (row < rows - 1) {
+        const nextPoint = points[index + cols];
+        lines.push(
+          <motion.line
+            key={`v-${point.id}`}
+            x1={`${point.x}%`}
+            y1={`${point.y}%`}
+            x2={`${nextPoint.x}%`}
+            y2={`${nextPoint.y}%`}
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            opacity="0.3"
+          />
+        );
+      }
+    });
+
+    return lines;
+  };
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#DEEEFE]/20">
-      {/* Animated Background Grid */}
-      <motion.div 
-        className="absolute inset-0 opacity-[0.03]"
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear"
-        }}
-      >
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(to right, #000 1px, transparent 1px),
-            linear-gradient(to bottom, #000 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }} />
-      </motion.div>
+    <section 
+      ref={sectionRef}
+      id="home" 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#DEEEFE]/20"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Magnetic Lines Background */}
+      {!prefersReducedMotion && points.length > 0 && (
+        <svg 
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FA9819" stopOpacity="0.6" />
+              <stop offset="50%" stopColor="#B6C9CF" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#FA9819" stopOpacity="0.6" />
+            </linearGradient>
+            <radialGradient id="pointGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#FA9819" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#B6C9CF" stopOpacity="0.4" />
+            </radialGradient>
+          </defs>
+          
+          {/* Draw lines */}
+          {createLines()}
+          
+          {/* Draw points */}
+          {points.map(point => (
+            <motion.circle
+              key={`point-${point.id}`}
+              cx={`${point.x}%`}
+              cy={`${point.y}%`}
+              r="3"
+              fill="url(#pointGradient)"
+              opacity="0.5"
+            />
+          ))}
+        </svg>
+      )}
 
       {/* Main Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">

@@ -228,7 +228,7 @@ export function HeroSection() {
             whileTap={{ scale: 0.95 }}
           >
             <Mail className="w-5 h-5" />
-            Get in Touch
+            Schedule a Call
           </motion.a>
         </motion.div>
       </div>

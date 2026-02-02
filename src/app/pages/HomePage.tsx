@@ -1,5 +1,6 @@
 import { HeroSection } from "@/app/components/HeroSection";
 import { AboutSection } from "@/app/components/AboutSection";
+import { ServicesSection } from "@/app/components/ServicesSection";
 import { SelectedWork } from "@/app/components/SelectedWork";
 import { WritingSection } from "@/app/components/WritingSection";
 import { useEffect } from "react";
@@ -24,6 +25,7 @@ export function HomePage() {
     <>
       <HeroSection />
       <AboutSection />
+      <ServicesSection />
       <SelectedWork />
       <WritingSection />
     </>

@@ -92,14 +92,16 @@ export function DataGallery() {
   ];
 
   return (
-    <section id="gallery" className="py-24 bg-white">
+    <section id="gallery" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <h2 className="text-4xl md:text-5xl mb-6">
+          {/* Section accent line */}
+          <div className="h-1 w-16 bg-black mb-6"></div>
+          <h2 className="text-4xl md:text-5xl mb-6 text-black">
             Data Visualization Gallery
           </h2>
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg text-gray-600 leading-relaxed">
             Explore a collection of interactive dashboards,
             statistical graphics, and data art. Each
             visualization tells a unique story through carefully
@@ -115,26 +117,26 @@ export function DataGallery() {
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden bg-gradient-to-br from-[#FA9819]/10 to-[#DEEEFE] border-2 border-[#48749E]/50 rounded-2xl p-8 hover:border-[#FA9819] transition-all duration-300 hover:shadow-xl"
+            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-black transition-all duration-300 hover:shadow-xl"
           >
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-16 h-16 bg-[#FA9819] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <BarChart3 className="w-8 h-8 text-white" />
                 </div>
-                <ExternalLink className="w-6 h-6 text-[#FA9819] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <h3 className="text-2xl mb-3">
+              <h3 className="text-2xl mb-3 text-black">
                 Tableau Public Portfolio
               </h3>
-              <p className="text-slate-600 mb-4 leading-relaxed">
+              <p className="text-gray-600 mb-4 leading-relaxed">
                 View my complete collection of interactive
                 dashboards and data stories published on Tableau
                 Public. Featuring business intelligence,
                 exploratory analysis, and data journalism
                 projects.
               </p>
-              <div className="flex items-center gap-2 text-[#FA9819] font-medium">
+              <div className="flex items-center gap-2 text-black font-medium">
                 <span>Explore Tableau Vizzes</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   →
@@ -147,8 +149,8 @@ export function DataGallery() {
                 className="absolute inset-0"
                 style={{
                   backgroundImage: `
-                  linear-gradient(to right, #FA9819 1px, transparent 1px),
-                  linear-gradient(to bottom, #FA9819 1px, transparent 1px)
+                  linear-gradient(to right, #000000 1px, transparent 1px),
+                  linear-gradient(to bottom, #000000 1px, transparent 1px)
                 `,
                   backgroundSize: "30px 30px",
                 }}
@@ -161,23 +163,23 @@ export function DataGallery() {
             href="https://github.com/imagineazhar"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden bg-gradient-to-br from-[#E8EBEF] to-[#DEEEFE] border-2 border-[#48749E]/50 rounded-2xl p-8 hover:border-[#FA9819] transition-all duration-300 hover:shadow-xl"
+            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-black transition-all duration-300 hover:shadow-xl"
           >
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-16 h-16 bg-[#1E3D59] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-[#FA9819]">
+                <div className="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-black">
                   <Github className="w-8 h-8 text-white" />
                 </div>
-                <ExternalLink className="w-6 h-6 text-[#FA9819] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <h3 className="text-2xl mb-3">
+              <h3 className="text-2xl mb-3 text-black">
                 GitHub Repository
               </h3>
-              <p className="text-slate-600 mb-4 leading-relaxed">
+              <p className="text-gray-600 mb-4 leading-relaxed">
                 Access the source code behind my data
                 visualizations. Explore D3.js examples and R scripts.
               </p>
-              <div className="flex items-center gap-2 text-[#FA9819] font-medium">
+              <div className="flex items-center gap-2 text-black font-medium">
                 <span>Browse Code & Projects</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   →
@@ -190,8 +192,8 @@ export function DataGallery() {
                 className="absolute inset-0"
                 style={{
                   backgroundImage: `
-                  linear-gradient(to right, #1E3D59 1px, transparent 1px),
-                  linear-gradient(to bottom, #1E3D59 1px, transparent 1px)
+                  linear-gradient(to right, #000000 1px, transparent 1px),
+                  linear-gradient(to bottom, #000000 1px, transparent 1px)
                 `,
                   backgroundSize: "30px 30px",
                 }}
@@ -205,27 +207,27 @@ export function DataGallery() {
           {visualizations.map((viz, index) => (
             <div
               key={index}
-              className="group bg-white border border-[#48749E]/30 rounded-xl overflow-hidden hover:border-[#FA9819] transition-all duration-300 hover:shadow-lg cursor-pointer"
+              className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-black transition-all duration-300 hover:shadow-lg cursor-pointer"
               onMouseEnter={() => setHoveredViz(index)}
               onMouseLeave={() => setHoveredViz(null)}
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#E8EBEF]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                 <ImageWithFallback
                   src={viz.image}
                   alt={viz.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
 
                 {/* Hover Icon */}
                 <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ExternalLink className="w-5 h-5 text-[#FA9819]" />
+                  <ExternalLink className="w-5 h-5 text-black" />
                 </div>
 
                 {/* Type Badge */}
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-slate-900 rounded-full">
+                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-black rounded-full">
                     {viz.type}
                   </span>
                 </div>
@@ -233,14 +235,14 @@ export function DataGallery() {
 
               {/* Content */}
               <div className="p-5">
-                <h3 className="text-lg mb-2 group-hover:text-[#FA9819] transition-colors">
+                <h3 className="text-lg mb-2 text-black group-hover:text-gray-700 transition-colors">
                   {viz.title}
                 </h3>
-                <p className="text-sm text-slate-600 mb-3 leading-relaxed line-clamp-2">
+                <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-2">
                   {viz.description}
                 </p>
-                <div className="flex items-center justify-between pt-3 border-t border-[#48749E]/20">
-                  <span className="text-xs text-[#FA9819] font-medium">
+                <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+                  <span className="text-xs text-gray-700 font-medium">
                     {viz.tools}
                   </span>
                   <div
@@ -250,7 +252,7 @@ export function DataGallery() {
                         : ""
                     }`}
                   >
-                    <span className="text-[#FA9819]">→</span>
+                    <span className="text-black">→</span>
                   </div>
                 </div>
               </div>

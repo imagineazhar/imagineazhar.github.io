@@ -1,7 +1,7 @@
 interface LogoProps {
   size?: number;
   className?: string;
-  variant?: "color" | "monochrome";
+  variant?: "color" | "monochrome" | "mono";
   animated?: boolean;
 }
 
@@ -11,7 +11,7 @@ export function Logo({
   variant = "color",
   animated = false 
 }: LogoProps) {
-  const primaryColor = variant === "color" ? "#1E3D59" : "#000000";
+  const primaryColor = (variant === "monochrome" || variant === "mono") ? "#000000" : "#1E3D59";
   
   return (
     <svg

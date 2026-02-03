@@ -1,5 +1,6 @@
 import { Mail, Linkedin, Github, FileDown } from "lucide-react";
 import { XIcon } from "@/app/components/icons/XIcon";
+import resumePdf from "@/app/data/Azhar - Resume.pdf";
 
 export function Footer() {
   return (
@@ -37,7 +38,8 @@ export function Footer() {
 
             {/* Resume Download Card */}
             <a 
-              href="#"
+              href={resumePdf}
+              download="Azhar - Resume.pdf"
               className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
             >
               <div className="flex items-center gap-4">

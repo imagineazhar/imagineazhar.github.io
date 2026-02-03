@@ -1,6 +1,4 @@
-import { Mail, Linkedin, Github, FileDown } from "lucide-react";
-import { XIcon } from "@/app/components/icons/XIcon";
-import resumePdf from "@/app/data/Azhar - Resume.pdf";
+import { Mail, Linkedin, Github, FileDown, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -38,8 +36,7 @@ export function Footer() {
 
             {/* Resume Download Card */}
             <a 
-              href={resumePdf}
-              download="Azhar - Resume.pdf"
+              href="#"
               className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
             >
               <div className="flex items-center gap-4">
@@ -70,7 +67,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
             >
-              <XIcon className="w-5 h-5" />
+              <Twitter className="w-5 h-5" />
             </a>
             <a 
               href="https://github.com/imagineazhar" 
@@ -87,7 +84,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-8 border-t border-gray-800">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
-            © 2024 DataViz Portfolio. All rights reserved.
+            © 2026 Muhammad Azhar. All rights reserved.
           </p>
 
           {/* Links */}

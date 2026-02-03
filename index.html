@@ -4,6 +4,18 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script type="text/javascript">
+        (function (l) {
+          if (!l.search) return;
+          const params = new URLSearchParams(l.search);
+          const p = params.get("p");
+          const q = params.get("q");
+          if (p && p.startsWith("/")) {
+            const newPath = p + (q ? `?${q}` : "") + l.hash;
+            window.history.replaceState(null, "", newPath);
+          }
+        })(window.location);
+      </script>
       <title>Portfolio</title>
     </head>
 

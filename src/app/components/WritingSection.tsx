@@ -1,4 +1,4 @@
-import { Calendar, Clock, ArrowRight, ExternalLink, Loader2 } from "lucide-react";
+import { Calendar, Clock, ArrowRight, ExternalLink, Loader2, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import Parser from "rss-parser";
 
@@ -9,6 +9,7 @@ interface Article {
   date: string;
   readTime: string;
   categories: string[];
+  image?: string;
 }
 
 export function WritingSection() {
@@ -61,13 +62,23 @@ export function WritingSection() {
             year: 'numeric'
           });
 
+          const imageFromContent =
+            tempDiv.querySelector('img')?.getAttribute('src') || undefined;
+
+          const image =
+            item.thumbnail ||
+            item.enclosure?.link ||
+            item.enclosure?.url ||
+            imageFromContent;
+
           return {
             title: item.title,
             excerpt: excerpt,
             link: item.link,
             date: formattedDate,
             readTime: `${readTime} min read`,
-            categories: item.categories || []
+            categories: item.categories || [],
+            image
           };
         });
 
@@ -84,7 +95,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Jan 15, 2026",
             readTime: "8 min read",
-            categories: ["Design Theory", "Color Theory"]
+            categories: ["Design Theory", "Color Theory"],
+            image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80"
           },
           {
             title: "Building Real-Time Dashboards with D3.js",
@@ -92,7 +104,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Dec 28, 2025",
             readTime: "12 min read",
-            categories: ["Technical", "D3.js"]
+            categories: ["Technical", "D3.js"],
+            image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&q=80"
           },
           {
             title: "When to Use Tables vs. Charts: A Decision Framework",
@@ -100,7 +113,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Dec 10, 2025",
             readTime: "6 min read",
-            categories: ["Best Practices"]
+            categories: ["Best Practices"],
+            image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
           },
           {
             title: "The Hidden Cost of Dashboard Complexity",
@@ -108,7 +122,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Nov 22, 2025",
             readTime: "10 min read",
-            categories: ["Case Study"]
+            categories: ["Case Study"],
+            image: "https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=800&q=80"
           },
           {
             title: "Accessible Data Visualization: Beyond WCAG Compliance",
@@ -116,7 +131,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Nov 5, 2025",
             readTime: "9 min read",
-            categories: ["Accessibility"]
+            categories: ["Accessibility"],
+            image: "https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=800&q=80"
           },
           {
             title: "Data Storytelling: Making Numbers Memorable",
@@ -124,7 +140,8 @@ export function WritingSection() {
             link: `https://medium.com/${mediumUsername}`,
             date: "Oct 18, 2025",
             readTime: "7 min read",
-            categories: ["Storytelling"]
+            categories: ["Storytelling"],
+            image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
           }
         ]);
       } finally {
@@ -170,30 +187,74 @@ export function WritingSection() {
         {/* Articles Grid */}
         {!loading && articles.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {articles.map((article, index) => (
+                index === 0 ? (
+                  <a
+                    key={index}
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-900 text-white shadow-lg transition-all duration-300 hover:shadow-2xl lg:col-span-2 lg:row-span-2 min-h-[360px]"
+                  >
+                    {article.image ? (
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 origin-top-left group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_55%)]" />
+                    )}
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0.05),_rgba(0,0,0,0.65))]" />
+
+                    <div className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-md transition-all duration-300 group-hover:bg-accent group-hover:text-accent-foreground group-hover:scale-105">
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
+
+                    <div className="relative z-10 flex h-full flex-col justify-end p-8 transition-transform duration-500 group-hover:translate-y-3">
+                      <h3 className="text-3xl sm:text-4xl font-medium leading-tight mb-4">
+                        {article.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-white/80 max-w-2xl">
+                        {article.excerpt}
+                      </p>
+                    </div>
+                  </a>
+                ) : (
                 <a
                   key={index}
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-lg transition-all duration-300 cursor-pointer block"
+                  className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:border-accent hover:shadow-lg transition-all duration-300 cursor-pointer block min-h-[260px] overflow-hidden"
                 >
+                  <div className="absolute top-5 right-5 flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-black shadow-sm transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground group-hover:scale-105">
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </div>
+
                   {/* Category Badge */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 bg-gray-100 text-xs font-medium text-gray-700 rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-colors leading-none">
-                      {article.categories[0] || 'Article'}
-                    </span>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-accent opacity-0 group-hover:opacity-100 transition-all" />
+                  <div className="mb-8 flex items-center gap-3 transition-transform duration-500 group-hover:translate-y-2">
+                    <div className="h-12 w-12 overflow-hidden rounded-lg bg-gradient-to-br from-gray-200 via-white to-gray-300 p-[2px] transition-transform duration-500 origin-top-left group-hover:scale-110">
+                      {article.image ? (
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          className="h-full w-full rounded-md object-cover transition-transform duration-500 origin-top-left group-hover:scale-125"
+                        />
+                      ) : (
+                        <div className="h-full w-full rounded-md bg-white shadow-inner" />
+                      )}
+                    </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-medium mb-3 text-black group-hover:text-gray-700 transition-colors leading-[1.3]">
+                  <h3 className="text-lg font-medium mb-3 text-black group-hover:text-gray-700 transition-colors leading-[1.3] transition-transform duration-500 group-hover:translate-y-3">
                     {article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-gray-600 text-sm leading-[1.5] mb-4">
+                  <p className="text-gray-600 text-sm leading-[1.5] mb-6 transition-transform duration-500 group-hover:translate-y-3">
                     {article.excerpt}
                   </p>
 
@@ -223,6 +284,7 @@ export function WritingSection() {
                     </div>
                   </div>
                 </a>
+                )
               ))}
             </div>
 

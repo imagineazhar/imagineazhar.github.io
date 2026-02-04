@@ -108,7 +108,7 @@ export function SelectedWork() {
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
-            className="group px-8 py-4 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            className="group btn-luma btn-luma--primary px-8 py-4 transition-all duration-300 inline-flex items-center gap-2"
           >
             View All Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

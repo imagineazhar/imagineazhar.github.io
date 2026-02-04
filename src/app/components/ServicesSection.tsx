@@ -65,7 +65,7 @@ export function ServicesSection() {
                 href="https://cal.com/muhammad-azhar-tbumar/15min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-8 py-4 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 font-medium"
+                className="btn-luma btn-luma--primary inline-block px-8 py-4 transition-all duration-300 font-medium"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 Let's work Together

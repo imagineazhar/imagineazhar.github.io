@@ -40,7 +40,7 @@ export function CaseStudyPage() {
         <div className="max-w-7xl mx-auto px-6 py-6">
           <button
             onClick={() => navigate("/")}
-            className="group inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
+            className="btn-luma group inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="text-base font-medium">Back to Home</span>

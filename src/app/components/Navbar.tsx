@@ -80,7 +80,7 @@ export function Navbar() {
               href="https://cal.com/muhammad-azhar-tbumar/15min"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 shadow-sm hover:shadow-md ml-2"
+              className="btn-luma btn-luma--primary px-6 py-2.5 transition-all duration-300 ml-2"
             >
               Schedule a Call
             </a>
@@ -89,7 +89,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-black hover:text-gray-700 transition-colors rounded-[var(--radius)]"
+            className="btn-luma btn-luma--icon md:hidden p-2 text-black transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -143,7 +143,7 @@ export function Navbar() {
                 href="https://cal.com/muhammad-azhar-tbumar/15min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 text-center mt-2"
+                className="btn-luma btn-luma--primary px-6 py-3 transition-all duration-300 text-center mt-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Schedule a Call

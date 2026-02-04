@@ -45,33 +45,33 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
             >
               Home
             </Link>
             <a
               href="#about"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#about")}
             >
               About
             </a>
             <a
               href="#portfolio"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#portfolio")}
             >
               Work
             </a>
             <Link
               to="/gallery"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
             >
               Gallery
             </Link>
             <a
               href="#writing"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
               onClick={(e) => handleHashNavigation(e, "#writing")}
             >
               Writing
@@ -80,7 +80,7 @@ export function Navbar() {
               href="https://cal.com/muhammad-azhar-tbumar/15min"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 shadow-sm hover:shadow-md ml-2"
+              className="px-6 py-2.5 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 shadow-sm hover:shadow-md ml-2"
             >
               Schedule a Call
             </a>
@@ -89,7 +89,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-black hover:text-gray-700 transition-colors"
+            className="md:hidden p-2 text-black hover:text-gray-700 transition-colors rounded-[var(--radius)]"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -106,35 +106,35 @@ export function Navbar() {
             <div className="flex flex-col gap-2">
               <Link
                 to="/"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <a
                 href="#about"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
                 onClick={(e) => handleHashNavigation(e, "#about")}
               >
                 About
               </a>
               <a
                 href="#portfolio"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
                 onClick={(e) => handleHashNavigation(e, "#portfolio")}
               >
                 Work
               </a>
               <Link
                 to="/gallery"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Gallery
               </Link>
               <a
                 href="#writing"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
                 onClick={(e) => handleHashNavigation(e, "#writing")}
               >
                 Writing
@@ -143,7 +143,7 @@ export function Navbar() {
                 href="https://cal.com/muhammad-azhar-tbumar/15min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 text-center mt-2"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 text-center mt-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Schedule a Call

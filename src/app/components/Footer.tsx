@@ -57,7 +57,7 @@ export function Footer() {
               href="https://linkedin.com/in/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius)] bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Linkedin className="w-5 h-5" />
             </a>
@@ -65,7 +65,7 @@ export function Footer() {
               href="https://twitter.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius)] bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Twitter className="w-5 h-5" />
             </a>
@@ -73,7 +73,7 @@ export function Footer() {
               href="https://github.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius)] bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Github className="w-5 h-5" />
             </a>

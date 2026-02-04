@@ -24,8 +24,8 @@ export function SelectedWork() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {caseStudies.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {caseStudies.map((project:any, index:any) => (
             <Link
               key={project.id}
               to={`/case-study/${project.id}`}
@@ -108,7 +108,7 @@ export function SelectedWork() {
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
-            className="group px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            className="group px-8 py-4 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
           >
             View All Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

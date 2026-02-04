@@ -148,37 +148,37 @@ export function DataVizLogo() {
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => downloadSVG(512, "logo-512.svg", "color")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               512×512 (Color)
             </button>
             <button
               onClick={() => downloadSVG(1024, "logo-1024.svg", "color")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               1024×1024 (Color)
             </button>
             <button
               onClick={() => downloadSVG(2048, "logo-2048.svg", "color")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               2048×2048 (Color)
             </button>
             <button
               onClick={() => downloadSVG(512, "logo-512.svg", "monochrome")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               512×512 (Monochrome)
             </button>
             <button
               onClick={() => downloadSVG(1024, "logo-1024.svg", "monochrome")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               1024×1024 (Monochrome)
             </button>
             <button
               onClick={() => downloadSVG(2048, "logo-2048.svg", "monochrome")}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-[var(--radius)] hover:opacity-90 transition-opacity"
             >
               2048×2048 (Monochrome)
             </button>
@@ -195,49 +195,49 @@ export function DataVizLogo() {
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => downloadPNG(256, "logo-256.png", "color")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               256×256 (Color)
             </button>
             <button
               onClick={() => downloadPNG(512, "logo-512.png", "color")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               512×512 (Color)
             </button>
             <button
               onClick={() => downloadPNG(1024, "logo-1024.png", "color")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               1024×1024 (Color)
             </button>
             <button
               onClick={() => downloadPNG(2048, "logo-2048.png", "color")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               2048×2048 (Color)
             </button>
             <button
               onClick={() => downloadPNG(256, "logo-256.png", "monochrome")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               256×256 (Monochrome)
             </button>
             <button
               onClick={() => downloadPNG(512, "logo-512.png", "monochrome")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               512×512 (Monochrome)
             </button>
             <button
               onClick={() => downloadPNG(1024, "logo-1024.png", "monochrome")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               1024×1024 (Monochrome)
             </button>
             <button
               onClick={() => downloadPNG(2048, "logo-2048.png", "monochrome")}
-              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-[var(--radius)] hover:bg-secondary/80 transition-colors"
             >
               2048×2048 (Monochrome)
             </button>

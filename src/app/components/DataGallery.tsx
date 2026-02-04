@@ -97,7 +97,7 @@ export function DataGallery() {
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           {/* Section accent line */}
-          <div className="h-1 w-16 bg-black mb-6"></div>
+          <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-4xl md:text-5xl mb-6 text-black">
             Data Visualization Gallery
           </h2>
@@ -117,14 +117,14 @@ export function DataGallery() {
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-black transition-all duration-300 hover:shadow-xl"
+            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-accent transition-all duration-300 hover:shadow-xl"
           >
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <BarChart3 className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-accent transition-transform duration-300">
+                  <BarChart3 className="w-8 h-8 text-white group-hover:text-accent-foreground transition-colors duration-300" />
                 </div>
-                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 group-hover:text-accent transition-opacity duration-300" />
               </div>
               <h3 className="text-2xl mb-3 text-black">
                 Tableau Public Portfolio
@@ -136,7 +136,7 @@ export function DataGallery() {
                 exploratory analysis, and data journalism
                 projects.
               </p>
-              <div className="flex items-center gap-2 text-black font-medium">
+              <div className="flex items-center gap-2 text-black font-medium group-hover:text-accent transition-colors duration-300">
                 <span>Explore Tableau Vizzes</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   →
@@ -163,14 +163,14 @@ export function DataGallery() {
             href="https://github.com/imagineazhar"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-black transition-all duration-300 hover:shadow-xl"
+            className="group relative overflow-hidden bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 hover:border-accent transition-all duration-300 hover:shadow-xl"
           >
             <div className="relative z-10">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-black">
-                  <Github className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 group-hover:bg-accent">
+                  <Github className="w-8 h-8 text-white group-hover:text-accent-foreground transition-colors duration-300" />
                 </div>
-                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ExternalLink className="w-6 h-6 text-black opacity-0 group-hover:opacity-100 group-hover:text-accent transition-opacity duration-300" />
               </div>
               <h3 className="text-2xl mb-3 text-black">
                 GitHub Repository
@@ -179,7 +179,7 @@ export function DataGallery() {
                 Access the source code behind my data
                 visualizations. Explore D3.js examples and R scripts.
               </p>
-              <div className="flex items-center gap-2 text-black font-medium">
+              <div className="flex items-center gap-2 text-black font-medium group-hover:text-accent transition-colors duration-300">
                 <span>Browse Code & Projects</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   →
@@ -207,7 +207,7 @@ export function DataGallery() {
           {visualizations.map((viz, index) => (
             <div
               key={index}
-              className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-black transition-all duration-300 hover:shadow-lg cursor-pointer"
+              className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-accent transition-all duration-300 hover:shadow-lg cursor-pointer"
               onMouseEnter={() => setHoveredViz(index)}
               onMouseLeave={() => setHoveredViz(null)}
             >
@@ -221,8 +221,8 @@ export function DataGallery() {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
 
                 {/* Hover Icon */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ExternalLink className="w-5 h-5 text-black" />
+                <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:bg-accent">
+                  <ExternalLink className="w-5 h-5 text-black group-hover:text-accent-foreground transition-colors" />
                 </div>
 
                 {/* Type Badge */}
@@ -252,7 +252,7 @@ export function DataGallery() {
                         : ""
                     }`}
                   >
-                    <span className="text-black">→</span>
+                  <span className="text-black group-hover:text-accent transition-colors">→</span>
                   </div>
                 </div>
               </div>

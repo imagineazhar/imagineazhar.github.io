@@ -144,7 +144,7 @@ export function WritingSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           {/* Section accent line */}
-          <div className="h-1 w-16 bg-black mb-6"></div>
+          <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Writing & Thinking</h2>
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
             Exploring the intersection of design, data, and human perception. Thoughts on best practices, 
@@ -155,7 +155,7 @@ export function WritingSection() {
         {/* Loading State */}
         {loading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 text-black animate-spin" />
+            <Loader2 className="w-8 h-8 text-accent animate-spin" />
             <span className="ml-3 text-gray-600">Loading articles from Medium...</span>
           </div>
         )}
@@ -177,14 +177,14 @@ export function WritingSection() {
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-black hover:shadow-lg transition-all duration-300 cursor-pointer block"
+                  className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-lg transition-all duration-300 cursor-pointer block"
                 >
                   {/* Category Badge */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 bg-gray-100 text-xs font-medium text-gray-700 rounded-full group-hover:bg-black group-hover:text-white transition-colors leading-none">
+                    <span className="px-3 py-1 bg-gray-100 text-xs font-medium text-gray-700 rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-colors leading-none">
                       {article.categories[0] || 'Article'}
                     </span>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-black opacity-0 group-hover:opacity-100 transition-all" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-accent opacity-0 group-hover:opacity-100 transition-all" />
                   </div>
 
                   {/* Title */}
@@ -232,7 +232,7 @@ export function WritingSection() {
                 href="https://medium.com/@imagineazhar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-base font-medium rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <span>See more on Medium</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

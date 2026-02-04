@@ -16,7 +16,7 @@ export function SelectedWork() {
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           {/* Section accent line */}
-          <div className="h-1 w-16 bg-black mb-6"></div>
+          <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Selected Work</h2>
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
             A small selection of projects where analytics and design were used to calrify decisions.
@@ -29,7 +29,7 @@ export function SelectedWork() {
             <Link
               key={project.id}
               to={`/case-study/${project.id}`}
-              className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300 hover:shadow-2xl block"
+              className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-accent transition-all duration-300 hover:shadow-2xl block"
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -44,14 +44,14 @@ export function SelectedWork() {
                 
                 {/* Category Badge */}
                 <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-black rounded-full group-hover:bg-black group-hover:text-white transition-colors leading-none">
+                  <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-xs font-medium text-black rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-colors leading-none">
                     {project.category}
                   </span>
                 </div>
 
                 {/* Hover Icon */}
-                <div className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:bg-black">
-                  <ArrowRight className="w-4 h-4 text-black group-hover:text-white transition-colors" />
+                <div className="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:bg-accent">
+                  <ArrowRight className="w-4 h-4 text-black group-hover:text-accent-foreground transition-colors" />
                 </div>
               </div>
 
@@ -92,7 +92,7 @@ export function SelectedWork() {
                     ))}
                   </div>
                   <ArrowRight 
-                    className={`w-5 h-5 text-black transition-transform duration-300 ${
+                    className={`w-5 h-5 text-black group-hover:text-accent transition-transform duration-300 ${
                       hoveredProject === index ? 'translate-x-1' : ''
                     }`}
                   />
@@ -108,7 +108,7 @@ export function SelectedWork() {
             href="https://public.tableau.com/app/profile/m.azhar/vizzes"
             target="_blank"
             rel="noopener noreferrer"
-            className="group px-8 py-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            className="group px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
           >
             View All Projects
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

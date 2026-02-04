@@ -2,13 +2,13 @@ import { Mail, Linkedin, Github, FileDown, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-black border-t-4 border-white">
+    <footer id="contact" className="bg-black border-t-4 border-accent">
       {/* Let's Connect Section */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             {/* Section accent line */}
-            <div className="h-1 w-16 bg-white mb-6 mx-auto"></div>
+            <div className="h-1 w-16 bg-accent mb-6 mx-auto"></div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-white">Let's Connect</h2>
             <p className="text-base sm:text-lg text-gray-300 leading-[1.6] max-w-2xl mx-auto">
               Interested in collaborating on your next data visualization project? 
@@ -21,11 +21,11 @@ export function Footer() {
             {/* Email Card */}
             <a 
               href="mailto:hello@dataviz.com"
-              className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
+              className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-accent hover:bg-gray-800 transition-all duration-300"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-white transition-colors duration-300">
-                  <Mail className="w-6 h-6 text-white group-hover:text-black transition-colors duration-300" />
+                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                  <Mail className="w-6 h-6 text-white group-hover:text-accent-foreground transition-colors duration-300" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-1 leading-[1.3] text-white">Email Me</h3>
@@ -37,11 +37,11 @@ export function Footer() {
             {/* Resume Download Card */}
             <a 
               href="#"
-              className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-white hover:bg-gray-800 transition-all duration-300"
+              className="group p-6 bg-gray-900 border border-gray-700 rounded-xl hover:border-accent hover:bg-gray-800 transition-all duration-300"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-white transition-colors duration-300">
-                  <FileDown className="w-6 h-6 text-white group-hover:text-black transition-colors duration-300" />
+                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                  <FileDown className="w-6 h-6 text-white group-hover:text-accent-foreground transition-colors duration-300" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-medium mb-1 leading-[1.3] text-white">Download Resume</h3>
@@ -57,7 +57,7 @@ export function Footer() {
               href="https://linkedin.com/in/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Linkedin className="w-5 h-5" />
             </a>
@@ -65,7 +65,7 @@ export function Footer() {
               href="https://twitter.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Twitter className="w-5 h-5" />
             </a>
@@ -73,7 +73,7 @@ export function Footer() {
               href="https://github.com/imagineazhar" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Github className="w-5 h-5" />
             </a>
@@ -89,11 +89,11 @@ export function Footer() {
 
           {/* Links */}
           <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#about" className="hover:text-white transition-colors">About</a>
-            <a href="#portfolio" className="hover:text-white transition-colors">Work</a>
-            <a href="#gallery" className="hover:text-white transition-colors">Gallery</a>
-            <a href="#writing" className="hover:text-white transition-colors">Writing</a>
-            <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <a href="#about" className="hover:text-accent transition-colors">About</a>
+            <a href="#portfolio" className="hover:text-accent transition-colors">Work</a>
+            <a href="#gallery" className="hover:text-accent transition-colors">Gallery</a>
+            <a href="#writing" className="hover:text-accent transition-colors">Writing</a>
+            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
           </div>
         </div>
       </div>

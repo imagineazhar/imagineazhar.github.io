@@ -77,6 +77,23 @@
   --chart-4: #ADB5BD;
   --chart-5: #DEE2E6;
   --radius: 0.625rem;
+  --button-radius: 999px;
+  --button-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.12),
+    0 6px 12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.08);
+  --button-shadow-hover:
+    0 18px 36px rgba(0, 0, 0, 0.16),
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+  --button-shadow-soft:
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.06);
+  --button-shadow-soft-hover:
+    0 12px 20px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.08);
   --sidebar: #ffffff;
   --sidebar-foreground: #000000;
   --sidebar-primary: #C3B1E1;
@@ -257,15 +274,11 @@
   .btn-luma {
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius);
+    border-radius: var(--button-radius);
     border: 1px solid rgba(255, 255, 255, 0.85);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(240, 240, 240, 0.78));
     color: #0b0b0b;
-    box-shadow:
-      0 18px 36px rgba(0, 0, 0, 0.14),
-      0 8px 16px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      inset 0 -2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--button-shadow);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
@@ -319,11 +332,7 @@
   .btn-luma:hover {
     transform: translateY(-1px);
     border-color: rgba(255, 255, 255, 0.95);
-    box-shadow:
-      0 22px 44px rgba(0, 0, 0, 0.18),
-      0 10px 20px rgba(0, 0, 0, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.98),
-      inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--button-shadow-hover);
   }
 
   .btn-luma:active {
@@ -342,5 +351,25 @@
       color-mix(in srgb, var(--primary) 65%, #ffffff)
     );
     color: var(--primary-foreground);
+  }
+
+  .btn-luma--soft {
+    border-color: color-mix(in srgb, var(--border) 80%, #ffffff);
+    background: linear-gradient(145deg, #ffffff, #f4f4f4);
+    color: #111111;
+    box-shadow: var(--button-shadow-soft);
+  }
+
+  .btn-luma--soft::before {
+    opacity: 0.25;
+    filter: blur(4px);
+  }
+
+  .btn-luma--soft::after {
+    opacity: 0.2;
+  }
+
+  .btn-luma--soft:hover {
+    box-shadow: var(--button-shadow-soft-hover);
   }
 }

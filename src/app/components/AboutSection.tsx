@@ -73,14 +73,15 @@ export function AboutSection() {
             <div className="group relative p-6 bg-white border border-gray-200 rounded-lg hover:border-accent hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-gray-700">Skill Radar</span>
-              <span className="text-xs text-gray-500">Lead Data Viz</span>
             </div>
-            <svg
-              viewBox="0 0 320 320"
-              className="w-full h-[320px]"
-              role="img"
-              aria-label="Radar chart showing skill strengths"
-            >
+            <div className="w-full max-w-[420px] mx-auto px-2">
+              <svg
+                viewBox="-20 -20 360 360"
+                preserveAspectRatio="xMidYMid meet"
+                className="w-full h-auto overflow-visible"
+                role="img"
+                aria-label="Radar chart showing skill strengths"
+              >
               <defs>
                 <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stopColor="rgba(195,177,225,0.45)" />
@@ -143,7 +144,7 @@ export function AboutSection() {
               {/* Labels */}
               {radarAxes.map((axis, index) => {
                 const angle = (Math.PI * 2 * index) / radarAxes.length - Math.PI / 2;
-                const labelRadius = 140;
+                const labelRadius = 150;
                 const lx = 160 + Math.cos(angle) * labelRadius;
                 const ly = 160 + Math.sin(angle) * labelRadius;
                 const anchor = lx < 160 ? "end" : lx > 160 ? "start" : "middle";
@@ -161,7 +162,8 @@ export function AboutSection() {
                   </text>
                 );
               })}
-            </svg>
+              </svg>
+            </div>
             </div>
           </div>
         </div>

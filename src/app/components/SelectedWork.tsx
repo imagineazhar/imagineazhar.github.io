@@ -54,7 +54,7 @@ export function SelectedWork() {
                 key={project.id}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`btn-luma btn-luma--soft w-full px-6 py-3 text-sm font-medium transition-all duration-300 ${
+                className={`btn-luma btn-luma--soft w-full px-6 py-3 text-sm font-medium ${
                   isActive
                     ? "text-black"
                     : "text-gray-500 hover:text-black"

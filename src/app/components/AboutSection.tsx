@@ -69,101 +69,118 @@ export function AboutSection() {
               </p>
             </div>
 
-            {/* Radar Chart */}
-            <div className="group relative p-6 bg-white border border-gray-200 rounded-lg hover:border-accent hover:shadow-lg transition-all duration-300">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-gray-700">Skill Radar</span>
-            </div>
-            <div className="w-full max-w-[420px] mx-auto px-2">
-              <svg
-                viewBox="-20 -20 360 360"
-                preserveAspectRatio="xMidYMid meet"
-                className="w-full h-auto overflow-visible"
-                role="img"
-                aria-label="Radar chart showing skill strengths"
-              >
-              <defs>
-                <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="rgba(195,177,225,0.45)" />
-                  <stop offset="100%" stopColor="rgba(195,177,225,0.05)" />
-                </linearGradient>
-              </defs>
+            <div className="group/stack relative">
+              <div className="relative h-[460px] w-full max-w-[420px] mx-auto">
+                {/* Portrait Card */}
+                <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 rounded-lg transition-all duration-500 ease-out z-20 shadow-md group-hover/stack:z-10 group-hover/stack:translate-x-3 group-hover/stack:translate-y-6 group-hover/stack:shadow-sm">
+                  <div className="p-4 sm:p-6">
+                    <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
+                      <img
+                        src="/portrait.jpg"
+                        alt="Portrait of Muhammad Azhar"
+                        className="h-full w-full object-cover saturate-90 contrast-105 brightness-95"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-              {/* Grid */}
-              {[0.2, 0.4, 0.6, 0.8, 1].map((level, i) => (
-                <polygon
-                  key={`grid-${i}`}
-                  points={radarAxes
-                    .map((_, index) => polarPoint(level, index, radarAxes.length))
-                    .join(" ")}
-                  fill="none"
-                  stroke="rgba(0,0,0,0.08)"
-                  strokeWidth="1"
-                />
-              ))}
+                {/* Radar Card */}
+                <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 rounded-lg transition-all duration-500 ease-out z-10 translate-x-3 translate-y-6 rotate-[-10deg] shadow-sm group-hover/stack:z-20 group-hover/stack:translate-x-0 group-hover/stack:translate-y-0 group-hover/stack:rotate-0 group-hover/stack:shadow-md hover:border-accent">
+                  <div className="p-4 sm:p-6">
+                    <div className="w-full max-w-[420px] mx-auto px-2">
+                      <svg
+                        viewBox="-20 -20 360 360"
+                        preserveAspectRatio="xMidYMid meet"
+                        className="w-full h-auto overflow-visible"
+                        role="img"
+                        aria-label="Radar chart showing skill strengths"
+                      >
+                        <defs>
+                          <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stopColor="rgba(195,177,225,0.45)" />
+                            <stop offset="100%" stopColor="rgba(195,177,225,0.05)" />
+                          </linearGradient>
+                        </defs>
 
-              {/* Axis lines */}
-              {radarAxes.map((_, index) => (
-                <line
-                  key={`axis-${index}`}
-                  x1="160"
-                  y1="160"
-                  x2={polarPoint(1, index, radarAxes.length).split(",")[0]}
-                  y2={polarPoint(1, index, radarAxes.length).split(",")[1]}
-                  stroke="rgba(0,0,0,0.08)"
-                  strokeWidth="1"
-                />
-              ))}
+                        {/* Grid */}
+                        {[0.2, 0.4, 0.6, 0.8, 1].map((level, i) => (
+                          <polygon
+                            key={`grid-${i}`}
+                            points={radarAxes
+                              .map((_, index) => polarPoint(level, index, radarAxes.length))
+                              .join(" ")}
+                            fill="none"
+                            stroke="rgba(0,0,0,0.08)"
+                            strokeWidth="1"
+                          />
+                        ))}
 
-              {/* Data shape */}
-              <polygon
-                points={radarAxes
-                  .map((axis, index) => polarPoint(axis.value, index, radarAxes.length))
-                  .join(" ")}
-                fill="url(#radarFill)"
-                stroke="rgba(195,177,225,0.8)"
-                strokeWidth="2"
-              />
+                        {/* Axis lines */}
+                        {radarAxes.map((_, index) => (
+                          <line
+                            key={`axis-${index}`}
+                            x1="160"
+                            y1="160"
+                            x2={polarPoint(1, index, radarAxes.length).split(",")[0]}
+                            y2={polarPoint(1, index, radarAxes.length).split(",")[1]}
+                            stroke="rgba(0,0,0,0.08)"
+                            strokeWidth="1"
+                          />
+                        ))}
 
-              {/* Data points */}
-              {radarAxes.map((axis, index) => {
-                const [x, y] = polarPoint(axis.value, index, radarAxes.length)
-                  .split(",")
-                  .map(Number);
-                return (
-                  <circle
-                    key={`point-${index}`}
-                    cx={x}
-                    cy={y}
-                    r="4"
-                    fill="#C3B1E1"
-                  />
-                );
-              })}
+                        {/* Data shape */}
+                        <polygon
+                          points={radarAxes
+                            .map((axis, index) => polarPoint(axis.value, index, radarAxes.length))
+                            .join(" ")}
+                          fill="url(#radarFill)"
+                          stroke="rgba(195,177,225,0.8)"
+                          strokeWidth="2"
+                        />
 
-              {/* Labels */}
-              {radarAxes.map((axis, index) => {
-                const angle = (Math.PI * 2 * index) / radarAxes.length - Math.PI / 2;
-                const labelRadius = 150;
-                const lx = 160 + Math.cos(angle) * labelRadius;
-                const ly = 160 + Math.sin(angle) * labelRadius;
-                const anchor = lx < 160 ? "end" : lx > 160 ? "start" : "middle";
-                return (
-                  <text
-                    key={`label-${index}`}
-                    x={lx}
-                    y={ly}
-                    textAnchor={anchor}
-                    dominantBaseline="middle"
-                    fontSize="11"
-                    fill="#4B5563"
-                  >
-                    {axis.label}
-                  </text>
-                );
-              })}
-              </svg>
-            </div>
+                        {/* Data points */}
+                        {radarAxes.map((axis, index) => {
+                          const [x, y] = polarPoint(axis.value, index, radarAxes.length)
+                            .split(",")
+                            .map(Number);
+                          return (
+                            <circle
+                              key={`point-${index}`}
+                              cx={x}
+                              cy={y}
+                              r="4"
+                              fill="#C3B1E1"
+                            />
+                          );
+                        })}
+
+                        {/* Labels */}
+                        {radarAxes.map((axis, index) => {
+                          const angle = (Math.PI * 2 * index) / radarAxes.length - Math.PI / 2;
+                          const labelRadius = 150;
+                          const lx = 160 + Math.cos(angle) * labelRadius;
+                          const ly = 160 + Math.sin(angle) * labelRadius;
+                          const anchor = lx < 160 ? "end" : lx > 160 ? "start" : "middle";
+                          return (
+                            <text
+                              key={`label-${index}`}
+                              x={lx}
+                              y={ly}
+                              textAnchor={anchor}
+                              dominantBaseline="middle"
+                              fontSize="11"
+                              fill="#4B5563"
+                            >
+                              {axis.label}
+                            </text>
+                          );
+                        })}
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

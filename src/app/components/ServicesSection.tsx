@@ -41,7 +41,7 @@ export function ServicesSection() {
                 className="text-5xl md:text-6xl mb-6 leading-tight"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
-               Services.
+               Services
               </h2>
               <p
                 className="text-gray-400 text-lg leading-relaxed mb-12"

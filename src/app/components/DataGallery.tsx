@@ -139,7 +139,7 @@ export function DataGallery() {
               <div className="flex items-center gap-2 text-black font-medium group-hover:text-accent transition-colors duration-300">
                 <span>Explore Tableau Vizzes</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
-                  →
+                  ?
                 </span>
               </div>
             </div>
@@ -182,7 +182,7 @@ export function DataGallery() {
               <div className="flex items-center gap-2 text-black font-medium group-hover:text-accent transition-colors duration-300">
                 <span>Browse Code & Projects</span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
-                  →
+                  ?
                 </span>
               </div>
             </div>
@@ -252,7 +252,7 @@ export function DataGallery() {
                         : ""
                     }`}
                   >
-                  <span className="text-black group-hover:text-accent transition-colors">→</span>
+                  <span className="text-black group-hover:text-accent transition-colors">?</span>
                   </div>
                 </div>
               </div>
@@ -263,3 +263,4 @@ export function DataGallery() {
     </section>
   );
 }
+

@@ -58,14 +58,15 @@ export function AboutSection() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             <div className="max-w-3xl">
               <p className="text-lg text-gray-600 leading-[1.6] mb-6">
-            I'm a data visualization consultant with a passion for transforming complex information 
-            into clear, compelling visual narratives. With 5+ years of experience, 
-            I help organizations make better decisions through smart design and clear analysis.
+                I work with data in environments where clarity matters and decisions that carry real consequences.
+                My focus is not on producing dashboards, but on shaping analysis to support sound judgment.
+              </p>             
+              <p className="text-lg text-gray-600 leading-[1.6] mb-6">
+                I approach analytics as a design and reasoning problem:
+                what matters, to whom, and at what moment.
               </p>
-              <p className="text-lg text-gray-600 leading-[1.6]">
-            My approach combines deep technical expertise with a human-centered design philosophy, 
-            ensuring every visualization not only looks beautiful but serves a genuine purpose in 
-            driving understanding and action.
+              <p className="text-lg text-gray-600 leading-[1.6] mb-6">
+                I’ve worked across enterprise analytics initiatives, often in complex environments with multiple stakeholders, evolving requirements, and imperfect data.
               </p>
             </div>
 
@@ -76,7 +77,7 @@ export function AboutSection() {
                   <div className="p-4 sm:p-6">
                     <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
                       <img
-                        src="/portrait.jpg"
+                        src="/portrait.png"
                         alt="Portrait of Muhammad Azhar"
                         className="h-full w-full object-cover saturate-90 contrast-105 brightness-95"
                         loading="lazy"

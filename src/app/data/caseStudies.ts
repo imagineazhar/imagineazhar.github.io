@@ -16,6 +16,13 @@ export interface CaseStudy {
     metric: string;
     description: string;
   }[];
+  reflection?: string[];
+  dashboardGallery?: {
+    title: string;
+    description: string;
+    image: string;
+    insights: string[];
+  }[];
   testimonial?: {
     quote: string;
     author: string;
@@ -30,52 +37,101 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     id: "1",
-    title: "FX Performance Dashboard",
-    client: "Treasury Team",
+    title: "Treasury Insight Suite",
+    client: "ENBD Treasury Team",
     category: "Banking",
-    description: "Helping leadership understand currency exposure and performance drivers",
-    tools: ["Tableau", "SQL"],
-    metrics: ["40% faster diagnosis", "25% cost reduction", "95% user adoption"],
-    image: "https://images.unsplash.com/photo-1698306642516-9841228dcff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwZGF0YSUyMGFuYWx5dGljcyUyMGRpc3BsYXl8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    overview: "A regional medical center needed to consolidate patient data from 12 departments into a unified analytics platform. The goal was to improve diagnostic accuracy, reduce operational costs, and provide real-time insights into patient outcomes and resource allocation.",
-    challenge: "The medical center was struggling with fragmented data systems, lengthy diagnosis times due to incomplete patient information, and inefficient resource allocation. Clinical staff needed immediate access to comprehensive patient histories, treatment outcomes, and departmental performance metrics without overwhelming cognitive load.",
+    description:
+      "Decision-ready dashboards across FX, Fixed Deposits, and Derivatives so Treasury leadership could make strategic, operational, and risk calls with speed and confidence.",
+    tools: ["Tableau", "SQL", "Figma"],
+    metrics: ["3 product lines", "1 unified framework", "Treasury-wide adoption"],
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYW5raW5nJTIwZGF0YSUyMGRhc2hib2FyZHxlbnwxfHx8fDE3Njk2ODc2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    overview:
+      "The Treasury department manages FX, Fixed Deposits, and Derivatives products. Leadership needed decision-ready dashboards across all verticals to support strategic, operational, and risk decisions. I led the design and development of dashboards for each product line, balancing UX, speed, and clarity, and delivered both migrated and greenfield dashboards that became the backbone of Treasury reporting.",
+    challenge:
+      "FX dashboards were slow, difficult to navigate, and limited in supporting rapid director-level decisions. The migration required performance improvements and a UX redesign. Fixed Deposits and Derivatives had no dashboards at all. The core challenge was that each product had unique stakeholders, metrics, and reporting needs, while a consistent analytical framework was required to reduce cognitive friction and drive adoption.",
     approach: [
-      "Conducted stakeholder interviews with physicians, nurses, and administrators across all 12 departments",
-      "Mapped existing data flows and identified critical pain points in the current workflow",
-      "Designed a hierarchical information architecture prioritizing emergency indicators and frequently accessed metrics",
-      "Created interactive prototypes and conducted usability testing with 15 clinical staff members",
-      "Implemented color-coded alert systems for critical patient conditions while maintaining accessibility standards",
-      "Built automated data pipelines to sync patient records in real-time from disparate hospital systems"
+      "Redesigned the FX layout and navigation for clarity and speed, while optimizing data pipelines to reduce load times",
+      "Defined product-specific KPIs and reporting needs for Fixed Deposits and Derivatives from scratch",
+      "Built new dashboards using decision-first design principles focused on director-level workflows",
+      "Created a consistent visual language and interaction pattern to reduce cognitive friction across products",
+      "Prioritized actionable insights over decorative visuals to keep attention on key signals",
+      "Applied a modular layout so future products could be added without redesigning the system",
     ],
-    solution: "The final dashboard features a three-tier information hierarchy: critical alerts at the top, department-level metrics in the middle, and detailed drill-down capabilities at the bottom. Color psychology was carefully applied—using warm colors for urgent conditions and cool tones for stable metrics. The system integrates data from electronic health records, lab systems, and scheduling software, presenting it through intuitive visualizations that require minimal training.",
+    solution:
+      "FX migrated to a faster, cleaner UX with decision-critical metrics immediately visible. Fixed Deposits and Derivatives gained full dashboards where none existed. Across all products, standardized layouts and interaction patterns improved trust and familiarity while integrating cleanly into the existing Treasury reporting ecosystem.",
     results: [
       {
-        metric: "40% Faster Diagnosis",
-        description: "Physicians can access complete patient histories and relevant test results in seconds rather than minutes, significantly reducing time to diagnosis"
+        metric: "Minutes to insights",
+        description:
+          "Directors and senior teams moved from hours of manual reporting to decision-ready dashboards in minutes",
       },
       {
-        metric: "25% Cost Reduction",
-        description: "Optimized resource allocation and reduced duplicate testing led to substantial operational savings"
+        metric: "Higher adoption",
+        description:
+          "Consistent UX and shared analytical language increased trust and adoption across the Treasury department",
       },
       {
-        metric: "95% User Adoption",
-        description: "Within 3 months, 95% of clinical staff were actively using the dashboard daily, with minimal training required"
-      }
+        metric: "Scalable framework",
+        description:
+          "A modular system now supports future Treasury products without redesigning the experience",
+      },
+      {
+        metric: "Decision support",
+        description:
+          "Dashboards evolved from operational reporting to strategic and risk decision tools",
+      },
     ],
-    testimonial: {
-      quote: "This dashboard has fundamentally changed Treasury team analyzed currency exposure.",
-      author: "Dr. Sarah Mitchell",
-      role: "Chief Medical Officer, Regional Medical Center"
-    },
+    reflection: [
+      "Migrating dashboards is an opportunity to improve UX and speed, not just replicate functionality",
+      "Greenfield projects allow decision-first thinking to be embedded from day one",
+      "Consistency in design and structure strengthens adoption and confidence among stakeholders",
+      "Analytical design must balance business context, stakeholder needs, and technical constraints",
+    ],
+    dashboardGallery: [
+      {
+        title: "FX Performance Dashboard",
+        description:
+          "Migration redesign focused on speed, clarity, and director-level decisions.",
+        image:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZCUyMGRhc2hib2FyZHxlbnwxfHx8fDE3Njk2ODc2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+        insights: [
+          "Exposure and PnL surfaced above the fold for immediate triage",
+          "Navigation reduced to three primary decision paths",
+        ],
+      },
+      {
+        title: "Fixed Deposits Overview",
+        description: "Greenfield KPI framework for pricing, volume, and maturity risk.",
+        image:
+          "https://images.unsplash.com/photo-1553877522-43269d4ea984?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmF5c2NhbGUlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+        insights: [
+          "Rate ladder highlights margin compression by tenor",
+          "Maturity concentration flags rollover risk",
+        ],
+      },
+      {
+        title: "Derivatives Risk Lens",
+        description:
+          "Decision-first view of hedge effectiveness and exposure.",
+        image:
+          "https://images.unsplash.com/photo-1556761175-4b46a572b786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlZnJhbWUlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+        insights: [
+          "Hedge coverage and VaR aligned on a single decision panel",
+          "Exception thresholds surfaced as alert tags",
+        ],
+      },
+    ],
     gallery: [
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080",
-      "https://images.unsplash.com/photo-1504813184591-01572f98c85f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080"
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZCUyMGRhc2hib2FyZHxlbnwxfHx8fDE3Njk2ODc2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmF5c2NhbGUlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlZnJhbWUlMjBkYXNoYm9hcmR8ZW58MXx8fHwxNzY5Njg3NzAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
     ],
-    tags: ["Banking", "Real-time Analytics", "User Experience"],
+    tags: ["Banking", "Executive Analytics", "Dashboard Design"],
     duration: "6 months",
-    team: "2 data analysts, 1 designers, 1 developer"
+    team: "2 data analysts, 1 designer, 1 developer",
   },
+
   {
     id: "financial-performance-dashboard",
     title: "Financial Performance Dashboard",

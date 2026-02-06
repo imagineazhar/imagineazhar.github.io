@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { caseStudies } from "@/app/data/caseStudies";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { motion } from "motion/react";
@@ -77,6 +77,7 @@ export function CaseStudyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <div className="flex items-center gap-3 mb-6">
               <span className="px-4 py-1.5 bg-black text-white text-sm font-medium rounded-full">
                 {caseStudy.category}
@@ -125,7 +126,7 @@ export function CaseStudyPage() {
       {/* Key Metrics */}
       <section className="py-16 bg-gray-50 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl sm:text-3xl font-medium mb-12 text-center text-black">Key Results</h2>
+          <h2 className="text-2xl sm:text-3xl font-medium mb-12 text-center text-black">Impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {caseStudy.results.map((result, index) => (
               <motion.div
@@ -135,7 +136,7 @@ export function CaseStudyPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
               >
-                <div className="text-3xl sm:text-4xl font-medium text-black mb-3">
+                <div className="text-3xl sm:text-4xl font-medium text-accent mb-3">
                   {result.metric}
                 </div>
                 <p className="text-sm text-gray-600 leading-[1.5]">
@@ -152,7 +153,7 @@ export function CaseStudyPage() {
         <div className="max-w-5xl mx-auto px-6">
           {/* Overview */}
           <div className="mb-16">
-            <div className="h-1 w-16 bg-black mb-6"></div>
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">Overview</h2>
             <p className="text-lg text-gray-600 leading-[1.7]">
               {caseStudy.overview}
@@ -161,7 +162,7 @@ export function CaseStudyPage() {
 
           {/* Challenge */}
           <div className="mb-16">
-            <div className="h-1 w-16 bg-black mb-6"></div>
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">The Challenge</h2>
             <p className="text-lg text-gray-600 leading-[1.7]">
               {caseStudy.challenge}
@@ -170,13 +171,13 @@ export function CaseStudyPage() {
 
           {/* Approach */}
           <div className="mb-16">
-            <div className="h-1 w-16 bg-black mb-6"></div>
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">Our Approach</h2>
             <div className="space-y-4">
               {caseStudy.approach.map((step, index) => (
                 <div key={index} className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-white" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-accent-foreground" />
                   </div>
                   <p className="text-lg text-gray-600 leading-[1.7]">
                     {step}
@@ -188,16 +189,81 @@ export function CaseStudyPage() {
 
           {/* Solution */}
           <div className="mb-16">
-            <div className="h-1 w-16 bg-black mb-6"></div>
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">The Solution</h2>
             <p className="text-lg text-gray-600 leading-[1.7]">
               {caseStudy.solution}
             </p>
           </div>
 
+          {/* Dashboards */}
+          {caseStudy.dashboardGallery?.length ? (
+            <div className="mb-16">
+              <div className="h-1 w-16 bg-accent mb-6"></div>
+              <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">
+                Dashboards
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {caseStudy.dashboardGallery.map((item, index) => (
+                  <div
+                    key={index}
+                    className="group rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm"
+                  >
+                    <div className="relative aspect-[16/10] bg-gray-100">
+                      <ImageWithFallback
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      />
+                      <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 rounded-full text-xs font-medium text-black">
+                        {item.title}
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-sm text-gray-500 mb-3">
+                        {item.description}
+                      </p>
+                      <div className="space-y-2">
+                        {item.insights.map((insight, insightIndex) => (
+                          <div
+                            key={insightIndex}
+                            className="text-sm text-gray-700 flex items-start gap-2"
+                          >
+                            <span className="mt-1 h-2 w-2 rounded-full bg-accent"></span>
+                            <span>{insight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {/* Reflection */}
+          {caseStudy.reflection?.length ? (
+            <div className="mb-16">
+              <div className="h-1 w-16 bg-accent mb-6"></div>
+              <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">
+                Reflection / Key Takeaways
+              </h2>
+              <div className="space-y-3">
+                {caseStudy.reflection.map((note, index) => (
+                  <p
+                    key={index}
+                    className="text-lg text-gray-600 leading-[1.7]"
+                  >
+                    {note}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {/* Tools & Technologies */}
           <div className="mb-16">
-            <div className="h-1 w-16 bg-black mb-6"></div>
+            <div className="h-1 w-16 bg-accent mb-6"></div>
             <h2 className="text-3xl sm:text-4xl font-medium mb-6 text-black">Tools & Technologies</h2>
             <div className="flex flex-wrap gap-3">
               {caseStudy.tools.map((tool, index) => (

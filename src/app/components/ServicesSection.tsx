@@ -8,23 +8,19 @@ import {
 
 const services = [
   {
-    title: "Data Visualization",
+    title: "Data Visualization Systems",
     icon: BarChart3,
   },
   {
-    title: "Dashboard Development",
+    title: "Executive Analytics & Dashboards",
     icon: Layout,
   },
   {
-    title: "Analytics Consulting",
-    icon: Lightbulb,
-  },
-  {
-    title: "Data Strategy",
+    title: "Data Storytelling & Information Design",
     icon: TrendingUp,
   },
   {
-    title: "Business Intelligence",
+    title: "Data Strategy & Analytics Planning",
     icon: Database,
   },
 ];
@@ -41,23 +37,23 @@ export function ServicesSection() {
                 className="text-5xl md:text-6xl mb-6 leading-tight"
                 style={{ fontFamily: "var(--font-secondary)" }}
               >
-               Services
+               What I work on
               </h2>
-              <p
+              {/* <p
                 className="text-gray-400 text-lg leading-relaxed mb-12"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 I transform complex data into clear, impactful
                 insights. Explore the services that help
                 organizations grow, connect, and inspire.
-              </p>
+              </p> */}
               <p
                 className="text-gray-400 text-lg leading-relaxed mb-12"
                 style={{ fontFamily: "var(--font-primary)" }}
               >
                 Tools and tecnologies are chosen based on
                 context, contraints, and business needs (not
-                prefernce).
+                preferences).
               </p>
             </div>
             <div>

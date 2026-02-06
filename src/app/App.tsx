@@ -10,11 +10,13 @@ export default function App() {
     <Router>
       <div className="size-full">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/case-study/:id" element={<CaseStudyPage />} />
-        </Routes>
+        <main role="main">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/case-study/:id" element={<CaseStudyPage />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>

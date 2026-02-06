@@ -41,7 +41,7 @@ export function SelectedWork() {
             Selected Work
           </h2>
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
-            A small selection of projects where analytics and design were used to calrify decisions.
+            A small selection of projects where analytics and design were used to clarify decisions.
           </p>
         </div>
 

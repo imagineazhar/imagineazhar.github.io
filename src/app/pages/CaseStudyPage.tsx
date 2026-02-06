@@ -4,6 +4,7 @@ import { caseStudies } from "@/app/data/caseStudies";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import { motion } from "motion/react";
 import { useEffect } from "react";
+import { buildUrl, setPageMeta } from "@/app/utils/seo";
 
 export function CaseStudyPage() {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +16,26 @@ export function CaseStudyPage() {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    if (!caseStudy) {
+      setPageMeta({
+        title: "Case Study Not Found | Muhammad Azhar",
+        description:
+          "The requested case study could not be found. Explore data visualization and analytics work.",
+        url: buildUrl(`/case-study/${id ?? ""}`),
+      });
+      return;
+    }
+
+    setPageMeta({
+      title: `${caseStudy.title} | Case Study`,
+      description: caseStudy.description,
+      url: buildUrl(`/case-study/${caseStudy.id}`),
+      image: caseStudy.image,
+      imageAlt: caseStudy.title,
+    });
+  }, [caseStudy, id]);
 
   if (!caseStudy) {
     return (

@@ -10,7 +10,7 @@ export function DataGallery() {
   const visualizations = [
     {
       title: "Baltimore's Trash Wheel",
-      type: "Enviromental Visualization",
+      type: "Environmental Visualization",
       tools: "R - ggplot",
       description:
         "Analysis of items types captured by Baltimore's trash wheels.",
@@ -19,7 +19,7 @@ export function DataGallery() {
     },
     {
       title: "Population Density Map",
-      type: "Enviromental Visualization",
+      type: "Environmental Visualization",
       tools: "D3.js",
       description:
         "Heat map visualization showing population distribution across major metropolitan areas.",

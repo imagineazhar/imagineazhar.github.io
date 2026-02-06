@@ -5,6 +5,7 @@ import { SelectedWork } from "@/app/components/SelectedWork";
 import { WritingSection } from "@/app/components/WritingSection";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { buildUrl, setPageMeta } from "@/app/utils/seo";
 
 export function HomePage() {
   const location = useLocation();
@@ -20,6 +21,15 @@ export function HomePage() {
       }, 100);
     }
   }, [location]);
+
+  useEffect(() => {
+    setPageMeta({
+      title: "Muhammad Azhar | Data Analytics Specialist",
+      description:
+        "Data analytics specialist focused on data visualization and enterprise data strategy.",
+      url: buildUrl("/"),
+    });
+  }, []);
 
   return (
     <>

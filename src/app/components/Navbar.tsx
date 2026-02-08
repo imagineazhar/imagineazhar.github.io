@@ -63,12 +63,6 @@ export function Navbar() {
             >
               Work
             </a>
-            <Link
-              to="/gallery"
-              className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
-            >
-              Gallery
-            </Link>
             <a
               href="#writing"
               className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
@@ -125,13 +119,6 @@ export function Navbar() {
               >
                 Work
               </a>
-              <Link
-                to="/gallery"
-                className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Gallery
-              </Link>
               <a
                 href="#writing"
                 className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"

@@ -117,18 +117,6 @@ export function SelectedWork() {
           </div>
         </div>
 
-        {/* View All CTA */}
-        <div className="text-center mt-12">
-          <a 
-            href="https://public.tableau.com/app/profile/m.azhar/vizzes"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group btn-luma btn-luma--primary px-8 py-4 transition-all duration-300 inline-flex items-center gap-2"
-          >
-            View All Projects
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
       </div>
 
       {/* Bottom separator */}

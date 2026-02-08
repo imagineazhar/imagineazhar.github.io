@@ -221,9 +221,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
           <motion.a
-            href="https://public.tableau.com/app/profile/m.azhar/vizzes"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#portfolio"
             className="group btn-luma btn-luma--primary px-8 py-4 text-base font-medium transition-all duration-300 flex items-center justify-center gap-2 min-w-[200px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

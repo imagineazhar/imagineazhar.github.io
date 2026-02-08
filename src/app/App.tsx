@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { HomePage } from "@/app/pages/HomePage";
-import { GalleryPage } from "@/app/pages/GalleryPage";
 import { CaseStudyPage } from "@/app/pages/CaseStudyPage";
 
 export default function App() {
@@ -13,7 +12,6 @@ export default function App() {
         <main role="main">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/case-study/:id" element={<CaseStudyPage />} />
           </Routes>
         </main>

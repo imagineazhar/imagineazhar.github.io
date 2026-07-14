@@ -3,9 +3,9 @@
 :root {
   --font-size: 16px;
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-secondary: 'Fraunces', 'Source Serif 4', Georgia, serif;
-  --font-mono: 'Space Mono', ui-monospace, monospace;
-  --font-accent: 'Source Serif 4', serif;
+  --font-secondary: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-accent: 'Playfair Display', serif;
   
   /* Typography Scale */
   --text-xs: 0.75rem;      /* 12px */
@@ -46,56 +46,56 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   
-  /* Primary Color Palette (craft: warm ink on cream paper, terracotta accent) */
-  --color-orange: #C2410C;
-  --color-blue-tint: #B6C9CF;
-  --color-baby-blue: #C6EBF7;
-  --color-black: #211B13;
-  --color-white: #FDFAF2;
+  /* Primary Color Palette (sleek: ink on porcelain, refined blue accent) */
+  --color-orange: #2563EB;
+  --color-blue-tint: #DBEAFE;
+  --color-baby-blue: #EFF6FF;
+  --color-black: #09090B;
+  --color-white: #FFFFFF;
 
   /* Section surface variants (editorial background rotation) */
-  --surface-dark: #221A12;
+  --surface-dark: #0C0C0E;
 
-  /* Warm stone palette (craft neutrals) */
-  --color-gray-50: #F7F1E6;
-  --color-gray-100: #EFE7D6;
-  --color-gray-200: #E4D8C2;
-  --color-gray-300: #D2C4A8;
-  --color-gray-400: #AC9E84;
-  --color-gray-500: #8B7D66;
-  --color-gray-600: #6B5E4B;
-  --color-gray-700: #4F4435;
-  --color-gray-800: #372F25;
-  --color-gray-900: #221D15;
+  /* Zinc neutral palette (cool sleek grays) */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F4F4F5;
+  --color-gray-200: #E4E4E7;
+  --color-gray-300: #D4D4D8;
+  --color-gray-400: #A1A1AA;
+  --color-gray-500: #71717A;
+  --color-gray-600: #52525B;
+  --color-gray-700: #3F3F46;
+  --color-gray-800: #27272A;
+  --color-gray-900: #18181B;
 
-  /* Craft band palette (hero ribbons, echoes the reference artwork) */
-  --band-moss: #6F7D4B;
-  --band-clay: #C05B33;
-  --band-ink: #221B13;
-  --band-plum: #7C4A5E;
-  --band-ochre: #C08F2F;
+  /* Band palette (hero ribbons — ink to blue to silver, restrained) */
+  --band-moss: #475569;
+  --band-clay: #2563EB;
+  --band-ink: #0F172A;
+  --band-plum: #1E40AF;
+  --band-ochre: #CBD5E1;
 
-  --background: #FBF6EA;
-  --foreground: #211B13;
-  --card: #FDFAF2;
-  --card-foreground: #211B13;
-  --popover: #FDFAF2;
-  --popover-foreground: #211B13;
-  --primary: #C2410C;
-  --primary-foreground: #FDFAF2;
-  --secondary: #F7F1E6;
-  --secondary-foreground: #211B13;
-  --muted: #EFE7D6;
-  --muted-foreground: #6B5E4B;
-  --accent: #C2410C;
-  --accent-foreground: #FDFAF2;
-  --destructive: #B3261E;
-  --destructive-foreground: #FDFAF2;
-  --border: #E4D8C2;
+  --background: #FAFAFA;
+  --foreground: #09090B;
+  --card: #FFFFFF;
+  --card-foreground: #09090B;
+  --popover: #FFFFFF;
+  --popover-foreground: #09090B;
+  --primary: #18181B;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F4F5;
+  --secondary-foreground: #09090B;
+  --muted: #F4F4F5;
+  --muted-foreground: #52525B;
+  --accent: #2563EB;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #E4E4E7;
   --input: transparent;
-  --input-background: #F7F1E6;
-  --switch-background: #D2C4A8;
-  --ring: #C2410C;
+  --input-background: #F4F4F5;
+  --switch-background: #D4D4D8;
+  --ring: #18181B;
   --chart-1: #000000;
   --chart-2: #495057;
   --chart-3: #6C757D;
@@ -104,25 +104,25 @@
   --radius: 0.625rem;
   /* Restrained elevation scale — one soft ambient layer plus a hairline key */
   --button-shadow:
-    0 1px 2px rgba(33, 27, 19, 0.08),
-    0 4px 12px rgba(33, 27, 19, 0.08);
+    0 1px 2px rgba(9, 9, 11, 0.08),
+    0 4px 12px rgba(9, 9, 11, 0.08);
   --button-shadow-hover:
-    0 2px 4px rgba(33, 27, 19, 0.08),
-    0 8px 20px rgba(33, 27, 19, 0.12);
+    0 2px 4px rgba(9, 9, 11, 0.08),
+    0 8px 20px rgba(9, 9, 11, 0.12);
   --button-shadow-soft:
-    0 1px 2px rgba(33, 27, 19, 0.06),
-    0 2px 8px rgba(33, 27, 19, 0.06);
+    0 1px 2px rgba(9, 9, 11, 0.06),
+    0 2px 8px rgba(9, 9, 11, 0.06);
   --button-shadow-soft-hover:
-    0 1px 3px rgba(33, 27, 19, 0.08),
-    0 4px 12px rgba(33, 27, 19, 0.08);
-  --sidebar: #FDFAF2;
-  --sidebar-foreground: #211B13;
-  --sidebar-primary: #C2410C;
-  --sidebar-primary-foreground: #FDFAF2;
-  --sidebar-accent: #F6E7DB;
-  --sidebar-accent-foreground: #211B13;
-  --sidebar-border: #E4D8C2;
-  --sidebar-ring: #C2410C;
+    0 1px 3px rgba(9, 9, 11, 0.08),
+    0 4px 12px rgba(9, 9, 11, 0.08);
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #09090B;
+  --sidebar-primary: #18181B;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F4F4F5;
+  --sidebar-accent-foreground: #09090B;
+  --sidebar-border: #E4E4E7;
+  --sidebar-ring: #18181B;
 
   /* Fixed navbar height — used to offset in-page anchor scrolling */
   --nav-height: 5rem;
@@ -135,19 +135,19 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: #FF5A1F;
+  --primary: #3B82F6;
   --primary-foreground: #0b0b0b;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: #FF5A1F;
+  --accent: #3B82F6;
   --accent-foreground: #0b0b0b;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: #FF5A1F;
+  --ring: #3B82F6;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -155,29 +155,29 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: #FF5A1F;
+  --sidebar-primary: #3B82F6;
   --sidebar-primary-foreground: #0b0b0b;
-  --sidebar-accent: #2a1f1a;
-  --sidebar-accent-foreground: #ffe4d6;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #dbeafe;
   --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: #FF5A1F;
+  --sidebar-ring: #3B82F6;
 }
 
 @theme inline {
-  /* Warm craft overrides for Tailwind core palette — re-skins bg-white,
+  /* Sleek zinc overrides for Tailwind core palette — re-skins bg-white,
      bg-black, and all *-gray-* utilities across the site. */
-  --color-white: #FDFAF2;
-  --color-black: #211B13;
-  --color-gray-50: #F7F1E6;
-  --color-gray-100: #EFE7D6;
-  --color-gray-200: #E4D8C2;
-  --color-gray-300: #D2C4A8;
-  --color-gray-400: #AC9E84;
-  --color-gray-500: #8B7D66;
-  --color-gray-600: #6B5E4B;
-  --color-gray-700: #4F4435;
-  --color-gray-800: #372F25;
-  --color-gray-900: #221D15;
+  --color-white: #FFFFFF;
+  --color-black: #09090B;
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F4F4F5;
+  --color-gray-200: #E4E4E7;
+  --color-gray-300: #D4D4D8;
+  --color-gray-400: #A1A1AA;
+  --color-gray-500: #71717A;
+  --color-gray-600: #52525B;
+  --color-gray-700: #3F3F46;
+  --color-gray-800: #27272A;
+  --color-gray-900: #18181B;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -359,7 +359,7 @@
   }
 
   .btn-luma--primary:hover {
-    background: color-mix(in srgb, var(--primary) 88%, #211B13);
+    background: color-mix(in srgb, var(--primary) 82%, #52525B);
   }
 
   .btn-luma--soft {

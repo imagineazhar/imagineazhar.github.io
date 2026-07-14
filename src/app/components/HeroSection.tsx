@@ -74,22 +74,22 @@ function pointOn(spec: Pick<BandSpec, "y0" | "y1">, t: number) {
 const hexPoints = (w: number, h: number) =>
   `${-w / 2},0 ${-w / 2 + 16},${-h / 2} ${w / 2 - 16},${-h / 2} ${w / 2},0 ${w / 2 - 16},${h / 2} ${-w / 2 + 16},${h / 2}`;
 
-const INK = "#221B13";
+const INK = "#0F172A";
 
 function Band({ spec, index, animate }: { spec: BandSpec; index: number; animate: boolean }) {
   const d = bandPath(spec);
   const gradientId = `hero-band-grad-${index}`;
   // Distant bands sit hazed toward the cream background before the
   // along-the-band light/dark gradient is applied.
-  const base = `color-mix(in srgb, ${spec.color} ${100 - spec.haze}%, #F4EFE3)`;
+  const base = `color-mix(in srgb, ${spec.color} ${100 - spec.haze}%, #FAFAFA)`;
 
   return (
     <g opacity={spec.opacity}>
       <defs>
         <linearGradient id={gradientId} gradientUnits="userSpaceOnUse" x1={X0} y1="0" x2={X1} y2="0">
-          <stop offset="0" stopColor={`color-mix(in srgb, ${base} 80%, #FDFAF2)`} />
+          <stop offset="0" stopColor={`color-mix(in srgb, ${base} 80%, #FFFFFF)`} />
           <stop offset="0.45" stopColor={base} />
-          <stop offset="1" stopColor={`color-mix(in srgb, ${base} 74%, #2A2015)`} />
+          <stop offset="1" stopColor={`color-mix(in srgb, ${base} 74%, #0F172A)`} />
         </linearGradient>
       </defs>
       {/* Soft under-edge so crossings separate cleanly */}
@@ -97,7 +97,7 @@ function Band({ spec, index, animate }: { spec: BandSpec; index: number; animate
         d={d}
         transform="translate(0, 5)"
         fill="none"
-        stroke={`color-mix(in srgb, ${base} 70%, #2A2015)`}
+        stroke={`color-mix(in srgb, ${base} 70%, #0F172A)`}
         strokeWidth={spec.width}
         strokeLinecap="round"
       />

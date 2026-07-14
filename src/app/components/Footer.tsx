@@ -1,5 +1,6 @@
 import { Mail, Linkedin, Github, Twitter } from "lucide-react";
 import { useHashNav } from "@/app/hooks/useHashNav";
+import { Reveal } from "@/app/components/Reveal";
 
 export function Footer() {
   const { navigateToHash } = useHashNav();
@@ -9,7 +10,7 @@ export function Footer() {
       {/* Let's Connect Section */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             {/* Section accent line */}
             <div className="h-1 w-16 bg-accent mb-6 mx-auto"></div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-white">Let&rsquo;s Connect</h2>
@@ -17,10 +18,10 @@ export function Footer() {
               Got a dataset nobody&rsquo;s made sense of yet, or a dashboard nobody opens?
               I&rsquo;m taking on a few new projects right now — let&rsquo;s talk about it.
             </p>
-          </div>
+          </Reveal>
 
           {/* Contact Options */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <Reveal delay={0.08} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {/* Email Card */}
             <a
               href="mailto:2muhammadazhar@gmail.com"
@@ -54,10 +55,10 @@ export function Footer() {
                 </div>
               </div>
             </a>
-          </div>
+          </Reveal>
 
           {/* Social Media Links */}
-          <div className="flex gap-3">
+          <Reveal delay={0.12} className="flex gap-3">
             <a 
               href="https://linkedin.com/in/imagineazhar" 
               target="_blank" 
@@ -82,7 +83,7 @@ export function Footer() {
             >
               <Github className="w-5 h-5" />
             </a>
-          </div>
+          </Reveal>
         </div>
       </div>
 

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { caseStudies } from "@/app/data/caseStudies";
+import { Reveal } from "@/app/components/Reveal";
 
 export function SelectedWork() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,7 +38,7 @@ export function SelectedWork() {
 
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
+        <Reveal className="max-w-3xl mb-12">
           <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">
             Selected Work
@@ -45,9 +46,10 @@ export function SelectedWork() {
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
             A small selection of projects where analytics and design were used to clarify decisions.
           </p>
-        </div>
+        </Reveal>
 
         {/* Project Tabs */}
+        <Reveal delay={0.08}>
         <div
           role="tablist"
           aria-label="Selected work projects"
@@ -86,8 +88,10 @@ export function SelectedWork() {
             );
           })}
         </div>
+        </Reveal>
 
         {/* Featured Project */}
+        <Reveal delay={0.12}>
         <div id="selected-work-panel" className="relative overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -169,6 +173,7 @@ export function SelectedWork() {
             </motion.div>
           </AnimatePresence>
         </div>
+        </Reveal>
 
       </div>
 

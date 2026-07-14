@@ -1,5 +1,6 @@
 import { ArrowDownRight } from "lucide-react";
 import { useHashNav } from "../hooks/useHashNav";
+import { Reveal } from "@/app/components/Reveal";
 
 interface OctagonGlyphProps {
   stacks?: number;
@@ -78,15 +79,17 @@ export function AboutSection() {
 
       <div className="max-w-6xl mx-auto px-6">
         {/* Eyebrow */}
-        <p
-          className="mb-6 text-sm tracking-[0.25em] text-gray-500"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
-          [ ABOUT ]
-        </p>
+        <Reveal>
+          <p
+            className="mb-6 text-sm tracking-[0.25em] text-gray-500"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            [ ABOUT ]
+          </p>
+        </Reveal>
 
         {/* Headline + CTA */}
-        <div className="mb-20">
+        <Reveal delay={0.08} className="mb-20">
           <h2
             className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] mb-10 font-semibold uppercase leading-[1.05] text-black max-w-5xl"
             style={{ fontFamily: "var(--font-secondary)" }}
@@ -103,13 +106,14 @@ export function AboutSection() {
             <ArrowDownRight className="w-4 h-4" />
             Learn more
           </a> */}
-        </div>
+        </Reveal>
 
         {/* Pillar grid (about_us.png reference) */}
         <div className="grid grid-cols-1 md:grid-cols-3 border-t border-gray-200 mb-24">
           {pillars.map((pillar, index) => (
-            <div
+            <Reveal
               key={pillar.title}
+              delay={index * 0.08}
               className={`py-10 px-2 md:px-8 ${
                 index > 0 ? "md:border-l border-gray-200" : ""
               }`}
@@ -126,12 +130,12 @@ export function AboutSection() {
               <p className="text-sm sm:text-base text-gray-600 leading-[1.6]">
                 {pillar.description}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Signature block: personal bio + identity cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center pt-16 border-t border-gray-200">
+        <Reveal className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center pt-16 border-t border-gray-200">
           <div className="max-w-2xl">
             <p
               className="mb-4 text-xs tracking-[0.25em] text-gray-500"
@@ -181,8 +185,8 @@ export function AboutSection() {
                     >
                       <defs>
                         <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0%" stopColor="rgba(255,90,31,0.35)" />
-                          <stop offset="100%" stopColor="rgba(255,90,31,0.04)" />
+                          <stop offset="0%" stopColor="rgba(37,99,235,0.35)" />
+                          <stop offset="100%" stopColor="rgba(37,99,235,0.04)" />
                         </linearGradient>
                       </defs>
 
@@ -215,7 +219,7 @@ export function AboutSection() {
                           .map((axis, index) => polarPoint(axis.value, index, radarAxes.length))
                           .join(" ")}
                         fill="url(#radarFill)"
-                        stroke="rgba(255,90,31,0.85)"
+                        stroke="rgba(37,99,235,0.85)"
                         strokeWidth="2"
                       />
 
@@ -224,7 +228,7 @@ export function AboutSection() {
                           .split(",")
                           .map(Number);
                         return (
-                          <circle key={`point-${index}`} cx={x} cy={y} r="4" fill="#FF5A1F" />
+                          <circle key={`point-${index}`} cx={x} cy={y} r="4" fill="#2563EB" />
                         );
                       })}
 
@@ -254,7 +258,7 @@ export function AboutSection() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* Bottom separator */}

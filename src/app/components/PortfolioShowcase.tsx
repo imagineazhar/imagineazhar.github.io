@@ -1,6 +1,7 @@
 import { ArrowUpRight, Eye } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { Reveal } from "@/app/components/Reveal";
 import tableauData from "@/app/data/tableauProjects.json";
 
 // Snapshot of the Tableau Public profile, refreshed on every build by
@@ -29,13 +30,16 @@ export function PortfolioShowcase() {
       <div className="absolute top-0 left-0 right-0 h-px bg-white/10" />
 
       <div className="max-w-6xl mx-auto px-6">
-        <p
-          className="mb-6 text-sm tracking-[0.25em] text-white/50"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
-          [ PERSONAL PROJECTS ]
-        </p>
+        <Reveal>
+          <p
+            className="mb-6 text-sm tracking-[0.25em] text-white/50"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            [ PERSONAL PROJECTS ]
+          </p>
+        </Reveal>
 
+        <Reveal delay={0.08}>
         <h2 className="max-w-3xl mb-16 text-3xl sm:text-4xl md:text-5xl leading-[1.25] text-white">
           Client work is only half the story. Here&rsquo;s what I build when{" "}
           <em
@@ -46,6 +50,7 @@ export function PortfolioShowcase() {
           </em>
           .
         </h2>
+        </Reveal>
 
         {/* auto-fill + minmax lets the grid decide its own column count from
             the available width — no per-breakpoint column classes needed */}
@@ -93,7 +98,7 @@ export function PortfolioShowcase() {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <Reveal className="mt-12 flex justify-center">
           <a
             href={tableauData.profileUrl}
             target="_blank"
@@ -104,7 +109,7 @@ export function PortfolioShowcase() {
             View all {tableauData.projects.length} vizzes on Tableau Public
             <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-        </div>
+        </Reveal>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />

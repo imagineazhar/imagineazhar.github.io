@@ -1,5 +1,6 @@
 import { Calendar, Clock, ArrowRight, Loader2, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Reveal } from "@/app/components/Reveal";
 
 interface RssItem {
   title: string;
@@ -169,7 +170,7 @@ export function WritingSection() {
       
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <Reveal className="max-w-3xl mb-16">
           {/* Section accent line */}
           <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Writing & Thinking</h2>
@@ -178,7 +179,7 @@ export function WritingSection() {
             read a chart all collide. Some of it&rsquo;s technical, some of it&rsquo;s just
             things I wish I&rsquo;d known sooner.
           </p>
-        </div>
+        </Reveal>
 
         {/* Loading State */}
         {loading && (
@@ -198,7 +199,7 @@ export function WritingSection() {
         {/* Articles Grid */}
         {!loading && articles.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <Reveal delay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {articles.map((article, index) => (
                 index === 0 ? (
                   <a
@@ -297,10 +298,10 @@ export function WritingSection() {
                 </a>
                 )
               ))}
-            </div>
+            </Reveal>
 
             {/* See More on Medium Button */}
-            <div className="text-center">
+            <Reveal delay={0.12} className="text-center">
               <a
                 href="https://medium.com/@imagineazhar"
                 target="_blank"
@@ -310,7 +311,7 @@ export function WritingSection() {
                 <span>See more on Medium</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
-            </div>
+            </Reveal>
           </>
         )}
       </div>

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
+import { GhostCursor } from "@/app/components/GhostCursor";
 import { HomePage } from "@/app/pages/HomePage";
 import { CaseStudyPage } from "@/app/pages/CaseStudyPage";
 
@@ -40,6 +41,7 @@ export default function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
+        <GhostCursor />
       </div>
     </Router>
   );

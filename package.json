@@ -5,6 +5,7 @@
   "type": "module",
   "homepage": "https://imagineazhar.com",
   "scripts": {
+    "prebuild": "node scripts/fetch-tableau-projects.mjs",
     "build": "vite build",
     "dev": "vite",
     "lint": "eslint .",

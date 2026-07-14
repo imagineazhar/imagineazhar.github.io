@@ -2,55 +2,69 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 /*
- * Four highway-like ribbons drawn as wide stroked cubic Béziers, after the
- * reference hero. Every band shares the same control-point offset (CURVE)
- * at the same control x-positions, so all curves are congruent in bend —
- * they diverge only through their anchor y-positions: bundled into a dense
- * stack at the left edge, fanning apart to the right (moss climbs to the
- * top-right, ochre dives to the bottom-right, clay and plum hold the middle
- * and cross over each other). Depth is strictly 2D: paint order decides
- * occlusion at the crossings, with opacity and value falling off toward the
- * back. Each band carries a grainy gradient surface and dashed lane
- * markings on its centerline; some bands add hexagon gate markers and
- * directional chevrons. Small square bits ride each band's exact path to
- * convey flow.
+ * Five highway-like ribbons after reference/hero.png. All bands share one
+ * width. Each runs dead flat off the left edge — bundled into a tight,
+ * overlapping stack — then bends once and exits as a straight ray, the rays
+ * fanning from a common pivot: two climb to the upper right, two dive to
+ * the lower right, and the front band holds the horizontal centerline the
+ * whole way. The geometry encodes this directly: every path starts with a
+ * horizontal tangent (cp1 at y0) and ends with its exit-ray slope (cp2 on
+ * the ray), so a band with y0 === y1 is exactly straight. Depth is strictly
+ * 2D: paint order decides occlusion at the crossings, with opacity and
+ * value falling off toward the back. Each band carries a grainy gradient
+ * surface, dashed lane markings, and a stream of dash/segment items of
+ * varying length riding its exact path — data in transit.
  */
 const X0 = -40;
 const X1 = 1660;
-const CP1_X = 520;
-const CP2_X = 1080;
-const CURVE = 90; // identical for all bands — congruent curvature
+const PIVOT_X = 420; // fan origin — every exit ray aims from here through its endpoint
+const CP1_X = 560; // start control at y0: holds bands flat off the left edge
+const CP2_X = 880; // end control on the exit ray: bands leave straight, not curved
+
+const BAND_WIDTH = 42; // identical for all bands
 
 interface BandSpec {
   y0: number;
   y1: number;
   color: string;
-  width: number; // wide, flat bands — not thin strokes
   opacity: number; // opacity falloff toward the back
   haze: number; // % mixed toward cream on distant bands
   laneDash: string; // centerline lane-marking rhythm
   laneWidth: number;
-  gates?: number[]; // t positions of hexagon gate markers
-  chevrons?: number[]; // t positions of directional arrows
-  flowDur: number; // seconds for a bit to travel end to end
-  bitSize: number;
-  bitCount: number;
+  flowDur: number; // seconds for an item to travel end to end
+  itemCount: number; // items in the flowing stream
+  itemFill: string; // primary stream-item color
+  itemAlt: string; // every third item
 }
 
-// Painted back → front. clay descends slightly while plum rises, so the two
-// middle bands cross mid-canvas and plum (front) occludes clay there.
+// Painted back → front: two far bands (one up, one down), two near bands
+// (one up, one down), then the straight front band holding the centerline.
+// Endpoint ys follow the reference proportions (≈44% / 56% / 83% / 94%).
 const BANDS: BandSpec[] = [
-  { y0: 402, y1: 118, color: "var(--band-moss)", width: 46, opacity: 0.78, haze: 18, laneDash: "4 44", laneWidth: 3, chevrons: [0.42, 0.8], flowDur: 12, bitSize: 5, bitCount: 3 },
-  { y0: 416, y1: 468, color: "var(--band-clay)", width: 44, opacity: 0.86, haze: 10, laneDash: "5 38", laneWidth: 3, chevrons: [0.62], flowDur: 10.5, bitSize: 6, bitCount: 3 },
-  { y0: 460, y1: 604, color: "var(--band-ochre)", width: 48, opacity: 0.92, haze: 5, laneDash: "4 40", laneWidth: 3, chevrons: [0.85], flowDur: 9.5, bitSize: 5.5, bitCount: 3 },
-  { y0: 444, y1: 372, color: "var(--band-plum)", width: 64, opacity: 1, haze: 0, laneDash: "30 26 12 42 46 34", laneWidth: 7, gates: [0.16, 0.5, 0.82], flowDur: 8.5, bitSize: 7, bitCount: 4 },
+  { y0: 338, y1: 202, color: "var(--band-moss)", opacity: 0.85, haze: 14, laneDash: "4 44", laneWidth: 3, flowDur: 12, itemCount: 8, itemFill: "#FFFFFF", itemAlt: "#0F172A" },
+  { y0: 376, y1: 520, color: "var(--band-ochre)", opacity: 0.92, haze: 5, laneDash: "4 40", laneWidth: 3, flowDur: 10.5, itemCount: 9, itemFill: "#0F172A", itemAlt: "#FFFFFF" },
+  { y0: 348, y1: 276, color: "var(--band-clay)", opacity: 0.9, haze: 6, laneDash: "5 38", laneWidth: 3, flowDur: 9.5, itemCount: 8, itemFill: "#FFFFFF", itemAlt: "#0F172A" },
+  { y0: 368, y1: 450, color: "var(--band-ink)", opacity: 0.95, haze: 0, laneDash: "6 42", laneWidth: 3, flowDur: 11, itemCount: 8, itemFill: "#FFFFFF", itemAlt: "#3B82F6" },
+  { y0: 356, y1: 356, color: "var(--band-plum)", opacity: 1, haze: 0, laneDash: "30 26 12 42 46 34", laneWidth: 6, flowDur: 8.5, itemCount: 10, itemFill: "#FFFFFF", itemAlt: "#93C5FD" },
 ];
 
-const bandPath = ({ y0, y1 }: Pick<BandSpec, "y0" | "y1">) =>
-  `M ${X0},${y0} C ${CP1_X},${y0 + CURVE} ${CP2_X},${y1 - CURVE} ${X1},${y1}`;
+// Varying dash lengths for the stream items — deterministic so every render
+// shows the same rhythm of long bars, short ticks, and squares.
+const ITEM_WIDTHS = [26, 7, 14, 7, 34, 10, 7, 20, 12, 7, 30, 9];
+const ITEM_H = 7;
 
-// Cubic Bézier evaluation — used to place gates, chevrons, and static bits
-// directly on a band's centerline, rotated to its tangent.
+// Exit-ray slope: from the fan pivot (at the band's flat height) through the
+// endpoint. Straight band (y0 === y1) gets slope 0 — a perfectly flat path.
+const exitSlope = ({ y0, y1 }: Pick<BandSpec, "y0" | "y1">) =>
+  (y1 - y0) / (X1 - PIVOT_X);
+const cp2Y = (spec: Pick<BandSpec, "y0" | "y1">) =>
+  spec.y1 - exitSlope(spec) * (X1 - CP2_X);
+
+const bandPath = (spec: Pick<BandSpec, "y0" | "y1">) =>
+  `M ${X0},${spec.y0} C ${CP1_X},${spec.y0} ${CP2_X},${cp2Y(spec)} ${X1},${spec.y1}`;
+
+// Cubic Bézier evaluation — used to place static (reduced-motion) stream
+// items directly on a band's centerline, rotated to its tangent.
 const cubic = (a: number, b: number, c: number, d: number, t: number) => {
   const u = 1 - t;
   return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d;
@@ -60,8 +74,8 @@ const cubicDeriv = (a: number, b: number, c: number, d: number, t: number) => {
   return 3 * u * u * (b - a) + 6 * u * t * (c - b) + 3 * t * t * (d - c);
 };
 function pointOn(spec: Pick<BandSpec, "y0" | "y1">, t: number) {
-  const cp1y = spec.y0 + CURVE;
-  const cp2y = spec.y1 - CURVE;
+  const cp1y = spec.y0;
+  const cp2y = cp2Y(spec);
   const x = cubic(X0, CP1_X, CP2_X, X1, t);
   const y = cubic(spec.y0, cp1y, cp2y, spec.y1, t);
   const dx = cubicDeriv(X0, CP1_X, CP2_X, X1, t);
@@ -69,19 +83,12 @@ function pointOn(spec: Pick<BandSpec, "y0" | "y1">, t: number) {
   return { x, y, angle: (Math.atan2(dy, dx) * 180) / Math.PI };
 }
 
-// Elongated hexagon straddling a band: wider than it is tall, taller than
-// the band so its points reach past both edges.
-const hexPoints = (w: number, h: number) =>
-  `${-w / 2},0 ${-w / 2 + 16},${-h / 2} ${w / 2 - 16},${-h / 2} ${w / 2},0 ${w / 2 - 16},${h / 2} ${-w / 2 + 16},${h / 2}`;
-
-const INK = "#0F172A";
-
 function Band({ spec, index, animate }: { spec: BandSpec; index: number; animate: boolean }) {
   const d = bandPath(spec);
   const gradientId = `hero-band-grad-${index}`;
-  // Distant bands sit hazed toward the cream background before the
+  // Distant bands sit hazed toward the white hero surface before the
   // along-the-band light/dark gradient is applied.
-  const base = `color-mix(in srgb, ${spec.color} ${100 - spec.haze}%, #FAFAFA)`;
+  const base = `color-mix(in srgb, ${spec.color} ${100 - spec.haze}%, #FFFFFF)`;
 
   return (
     <g opacity={spec.opacity}>
@@ -98,71 +105,50 @@ function Band({ spec, index, animate }: { spec: BandSpec; index: number; animate
         transform="translate(0, 5)"
         fill="none"
         stroke={`color-mix(in srgb, ${base} 70%, #0F172A)`}
-        strokeWidth={spec.width}
+        strokeWidth={BAND_WIDTH}
         strokeLinecap="round"
       />
       {/* Gradient body */}
-      <path d={d} fill="none" stroke={`url(#${gradientId})`} strokeWidth={spec.width} strokeLinecap="round" />
+      <path d={d} fill="none" stroke={`url(#${gradientId})`} strokeWidth={BAND_WIDTH} strokeLinecap="round" />
       {/* Dashed lane markings along the centerline */}
       <path
         d={d}
         fill="none"
-        stroke="var(--background)"
+        stroke="#FFFFFF"
         strokeOpacity={0.7}
         strokeWidth={spec.laneWidth}
         strokeDasharray={spec.laneDash}
         strokeDashoffset={index * 29}
       />
-      {/* Hexagon gate markers straddling the band */}
-      {spec.gates?.map((t, g) => {
-        const p = pointOn(spec, t);
-        return (
-          <g key={`gate-${g}`} transform={`translate(${p.x}, ${p.y}) rotate(${p.angle})`}>
-            <polygon
-              points={hexPoints(96, spec.width + 18)}
-              fill="var(--background)"
-              fillOpacity={0.22}
-              stroke="var(--background)"
-              strokeOpacity={0.95}
-              strokeWidth={2}
-            />
-          </g>
-        );
-      })}
-      {/* Directional chevrons pointing in the flow direction */}
-      {spec.chevrons?.map((t, c) => {
-        const p = pointOn(spec, t);
-        return (
-          <g key={`chev-${c}`} transform={`translate(${p.x}, ${p.y}) rotate(${p.angle})`} fill={INK} fillOpacity={0.85}>
-            <polygon points="-18,-6 -6,0 -18,6" />
-            <polygon points="-2,-6 10,0 -2,6" />
-          </g>
-        );
-      })}
-      {/* Square bits riding this band's exact Bézier path */}
-      {Array.from({ length: spec.bitCount }, (_, p) => {
-        const s = spec.bitSize * (1 + (p % 2) * 0.3); // slight size variation
+      {/* Stream of dash items riding this band's exact Bézier path */}
+      {Array.from({ length: spec.itemCount }, (_, p) => {
+        const w = ITEM_WIDTHS[(index * 4 + p * 5) % ITEM_WIDTHS.length];
+        const fill = p % 3 === 2 ? spec.itemAlt : spec.itemFill;
         if (!animate) {
-          // Reduced motion: static bits along the band instead of flow
-          const pt = pointOn(spec, (p + 1) / (spec.bitCount + 1));
+          // Reduced motion: static items along the band instead of flow
+          const pt = pointOn(spec, (p + 0.5) / spec.itemCount);
           return (
             <rect
-              key={`bit-${p}`}
-              x={-s / 2}
-              y={-s / 2}
-              width={s}
-              height={s}
-              fill={INK}
-              opacity={0.8}
+              key={`item-${p}`}
+              x={-w / 2}
+              y={-ITEM_H / 2}
+              width={w}
+              height={ITEM_H}
+              rx={1.5}
+              fill={fill}
+              opacity={0.9}
               transform={`translate(${pt.x}, ${pt.y}) rotate(${pt.angle})`}
             />
           );
         }
+        // Items spaced evenly through the loop (with slight irregularity)
+        // form a continuous stream; each band's stream is phase-shifted so
+        // they never synchronize.
         return (
-          <rect key={`bit-${p}`} x={-s / 2} y={-s / 2} width={s} height={s} fill={INK} opacity={0.8}>
+          <rect key={`item-${p}`} x={-w / 2} y={-ITEM_H / 2} width={w} height={ITEM_H} rx={1.5} fill={fill} opacity={0.9}>
             <animateMotion
               dur={`${spec.flowDur}s`}
-              begin={`${-((p + 0.37 * index + 0.13 * p) * spec.flowDur) / spec.bitCount}s`}
+              begin={`${-((p / spec.itemCount) * spec.flowDur + (p % 3) * 0.35 + index * 1.3)}s`}
               repeatCount="indefinite"
               rotate="auto"
               path={d}
@@ -177,7 +163,7 @@ function Band({ spec, index, animate }: { spec: BandSpec; index: number; animate
 function HeroGraphic({ animate }: { animate: boolean }) {
   return (
     <svg
-      viewBox="0 0 1600 640"
+      viewBox="0 0 1600 560"
       className="w-full h-full"
       preserveAspectRatio="xMidYMax meet"
       aria-hidden="true"
@@ -188,14 +174,14 @@ function HeroGraphic({ animate }: { animate: boolean }) {
           <feColorMatrix type="saturate" values="0" />
         </filter>
         <mask id="hero-bands-mask">
-          <rect x="0" y="0" width="1600" height="640" fill="black" />
+          <rect x="0" y="0" width="1600" height="560" fill="black" />
           {BANDS.map((spec, i) => (
             <path
               key={i}
               d={bandPath(spec)}
               fill="none"
               stroke="white"
-              strokeWidth={spec.width + 6}
+              strokeWidth={BAND_WIDTH + 6}
               strokeLinecap="round"
             />
           ))}
@@ -209,7 +195,7 @@ function HeroGraphic({ animate }: { animate: boolean }) {
         x="0"
         y="0"
         width="1600"
-        height="640"
+        height="560"
         filter="url(#hero-grain)"
         mask="url(#hero-bands-mask)"
         opacity={0.28}
@@ -225,17 +211,25 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-[var(--background)] md:min-h-[calc(40vw+420px)]"
+      className="relative overflow-hidden bg-white md:min-h-[calc(35vw+400px)]"
     >
       {/* Ribbon highway: reveals left-to-right, fanning apart across the page */}
       <motion.div
-        className="hidden md:block absolute inset-x-0 bottom-0 z-0 w-full aspect-[1600/640] pointer-events-none"
+        className="hidden md:block absolute inset-x-0 bottom-0 z-0 w-full aspect-[1600/560] pointer-events-none"
         initial={prefersReducedMotion ? undefined : { clipPath: "inset(0 100% 0 0)" }}
         animate={prefersReducedMotion ? undefined : { clipPath: "inset(0 0% 0 0)" }}
         transition={{ duration: 3.2, delay: 0.4, ease: "easeInOut" }}
       >
         <HeroGraphic animate={!prefersReducedMotion} />
       </motion.div>
+
+      {/* Bottom fade: the white hero surface (and its bands) dissolve into
+          the about section's gray, so the two sections read as distinct
+          surfaces with a smooth handoff instead of a hard cut */}
+      <div
+        className="hidden md:block absolute inset-x-0 bottom-0 z-0 h-36 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent, var(--color-gray-50))" }}
+      />
 
       {/* Copy block: left-aligned per the reference layout */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-40 md:pb-24">

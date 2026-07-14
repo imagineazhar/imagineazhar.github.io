@@ -6,7 +6,7 @@ import tableauData from "@/app/data/tableauProjects.json";
 
 // Snapshot of the Tableau Public profile, refreshed on every build by
 // scripts/fetch-tableau-projects.mjs (see the "prebuild" npm script).
-const PROJECTS_SHOWN = 12;
+const PROJECTS_SHOWN = 28;
 
 interface TableauProject {
   title: string;

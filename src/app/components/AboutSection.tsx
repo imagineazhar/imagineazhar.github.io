@@ -74,7 +74,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className="scroll-anchor relative py-32 bg-gray-50">
-      {/* Top separator */}
+      {/* Top separator — matches the hairline used at every other section boundary */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gray-200" />
 
       <div className="max-w-6xl mx-auto px-6">

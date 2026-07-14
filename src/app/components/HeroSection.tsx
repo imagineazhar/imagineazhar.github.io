@@ -240,10 +240,10 @@ export function HeroSection() {
       {/* Copy block: left-aligned per the reference layout */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-40 md:pb-24">
         <motion.h1
-          className="max-w-3xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 tracking-tight leading-[1.1] font-medium text-black"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="max-w-3xl text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 tracking-tight leading-[1.1] font-semibold text-black"
+          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.1 }}
         >
           I help leaders see what their data{" "}
           <em
@@ -257,39 +257,35 @@ export function HeroSection() {
 
         <motion.p
           className="max-w-xl text-lg sm:text-xl text-gray-600 mb-12 leading-[1.6]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.2 }}
         >
           Dashboards and reports are easy to build. Knowing what to do next is the hard part — that&rsquo;s what I&rsquo;m here for.
         </motion.p>
 
         <motion.div
           className="flex flex-col sm:flex-row gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 30, delay: 0.3 }}
         >
-          <motion.a
+          <a
             href="#portfolio"
-            className="group btn-luma btn-luma--primary px-8 py-4 text-base font-medium transition-all duration-300 flex items-center justify-center gap-2 min-w-[200px]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="group btn-luma btn-luma--primary px-8 py-4 text-base font-medium flex items-center justify-center gap-2 min-w-[200px]"
           >
             View Portfolio
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
-          <motion.a
+          </a>
+          <a
             href="https://cal.com/muhammad-azhar-tbumar/15min"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-luma px-8 py-4 text-base font-medium transition-all duration-300 flex items-center justify-center gap-2 min-w-[200px]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="btn-luma px-8 py-4 text-base font-medium flex items-center justify-center gap-2 min-w-[200px]"
           >
             Let&rsquo;s talk
             <MessageCircle className="w-5 h-5" />
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>

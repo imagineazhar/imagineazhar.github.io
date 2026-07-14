@@ -107,7 +107,7 @@ export function SelectedWork() {
                     <ImageWithFallback
                       src={activeProject.image}
                       alt={activeProject.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                   <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">

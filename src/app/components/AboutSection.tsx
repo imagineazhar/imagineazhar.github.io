@@ -155,7 +155,7 @@ export function AboutSection() {
           <div className="group/stack relative">
             <div className="relative h-[420px] w-full max-w-[380px] mx-auto">
               {/* Portrait Card */}
-              <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 transition-all duration-500 ease-out z-20 shadow-md group-hover/stack:z-10 group-hover/stack:translate-x-3 group-hover/stack:translate-y-6 group-hover/stack:shadow-sm">
+              <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 transition-all duration-300 ease-out z-20 shadow-md group-hover/stack:z-10 group-hover/stack:translate-x-3 group-hover/stack:translate-y-6 group-hover/stack:shadow-sm">
                 <div className="p-4 sm:p-6">
                   <div className="aspect-square w-full overflow-hidden bg-gray-100">
                     <img
@@ -169,7 +169,7 @@ export function AboutSection() {
               </div>
 
               {/* Radar Card */}
-              <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 transition-all duration-500 ease-out z-10 translate-x-3 translate-y-6 rotate-[-8deg] shadow-sm group-hover/stack:z-20 group-hover/stack:translate-x-0 group-hover/stack:translate-y-0 group-hover/stack:rotate-0 group-hover/stack:shadow-md hover:border-accent">
+              <div className="absolute left-0 top-0 w-full bg-white border border-gray-200 transition-all duration-300 ease-out z-10 translate-x-3 translate-y-6 rotate-[-8deg] shadow-sm group-hover/stack:z-20 group-hover/stack:translate-x-0 group-hover/stack:translate-y-0 group-hover/stack:rotate-0 group-hover/stack:shadow-md hover:border-accent">
                 <div className="p-4 sm:p-6">
                   <div className="w-full max-w-[380px] mx-auto px-2">
                     <svg

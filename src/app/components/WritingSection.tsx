@@ -212,7 +212,7 @@ export function WritingSection() {
                       <img
                         src={article.image}
                         alt={article.title}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 origin-top-left group-hover:scale-110"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 origin-top-left group-hover:scale-110"
                       />
                     ) : (
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_55%)]" />
@@ -223,7 +223,7 @@ export function WritingSection() {
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
 
-                    <div className="relative z-10 flex h-full flex-col justify-end p-8 transition-transform duration-500 group-hover:translate-y-3">
+                    <div className="relative z-10 flex h-full flex-col justify-end p-8 transition-transform duration-300 group-hover:translate-y-3">
                       <h3 className="text-3xl sm:text-4xl font-medium leading-tight mb-4">
                         {article.title}
                       </h3>
@@ -245,13 +245,13 @@ export function WritingSection() {
                   </div>
 
                   {/* Category Badge */}
-                  <div className="mb-8 flex items-center gap-3 transition-transform duration-500 group-hover:translate-y-2">
-                    <div className="h-12 w-12 overflow-hidden rounded-lg bg-gradient-to-br from-gray-200 via-white to-gray-300 p-[2px] transition-transform duration-500 origin-top-left group-hover:scale-110">
+                  <div className="mb-8 flex items-center gap-3 transition-transform duration-300 group-hover:translate-y-2">
+                    <div className="h-12 w-12 overflow-hidden rounded-lg bg-gradient-to-br from-gray-200 via-white to-gray-300 p-[2px] transition-transform duration-300 origin-top-left group-hover:scale-110">
                       {article.image ? (
                         <img
                           src={article.image}
                           alt={article.title}
-                          className="h-full w-full rounded-md object-cover transition-transform duration-500 origin-top-left group-hover:scale-125"
+                          className="h-full w-full rounded-md object-cover transition-transform duration-300 origin-top-left group-hover:scale-125"
                         />
                       ) : (
                         <div className="h-full w-full rounded-md bg-white shadow-inner" />
@@ -260,12 +260,12 @@ export function WritingSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-medium mb-3 text-black group-hover:text-gray-700 transition-colors leading-[1.3] transition-transform duration-500 group-hover:translate-y-3">
+                  <h3 className="text-lg font-medium mb-3 text-black group-hover:text-gray-700 transition-colors leading-[1.3] transition-transform duration-300 group-hover:translate-y-3">
                     {article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-gray-600 text-sm leading-[1.5] mb-6 transition-transform duration-500 group-hover:translate-y-3">
+                  <p className="text-gray-600 text-sm leading-[1.5] mb-6 transition-transform duration-300 group-hover:translate-y-3">
                     {article.excerpt}
                   </p>
 

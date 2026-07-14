@@ -60,12 +60,12 @@ export function PortfolioShowcase() {
               initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
               whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: (index % 4) * 0.06, ease: "easeOut" }}
+              transition={{ type: "spring", stiffness: 260, damping: 30, delay: (index % 4) * 0.04 }}
             >
               <ImageWithFallback
                 src={project.thumbnailUrl}
                 alt={`Tableau visualization: ${project.title}`}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />

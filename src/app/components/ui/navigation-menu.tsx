@@ -155,6 +155,7 @@ function NavigationMenuIndicator({
   );
 }
 
+/* eslint-disable react-refresh/only-export-components -- vendored shadcn/ui module; variants helper is colocated with its components by design. */
 export {
   NavigationMenu,
   NavigationMenuList,
@@ -166,3 +167,4 @@ export {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 };
+/* eslint-enable react-refresh/only-export-components */

@@ -1,7 +1,7 @@
 import { HeroSection } from "@/app/components/HeroSection";
 import { AboutSection } from "@/app/components/AboutSection";
-import { ServicesSection } from "@/app/components/ServicesSection";
 import { SelectedWork } from "@/app/components/SelectedWork";
+import { PortfolioShowcase } from "@/app/components/PortfolioShowcase";
 import { WritingSection } from "@/app/components/WritingSection";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -24,7 +24,7 @@ export function HomePage() {
 
   useEffect(() => {
     setPageMeta({
-      title: "Muhammad Azhar | Data Analytics Specialist",
+      title: "Muhammad Azhar",
       description:
         "Data analytics specialist focused on data visualization and enterprise data strategy.",
       url: buildUrl("/"),
@@ -35,8 +35,8 @@ export function HomePage() {
     <>
       <HeroSection />
       <AboutSection />
-      <ServicesSection />
       <SelectedWork />
+      <PortfolioShowcase />
       <WritingSection />
     </>
   );

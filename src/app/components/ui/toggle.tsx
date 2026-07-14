@@ -44,4 +44,5 @@ function Toggle({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- vendored shadcn/ui module; variants helper is colocated with its component by design.
 export { Toggle, toggleVariants };

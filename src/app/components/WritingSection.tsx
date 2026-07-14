@@ -1,6 +1,16 @@
-import { Calendar, Clock, ArrowRight, ExternalLink, Loader2, ArrowUpRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Loader2, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import Parser from "rss-parser";
+
+interface RssItem {
+  title: string;
+  link: string;
+  pubDate: string;
+  content?: string;
+  description?: string;
+  thumbnail?: string;
+  enclosure?: { link?: string; url?: string };
+  categories?: string[];
+}
 
 interface Article {
   title: string;
@@ -41,7 +51,7 @@ export function WritingSection() {
         }
 
         // Parse and format the articles
-        const parsedArticles: Article[] = data.items.slice(0, 6).map((item: any) => {
+        const parsedArticles: Article[] = data.items.slice(0, 6).map((item: RssItem) => {
           // Extract text from HTML content
           const tempDiv = document.createElement('div');
           tempDiv.innerHTML = item.content || item.description || '';
@@ -153,7 +163,7 @@ export function WritingSection() {
   }, []);
 
   return (
-    <section id="writing" className="relative py-32 bg-gray-50">
+    <section id="writing" className="scroll-anchor relative py-32 bg-gray-50">
       {/* Top separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gray-200"></div>
       
@@ -164,8 +174,9 @@ export function WritingSection() {
           <div className="h-1 w-16 bg-accent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 font-medium leading-[1.2] text-black">Writing & Thinking</h2>
           <p className="text-base sm:text-lg text-gray-600 leading-[1.6]">
-            Exploring the intersection of design, data, and human perception. Thoughts on best practices, 
-            technical deep-dives, and lessons learned from real-world projects.
+            Notes on what I&rsquo;m learning — where design, data, and how people actually
+            read a chart all collide. Some of it&rsquo;s technical, some of it&rsquo;s just
+            things I wish I&rsquo;d known sooner.
           </p>
         </div>
 

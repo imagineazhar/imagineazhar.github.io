@@ -5,11 +5,12 @@ interface LogoProps {
   animated?: boolean;
 }
 
-export function Logo({ 
-  size = 40, 
-  className = "", 
+export function Logo({
+  size = 40,
+  className = "",
   variant = "color",
-  animated = false 
+  // Unused: DataVizLogo (the only caller that passes this) isn't rendered anywhere in the app.
+  animated: _animated = false,
 }: LogoProps) {
   const primaryColor = (variant === "monochrome" || variant === "mono") ? "#000000" : "#1E3D59";
   

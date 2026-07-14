@@ -1,13 +1,15 @@
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { caseStudies } from "@/app/data/caseStudies";
 
 export function SelectedWork() {
-  const featuredProjects = useMemo(() => caseStudies.slice(0, 3), []);
-  const [activeIndex, setActiveIndex] = useState(1);
-  const activeProject = featuredProjects[activeIndex];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeProject = caseStudies[activeIndex];
+  const prefersReducedMotion = useReducedMotion();
+
   const featuredMetrics = useMemo(() => {
     const numeric = activeProject.metrics.filter((metric) => /\d/.test(metric));
     return (numeric.length ? numeric : activeProject.metrics).slice(0, 2);
@@ -29,7 +31,7 @@ export function SelectedWork() {
   };
 
   return (
-    <section id="portfolio" className="relative py-32 bg-white">
+    <section id="portfolio" className="scroll-anchor relative py-32 bg-white">
       {/* Top separator */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gray-200"></div>
 
@@ -46,75 +48,126 @@ export function SelectedWork() {
         </div>
 
         {/* Project Tabs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {featuredProjects.map((project, index) => {
+        <div
+          role="tablist"
+          aria-label="Selected work projects"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8"
+        >
+          {caseStudies.map((project, index) => {
             const isActive = index === activeIndex;
             return (
-              <button
+              <motion.button
                 key={project.id}
                 type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls="selected-work-panel"
                 onClick={() => setActiveIndex(index)}
-                className={`btn-luma btn-luma--soft w-full px-6 py-3 text-sm font-medium ${
-                  isActive
-                    ? "text-black"
-                    : "text-gray-500 hover:text-black"
-                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                className={`btn-luma ${
+                  isActive ? "btn-luma--primary" : "btn-luma--soft text-gray-500 hover:text-black"
+                } flex w-full items-center gap-2 px-4 py-3 text-left text-sm font-medium`}
               >
-                PROJECT {index + 1}
-              </button>
+                <span className={`text-xs ${isActive ? "opacity-80" : "text-gray-400"}`}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="truncate">{project.title}</span>
+                {project.isConcept && (
+                  <span
+                    className={`ml-auto h-1.5 w-1.5 shrink-0 rounded-full ${
+                      isActive ? "bg-current opacity-70" : "bg-accent/60"
+                    }`}
+                    aria-hidden="true"
+                    title="Concept project"
+                  />
+                )}
+              </motion.button>
             );
           })}
         </div>
 
         {/* Featured Project */}
-        <div className="rounded-2xl border border-gray-200 bg-gray-50/70 shadow-lg p-6 md:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
-            <div className="relative overflow-hidden rounded-2xl bg-white shadow-sm">
-              <div className="aspect-[4/3] bg-gray-100">
-                <ImageWithFallback
-                  src={activeProject.image}
-                  alt={activeProject.title}
-                  className="w-full h-full object-cover"
-                />
+        <div id="selected-work-panel" className="relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeProject.id}
+              initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? undefined : { opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="rounded-2xl border border-gray-200 bg-gray-50/70 shadow-lg p-6 md:p-8"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
+                <Link
+                  to={`/case-study/${activeProject.id}`}
+                  className="group relative block overflow-hidden rounded-2xl bg-white shadow-sm"
+                >
+                  <div className="aspect-[4/3] bg-gray-100">
+                    <ImageWithFallback
+                      src={activeProject.image}
+                      alt={activeProject.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-black opacity-0 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </div>
+                </Link>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
+                    {String(activeIndex + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="text-2xl sm:text-3xl font-medium text-black mb-3 leading-[1.2]">
+                    {activeProject.title}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <p className="text-sm text-gray-500">{activeProject.client}</p>
+                    {activeProject.isConcept && (
+                      <span className="inline-flex items-center rounded-full border border-dashed border-gray-300 px-2 py-0.5 text-[11px] uppercase tracking-wide text-gray-500">
+                        Concept
+                      </span>
+                    )}
+                  </div>
+                  {activeProject.isConcept && activeProject.conceptNote && (
+                    <p className="text-xs text-gray-400 italic mb-4 max-w-md">
+                      {activeProject.conceptNote}
+                    </p>
+                  )}
+                  <p className="text-sm sm:text-base text-gray-600 leading-[1.6] mb-6">
+                    {activeProject.description}
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    {featuredMetrics.map((metric, metricIndex) => {
+                      const { value, label } = splitMetric(metric);
+                      return (
+                        <motion.div
+                          key={metricIndex}
+                          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.35, delay: 0.1 + metricIndex * 0.08, ease: "easeOut" }}
+                          className="rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
+                        >
+                          <p className="text-2xl font-semibold text-black mb-1">{value}</p>
+                          <p className="text-sm text-gray-600">{label || "Impact outcome"}</p>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+
+                  <Link
+                    to={`/case-study/${activeProject.id}`}
+                    className="group inline-flex items-center gap-2 text-sm font-medium text-black hover:text-accent transition-colors"
+                  >
+                    View Case Study
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
-                {String(activeIndex + 1).padStart(2, "0")}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-medium text-black mb-3 leading-[1.2]">
-                {activeProject.title}
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">{activeProject.client}</p>
-              <p className="text-sm sm:text-base text-gray-600 leading-[1.6] mb-6">
-                {activeProject.description}
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                {featuredMetrics.map((metric, metricIndex) => {
-                  const { value, label } = splitMetric(metric);
-                  return (
-                    <div
-                      key={metricIndex}
-                      className="rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
-                    >
-                      <p className="text-2xl font-semibold text-black mb-1">{value}</p>
-                      <p className="text-sm text-gray-600">{label || "Impact outcome"}</p>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <Link
-                to={`/case-study/${activeProject.id}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-black hover:text-accent transition-colors"
-              >
-                View Case Study
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>

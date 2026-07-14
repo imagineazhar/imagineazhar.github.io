@@ -1,25 +1,14 @@
 import { useState } from "react";
 import { Menu, X, Ghost } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Logo } from "@/app/components/Logo";
+import { Link } from "react-router-dom";
+import { useHashNav } from "@/app/hooks/useHashNav";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { navigateToHash } = useHashNav();
 
   const handleHashNavigation = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      // If not on homepage, navigate to homepage with hash
-      navigate(`/${hash}`);
-    } else {
-      // If on homepage, just scroll to section
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+    navigateToHash(e, hash);
     setIsMenuOpen(false);
   };
 
@@ -36,7 +25,10 @@ export function Navbar() {
               size={24} 
               className="transition-transform group-hover:scale-110 text-black"
             />
-            <span className="text-xl font-semibold text-black">
+            <span
+              className="text-xl font-semibold text-black tracking-wide"
+              style={{ fontFamily: "var(--font-secondary)" }}
+            >
               Muhammad Azhar
             </span>
           </Link>

@@ -156,6 +156,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   );
 }
 
+/* eslint-disable react-refresh/only-export-components -- vendored shadcn/ui module; useFormField hook is colocated with its components by design. */
 export {
   useFormField,
   Form,
@@ -166,3 +167,4 @@ export {
   FormMessage,
   FormField,
 };
+/* eslint-enable react-refresh/only-export-components */

@@ -32,6 +32,9 @@ export interface CaseStudy {
   tags: string[];
   duration: string;
   team: string;
+  /** True for self-directed design explorations rather than verified client engagements. */
+  isConcept?: boolean;
+  conceptNote?: string;
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -182,7 +185,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ["Finance", "Real-time Data", "Predictive Analytics", "D3.js"],
     duration: "8 months",
-    team: "5 developers, 2 data scientists, 1 UX designer"
+    team: "5 developers, 2 data scientists, 1 UX designer",
+    isConcept: true,
+    conceptNote:
+      "Self-directed concept exploring real-time portfolio analytics at scale — not a client engagement."
   },
   {
     id: "network-intelligence-platform",
@@ -234,7 +240,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ["Network Monitoring", "WebGL", "Real-time Visualization", "Anomaly Detection"],
     duration: "10 months",
-    team: "6 developers, 2 network architects, 1 data scientist"
+    team: "6 developers, 2 network architects, 1 data scientist",
+    isConcept: true,
+    conceptNote:
+      "Self-directed concept exploring large-scale network topology visualization — not a client engagement."
   },
   {
     id: "retail-sales-intelligence",
@@ -286,6 +295,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     tags: ["Retail Analytics", "Omnichannel", "Inventory Optimization", "Customer Journey"],
     duration: "7 months",
-    team: "3 data analysts, 2 developers, 1 business analyst"
+    team: "3 data analysts, 2 developers, 1 business analyst",
+    isConcept: true,
+    conceptNote:
+      "Self-directed concept exploring omnichannel retail analytics — not a client engagement."
   }
 ];

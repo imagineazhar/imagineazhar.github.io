@@ -1,6 +1,5 @@
 import { HeroSection } from "@/app/components/HeroSection";
 import { AboutSection } from "@/app/components/AboutSection";
-import { SelectedWork } from "@/app/components/SelectedWork";
 import { PortfolioShowcase } from "@/app/components/PortfolioShowcase";
 import { WritingSection } from "@/app/components/WritingSection";
 import { useEffect } from "react";
@@ -35,7 +34,6 @@ export function HomePage() {
     <>
       <HeroSection />
       <AboutSection />
-      <SelectedWork />
       <PortfolioShowcase />
       <WritingSection />
     </>

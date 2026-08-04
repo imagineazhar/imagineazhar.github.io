@@ -1,10 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { GhostCursor } from "@/app/components/GhostCursor";
 import { HomePage } from "@/app/pages/HomePage";
-import { CaseStudyPage } from "@/app/pages/CaseStudyPage";
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
@@ -26,7 +25,10 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
-        <Route path="/case-study/:id" element={<PageTransition><CaseStudyPage /></PageTransition>} />
+        {/* Without this, an unknown URL renders the chrome around an empty
+            <main> — a blank page rather than anything the visitor can act on.
+            Also catches links to the retired /case-study/* pages. */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
   );

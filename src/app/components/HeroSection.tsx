@@ -1,5 +1,6 @@
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { useHashNav } from "@/app/hooks/useHashNav";
 
 /*
  * Five highway-like ribbons after reference/hero.png. All bands share one
@@ -207,6 +208,7 @@ function HeroGraphic({ animate }: { animate: boolean }) {
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
+  const { navigateToHash } = useHashNav();
 
   return (
     <section
@@ -266,6 +268,7 @@ export function HeroSection() {
         >
           <a
             href="#portfolio"
+            onClick={(e) => navigateToHash(e, "#portfolio")}
             className="group btn-luma btn-luma--primary px-8 py-4 text-base font-medium flex items-center justify-center gap-2 min-w-[200px]"
           >
             View Portfolio

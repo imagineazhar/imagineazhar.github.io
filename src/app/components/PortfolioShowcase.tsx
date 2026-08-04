@@ -26,7 +26,7 @@ export function PortfolioShowcase() {
   const projects: TableauProject[] = tableauData.projects.slice(0, PROJECTS_SHOWN);
 
   return (
-    <section id="personal-projects" className="relative py-32 bg-[var(--surface-dark)] text-white">
+    <section id="portfolio" className="scroll-anchor relative py-32 bg-[var(--surface-dark)] text-white">
       <div className="absolute top-0 left-0 right-0 h-px bg-white/10" />
 
       <div className="max-w-6xl mx-auto px-6">

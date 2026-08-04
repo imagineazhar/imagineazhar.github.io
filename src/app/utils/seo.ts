@@ -49,7 +49,7 @@ export const setPageMeta = (options: {
   imageAlt?: string;
 }) => {
   const { title, description, url, image, imageAlt } = options;
-  const imageUrl = image ?? `${SITE_URL}/portrait.jpg`;
+  const imageUrl = image ?? `${SITE_URL}/portrait.png`;
   const imageAltText = imageAlt ?? "Portrait of Muhammad Azhar";
 
   if (typeof document !== "undefined") {

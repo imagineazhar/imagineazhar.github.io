@@ -1,15 +1,25 @@
 import { useState } from "react";
 import { Menu, X, Ghost } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useHashNav } from "@/app/hooks/useHashNav";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { navigateToHash } = useHashNav();
+  const location = useLocation();
 
   const handleHashNavigation = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
     navigateToHash(e, hash);
     setIsMenuOpen(false);
+  };
+
+  // Routing to "/" from "/" is a no-op, so the logo and Home link would appear
+  // dead on the home page. Scroll back to the top instead.
+  const handleHomeNavigation = () => {
+    setIsMenuOpen(false);
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -19,6 +29,7 @@ export function Navbar() {
           {/* Logo */}
           <Link
             to="/"
+            onClick={handleHomeNavigation}
             className="flex items-center gap-3 group"
           >
             <Ghost 
@@ -37,6 +48,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/"
+              onClick={handleHomeNavigation}
               className="px-4 py-2 text-gray-700 hover:text-accent transition-colors rounded-[var(--radius)] hover:bg-gray-50"
             >
               Home
@@ -93,7 +105,7 @@ export function Navbar() {
               <Link
                 to="/"
                 className="px-4 py-3 text-gray-700 hover:text-accent hover:bg-gray-50 transition-colors rounded-[var(--radius)]"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={handleHomeNavigation}
               >
                 Home
               </Link>

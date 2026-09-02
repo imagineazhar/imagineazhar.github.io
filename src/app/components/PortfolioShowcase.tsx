@@ -44,7 +44,7 @@ export function PortfolioShowcase() {
           Client work is only half the story. Here&rsquo;s what I build when{" "}
           <em
             className="not-italic"
-            style={{ fontFamily: "var(--font-accent)", fontStyle: "italic" }}
+            style={{ fontFamily: "var(--font-accent)" }}
           >
             nobody&rsquo;s asking me to
           </em>

@@ -49,8 +49,11 @@ export const setPageMeta = (options: {
   imageAlt?: string;
 }) => {
   const { title, description, url, image, imageAlt } = options;
-  const imageUrl = image ?? `${SITE_URL}/portrait.png`;
-  const imageAltText = imageAlt ?? "Portrait of Muhammad Azhar";
+  /* Must stay in step with the og:image baked into index.html — that is the
+     copy every crawler actually reads, and this one only replaces it for
+     client-rendered visits. */
+  const imageUrl = image ?? `${SITE_URL}/og-card.png`;
+  const imageAltText = imageAlt ?? "Muhammad Azhar — I help leaders see what their data is actually saying.";
 
   if (typeof document !== "undefined") {
     document.title = title;

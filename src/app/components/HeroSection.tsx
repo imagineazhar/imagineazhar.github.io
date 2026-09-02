@@ -244,7 +244,7 @@ export function HeroSection() {
           I help leaders see what their data{" "}
           <em
             className="not-italic"
-            style={{ fontFamily: "var(--font-accent)", fontStyle: "italic" }}
+            style={{ fontFamily: "var(--font-accent)" }}
           >
             is actually saying
           </em>

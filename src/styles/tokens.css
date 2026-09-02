@@ -1,0 +1,451 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — ported from design-tokens.json ("The Insight Floor" system).
+
+   The source tokens target a 1080x1350 social canvas, so their absolute px
+   values can't be used directly on the web. Everything that scales with the
+   canvas (type size, rule weight, radius) is multiplied by 0.45 — the factor
+   that maps the canvas body size (40px) onto an 18px web body. Applying one
+   factor across the board preserves the original proportions instead of
+   re-inventing a scale. Spacing and color pass through unchanged.
+
+   Var names are deliberately un-prefixed but distinct from theme.css, which
+   is still loaded for the legacy portfolio components; nothing here collides.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* --- Core color ------------------------------------------------------- */
+  --canvas: #faf9f7;
+  --ink: #1d1c1a;
+  --slate: #44607a;
+  --slate-deep: #2f4557;
+
+  /* --- Derived color ---------------------------------------------------- */
+  --raised: #efede9;
+  --slate-soft: #9fb3c4;
+  --slate-tint: #e6edf2;
+  --gray: #6e6a64;
+  --hairline-color: #d8d4ce;
+  --grid: #e4e1dc;
+  --paper: #ffffff;
+  --paper-line: #ddd9d3;
+
+  /* Contrast, measured against every surface the site actually paints text on
+     rather than --canvas alone. The figures the source token file carried were
+     off in both directions (it quoted slate at 5.0 and gray at 5.6; both are
+     wrong), so these are computed from the hex values above:
+
+                    canvas   raised    paper
+       ink           16.18    14.56    17.03   body text, any size
+       slate-deep     9.46     8.51     9.95   accent text, any size
+       gray           5.11     4.60     5.37   captions and micro
+       slate          6.24     5.61     6.56   headlines, markers, metrics
+
+     Every one of those clears AA for normal text. The binding constraint is
+     gray on --raised at 4.60:1 — the Let's Connect block, where a .tif-lede
+     sits on the raised surface. It passes by 0.1, so darkening --raised or
+     lightening --gray breaks a live pairing. Check that cell before touching
+     either token.
+
+       slate-soft     2.05     1.85     2.16   rules and borders only
+       hairline       1.40     1.26     1.48   rules and borders only
+
+     Those two fail text contrast by design. Never set type in them. */
+
+  /* --- Families --------------------------------------------------------- */
+  --ff-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --ff-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --ff-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  /* --- Type scale (canvas px x 0.45, fluid above the h2 step) ----------- */
+  --fs-metric: clamp(4rem, 11vw, 7.875rem);        /* 280 -> 126 */
+  --fs-display-xl: clamp(2.75rem, 7vw, 4.1875rem); /* 148 -> 67  */
+  --fs-display: clamp(2.25rem, 5.5vw, 3.0625rem);  /* 108 -> 49  */
+  --fs-h1: clamp(1.875rem, 4vw, 2.25rem);          /*  80 -> 36  */
+  --fs-h2: clamp(1.5rem, 3vw, 1.75rem);            /*  62 -> 28  */
+  --fs-body-lg: 1.3125rem;                         /*  48 -> 21  */
+  --fs-body: 1.125rem;                             /*  40 -> 18  */
+  --fs-caption: 0.9375rem;                         /*  34 -> 15  */
+  --fs-micro: 0.8125rem;                           /*  28 -> 13  */
+
+  --lh-metric: 0.95;
+  --lh-display: 1.05;
+  --lh-h1: 1.1;
+  --lh-h2: 1.15;
+  --lh-body-lg: 1.35;
+  --lh-body: 1.4;
+
+  --ls-metric: -0.03em;
+  --ls-display: -0.02em;
+  --ls-h1: -0.01em;
+  --ls-micro: 0.08em;
+
+  /* --- Spacing (canvas scale, already web-appropriate) ------------------ */
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 96px;
+
+  /* --- Page gutters (safeArea, reinterpreted for a fluid viewport) ------ */
+  --gutter: 24px;
+  --measure: 68ch; /* long-form line length; token file has no web equivalent */
+
+  /* --- Radius + rules (canvas px x 0.45) -------------------------------- */
+  --radius-chip: 6px;
+  --radius-card: 12px;
+  --rule-hairline: 1px;
+  --rule-accent: 3px;
+  --rule-marker: 6px;
+
+  /* --- The Floor signature --------------------------------------------- */
+  /* Now read by the fixed reading-progress bar only — the masthead's bottom
+     edge and the footer colophon no longer carry the tick device. */
+  --floor-tick-gap: 24px;    /* 52 -> 23.4, rounded to an even grid */
+  --floor-tick-height: 14px; /* 30 -> 13.5 */
+  --floor-marker-width: 24px;
+  --floor-marker-color: var(--slate);
+
+  /* --- Sticky masthead -------------------------------------------------- */
+  /* The bar's height and the offset in-page anchors scroll to are the same
+     measurement, so they live together: a section heading landing underneath
+     the sticky bar is the classic anchor-navigation bug. */
+  --nav-height: 64px;    /* read by Masthead, which sets the bar from it */
+  --anchor-offset: 80px; /* nav height + 16px of air above the heading */
+
+  /* --- Motion (subtle tier; every value inside the 150-300ms band) ------
+     The CSS transitions below read these directly. The framer transitions in
+     App.tsx and BlogHome.tsx cannot — they take seconds and a bezier array —
+     so they carry the same numbers as literals: 0.3s/ease-out-soft on the home
+     statement, 0.2s/ease-in-out-soft on the route fade. Change a value here and
+     those two literals have to move with it. */
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --motion-slow: 300ms;
+  --ease-out-soft: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 72px; /* matches safeArea.sides at full canvas width */
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base + primitives
+
+   These live in @layer components on purpose. Tailwind v4 emits its utilities
+   into @layer utilities, and unlayered CSS outranks *any* layered rule — so an
+   unlayered `.tif-card { flex-direction: column }` would beat `md:flex-row` and
+   the featured card could never go horizontal. Inside the components layer the
+   normal expectation holds: utilities win, these are the defaults.
+   --------------------------------------------------------------------------- */
+
+@layer components {
+
+/* Ported out of theme.css when the legacy layer was removed.
+
+   scroll-behavior is the important one: App.tsx navigates by calling
+   scrollIntoView and window.scrollTo with no behavior option, precisely so that
+   this declaration governs and reduced-motion needs no second code path. Losing
+   it would have turned every in-page anchor into a hard jump, silently.
+
+   The ground colour sits on html rather than on .tif so that overscroll past
+   either end of the page shows canvas instead of the browser's default white. */
+html {
+  background-color: var(--canvas);
+  scroll-behavior: smooth;
+}
+
+.tif {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tif ::selection {
+  background-color: var(--slate-tint);
+  color: var(--slate-deep);
+}
+
+/* Visible focus ring on every interactive element (WCAG 2.4.7). */
+.tif :is(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--slate-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.tif-shell {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Every target the masthead can navigate to wears this, so a jump to #work
+   parks the heading below the sticky bar instead of behind it. One class
+   rather than per-section inline offsets — the sticky height changes in one
+   place and all anchors follow. */
+.tif-anchor {
+  scroll-margin-top: var(--anchor-offset);
+}
+
+/* One step above .tif-display, and the largest thing the scale can set. It is
+   for a single figure — the token file's metric step exists for exactly one
+   number per page, and the size only reads as emphasis while nothing else
+   competes with it.
+
+   Slate rather than ink: at this size an ink figure is a wall of text weight,
+   where slate puts the number in the same family as the accent rule and the
+   progress marker — a data mark rather than a sentence. 6.24:1 on --canvas.
+
+   Tabular figures are baked in rather than composed with .tif-tabular, since
+   this class never sets anything but numerals. */
+.tif-metric {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: var(--fs-metric);
+  line-height: var(--lh-metric);
+  letter-spacing: var(--ls-metric);
+  font-variant-numeric: tabular-nums;
+  color: var(--slate);
+}
+
+.tif-display {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+}
+
+.tif-h1 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  text-wrap: balance;
+}
+
+.tif-h2 {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  text-wrap: balance;
+}
+
+/* The emphasised phrase inside a headline. Headlines are set roman throughout,
+   so the emphasis is carried by colour rather than slant — --slate-deep is the
+   token file's designated accent text colour (8.6:1 on --canvas, passes at any
+   size). font-style is reset explicitly because the markup is an <em>, which
+   the UA stylesheet italicises by default. */
+.tif-accent-em {
+  font-style: normal;
+  color: var(--slate-deep);
+}
+
+/* Mono metadata: dates, read times, counts, year markers, the wordmark.
+   Uppercase + wide tracking per the micro token. Deliberately NOT used as a
+   section eyebrow — headings carry section identity on their own. */
+.tif-micro {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: var(--ls-micro);
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.tif-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.35;
+  color: var(--gray);
+}
+
+.tif-lede {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body-lg);
+  color: var(--gray);
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+/* Tabular figures wherever numbers sit in a column or a metric. */
+.tif-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Rules ------------------------------------------------------------- */
+
+.tif-hairline {
+  border: 0;
+  border-top: var(--rule-hairline) solid var(--hairline-color);
+  margin: 0;
+}
+
+.tif-accent-rule {
+  width: 56px;
+  height: var(--rule-accent);
+  background-color: var(--slate);
+}
+
+/* --- Link underline that grows from the left on hover ------------------ */
+
+.tif-link {
+  color: var(--slate-deep);
+  text-decoration: none;
+  background-image: linear-gradient(var(--slate-deep), var(--slate-deep));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% var(--rule-hairline);
+  transition: background-size var(--motion-base) var(--ease-out-soft);
+  cursor: pointer;
+}
+
+.tif-link:hover,
+.tif-link:focus-visible {
+  background-size: 100% var(--rule-hairline);
+}
+
+/* --- Buttons ----------------------------------------------------------- */
+
+.tif-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px; /* touch target floor */
+  padding: 12px 22px;
+  border-radius: var(--radius-chip);
+  border: var(--rule-hairline) solid transparent;
+  font-family: var(--ff-body);
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-base) var(--ease-out-soft),
+    border-color var(--motion-base) var(--ease-out-soft),
+    color var(--motion-base) var(--ease-out-soft);
+}
+
+.tif-btn--primary {
+  background-color: var(--slate-deep);
+  color: var(--paper);
+}
+
+.tif-btn--primary:hover {
+  background-color: var(--ink);
+}
+
+.tif-btn--quiet {
+  background-color: transparent;
+  border-color: var(--hairline-color);
+  color: var(--ink);
+}
+
+.tif-btn--quiet:hover {
+  background-color: var(--raised);
+  border-color: var(--slate-soft);
+}
+
+/* --- Dense post list ----------------------------------------------------
+   Hairline-separated ledger rows: mono date column, whole row is the link
+   (44px+ target from py-3 + body line-height). Hover recolors the title
+   only — no lift; the density is the point. */
+
+.tif-rowlist > * + * {
+  border-top: var(--rule-hairline) solid var(--hairline-color);
+}
+
+.tif-row-title {
+  color: var(--ink);
+  transition: color var(--motion-fast) var(--ease-out-soft);
+}
+
+.tif-row:hover .tif-row-title,
+.tif-row:focus-visible .tif-row-title {
+  color: var(--slate-deep);
+}
+
+/* Every ledger row leaves the site for Medium or Substack. The link name says
+   so for a screen reader; this is the sighted half of the same fact.
+
+   Opacity only, and the mark is set inline inside the title, so its space is
+   always occupied — a row can never nudge its neighbours by revealing one.
+   It inherits the title's colour, so it recolours with it on hover. Where
+   there is no hover to discover it with, it simply stays visible. */
+.tif-row-out {
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-out-soft);
+}
+
+.tif-row:hover .tif-row-out,
+.tif-row:focus-visible .tif-row-out {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .tif-row-out {
+    opacity: 1;
+  }
+}
+
+/* --- Card -------------------------------------------------------------- */
+
+.tif-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--paper);
+  border: var(--rule-hairline) solid var(--paper-line);
+  border-radius: var(--radius-card);
+  transition:
+    border-color var(--motion-base) var(--ease-out-soft),
+    transform var(--motion-base) var(--ease-out-soft);
+}
+
+/* Lift uses transform only — never width/height/top — so nothing reflows. */
+.tif-card:hover {
+  border-color: var(--slate-soft);
+  transform: translateY(-3px);
+}
+} /* end @layer components */
+
+/* Left unlayered so the !important reset always wins. */
+@media (prefers-reduced-motion: reduce) {
+  /* Outside .tif, so the block below does not cover it. */
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tif-card:hover {
+    transform: none;
+  }
+
+  /* The card's lift is nulled above; the thumbnail zoom has to go with it.
+     Killing transition-duration alone only makes the scale instant, not
+     absent. Unlayered, so it outranks the Tailwind utility that sets it. */
+  .tif-card:hover img {
+    transform: none;
+  }
+
+  .tif *,
+  .tif *::before,
+  .tif *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

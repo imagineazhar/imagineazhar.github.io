@@ -5,6 +5,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Loaded here rather than through an @import in the CSS bundle: an
+         @import chains HTML -> bundle.css -> fonts.googleapis.com -> gstatic,
+         so the real faces cannot start downloading until the bundle has been
+         fetched and parsed. The link starts them in parallel with it, and the
+         preconnects open both font connections up front.
+
+         No italic axis on Instrument Sans (.tif-accent-em resets font-style,
+         and nothing else on the site slants) and no Plex Mono 600 — dropping
+         the two unused faces takes the latin payload from 180 KB to 133 KB. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- The featured post's preview plate is pulled from whichever CDN hosts
+         that piece. It is lazy and far below the fold, so it does not warrant
+         a preconnect holding a socket open from first paint — resolving the
+         name early is the whole win, and costs nothing if the post that lands
+         has no image. -->
+    <link rel="dns-prefetch" href="https://cdn-images-1.medium.com" />
+    <link rel="dns-prefetch" href="https://substackcdn.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap"
+    />
     <meta
       name="description"
       content="Data analytics specialist focused on data visualization and enterprise data strategy."
@@ -15,7 +39,7 @@
     />
     <meta name="author" content="Muhammad Azhar" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#FAF9F7" />
     <link rel="canonical" href="https://imagineazhar.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
@@ -26,16 +50,23 @@
       content="Data analytics specialist focused on data visualization and enterprise data strategy."
     />
     <meta property="og:url" content="https://imagineazhar.com/" />
-    <meta property="og:image" content="https://imagineazhar.com/portrait.png" />
-    <meta property="og:image:alt" content="Portrait of Muhammad Azhar" />
+    <!-- A 1200x630 card, not the portrait: with summary_large_image every
+         consumer crops the image to about 1.91:1, and the old square portrait
+         came out as a band across the middle of the face. Width and height are
+         declared so a scraper can lay the card out before it has fetched it. -->
+    <meta property="og:image" content="https://imagineazhar.com/og-card.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Muhammad Azhar — I help leaders see what their data is actually saying." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Muhammad Azhar | Data Analytics Specialist" />
     <meta
       name="twitter:description"
       content="Data analytics specialist focused on data visualization and enterprise data strategy."
     />
-    <meta name="twitter:image" content="https://imagineazhar.com/portrait.png" />
-    <meta name="twitter:image:alt" content="Portrait of Muhammad Azhar" />
+    <meta name="twitter:image" content="https://imagineazhar.com/og-card.png" />
+    <meta name="twitter:image:alt" content="Muhammad Azhar — I help leaders see what their data is actually saying." />
       <script type="text/javascript">
         (function (l) {
           if (!l.search) return;
@@ -62,7 +93,13 @@
           "Dashboard design"
         ],
         "url": "https://imagineazhar.com/",
-        "sameAs": []
+        "sameAs": [
+          "https://linkedin.com/in/imagineazhar",
+          "https://github.com/imagineazhar",
+          "https://medium.com/@imagineazhar",
+          "https://imagineazhar.substack.com",
+          "https://public.tableau.com/app/profile/m.azhar/vizzes"
+        ]
       }
     </script>
   </head>

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hand-maintained. Two kinds of URL live here:
+
+  The SPA routes (/, /archive, /lab/*) are client-rendered — a crawler sees
+  only the meta baked into index.html, since setPageMeta runs after mount.
+
+  The /viz/*.html pages are real static files with real <head> markup, so they
+  are the only pages on this site a crawler reads in full. Listed at the same
+  priority as the routes that frame them for exactly that reason.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://imagineazhar.com/</loc>
@@ -11,5 +21,49 @@
     <lastmod>2026-09-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <!--
+    One URL per chart, and no index above them: /lab/<slug> is the chart
+    running inside the site chrome, and the home page is its only index.
+  -->
+  <url>
+    <loc>https://imagineazhar.com/lab/country-heat-anomaly</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://imagineazhar.com/lab/country-strips</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://imagineazhar.com/lab/climate-ring</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!--
+    The charts themselves. Each redraws from live observations on open, so the
+    content genuinely changes daily even though the file does not.
+  -->
+  <url>
+    <loc>https://imagineazhar.com/viz/country-heat-anomaly.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://imagineazhar.com/viz/country-strips.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://imagineazhar.com/viz/climate-ring.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

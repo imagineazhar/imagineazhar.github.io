@@ -13,6 +13,7 @@ import { ProgressFloor } from "@/app/components/blog/TheFloor";
 import { GhostCursor } from "@/app/components/blog/GhostCursor";
 import { BlogHome } from "@/app/pages/BlogHome";
 import { ArchivePage } from "@/app/pages/ArchivePage";
+import { VizPage } from "@/app/pages/VizPage";
 import { useFeed, type FeedState } from "@/app/hooks/useFeed";
 import { waitForElement } from "@/app/utils/waitForElement";
 
@@ -92,6 +93,21 @@ function AnimatedRoutes({ feed }: { feed: FeedState }) {
           element={
             <PageTransition>
               <ArchivePage feed={feed} />
+            </PageTransition>
+          }
+        />
+        {/* One interactive chart, running full-bleed between the masthead and
+            the footer. There is no /lab index above it: the plates in #work on
+            the home page are the index, and a card goes straight here.
+
+            The route is the frame, not the chart — the bundle it loads is a
+            real file under public/viz/ that never enters the router. Must sit
+            above the catch-all; a "*" declared first would swallow it. */}
+        <Route
+          path="/lab/:slug"
+          element={
+            <PageTransition>
+              <VizPage />
             </PageTransition>
           }
         />

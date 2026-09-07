@@ -3,8 +3,6 @@ import tableauData from "@/app/data/tableauProjects.json";
 
 const SHOW_COUNT = 9;
 
-const number = new Intl.NumberFormat("en-US");
-
 /* A 1px ring on every cell, with a 1px grid gap for the rings to meet in.
    Adjacent rings coincide into single shared rules, so the plates read as one
    contact sheet instead of six floating cards — and an orphaned cell on the
@@ -25,9 +23,8 @@ const PLATE = { aspectRatio: "736 / 454", backgroundColor: "var(--raised)" } as 
 const TITLE_TWO_LINES = { minHeight: "calc(2 * 1.35em)" } as const;
 
 /**
- * The six most-viewed pieces of Tableau work as a numbered contact sheet —
- * square corners, hairline gutters, no card chrome. Because the order is by
- * views, the plate numbers read as a ranking rather than as arbitrary labels.
+ * The Tableau back catalogue as a numbered contact sheet — square corners,
+ * hairline gutters, no card chrome.
  *
  * Captions sit under the plate rather than over it. The reference this follows
  * sets its metadata straight onto the imagery, which works for architectural
@@ -35,29 +32,38 @@ const TITLE_TWO_LINES = { minHeight: "calc(2 * 1.35em)" } as const;
  * edges, so type over it would be unreadable and unpredictable.
  */
 export function VizShowcase() {
-  /* Most-viewed first, not profile order — the snapshot arrives in Tableau's own
-     sequence, which buried the 10k and 8k pieces below a 119-view workout entry.
-     Spread before sorting: the JSON import is a shared module object and other
-     consumers read it in its original order. */
+  /* Still sorted on viewCount, though the count itself no longer reaches the
+     page: it is the only signal in the snapshot that separates the work worth
+     leading with from a one-off workout chart, and Tableau's own profile order
+     buries the former under the latter. A hidden sort key, not a displayed
+     metric. Spread before sorting — the JSON import is a shared module object
+     and other consumers read it in its original order. */
   const projects = [...tableauData.projects]
     .sort((a, b) => b.viewCount - a.viewCount)
     .slice(0, SHOW_COUNT);
 
   /* Same opener as the writing section — accent rule, short headline, lede —
      so the two read as peers. The old single sentence was carrying eyebrow,
-     headline and body all at once at h2 size. */
+     headline and body all at once at h2 size.
+
+     This used to be the whole of #work, and read as "what I build when nobody's
+     asking me to". LabShowcase now sits above it making that claim for work
+     that runs on this domain, so the claim has moved up and this tier says the
+     narrower, still-true thing: it is the back catalogue, and it is somewhere
+     else. */
   const heading = (
     <>
       <div className="tif-accent-rule mb-6" />
       <h2 className="tif-h1" style={{ color: "var(--ink)" }}>
-        Client work is only <em className="tif-accent-em">half the story</em>.
+        The back catalogue lives on{" "}
+        <em className="tif-accent-em">Tableau Public</em>.
       </h2>
       <p
         className="tif-lede"
         style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-body)" }}
       >
-        Here&rsquo;s what I build when nobody&rsquo;s asking me to &mdash;
-        personal projects, published open on Tableau Public.
+        Personal projects, published open &mdash; a selection from the
+        profile, which holds the rest.
       </p>
     </>
   );
@@ -108,7 +114,7 @@ export function VizShowcase() {
               href={project.vizUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} — ${number.format(project.viewCount)} views on Tableau Public (opens in a new tab)`}
+              aria-label={`${project.title} — on Tableau Public (opens in a new tab)`}
               className="tif-row flex h-full flex-col"
             >
               <div className="w-full overflow-hidden" style={PLATE}>
@@ -126,16 +132,13 @@ export function VizShowcase() {
               </div>
 
               <div className="flex flex-col gap-1 p-3 md:p-4">
-                {/* The plate number only reads as a ranking if the thing being
-                    ranked is on the plate with it, so the count it was sorted
-                    on sits opposite. Wraps rather than overflows in the very
-                    narrowest two-column cells; the number itself never breaks,
-                    which is what nowrap is protecting. */}
-                <span className="tif-micro tif-tabular flex flex-wrap items-baseline justify-between gap-x-3">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <span className="whitespace-nowrap">
-                    {number.format(project.viewCount)} views
-                  </span>
+                {/* A plate number, not a rank. It used to carry the view count
+                    opposite it and read as a leaderboard; without the count
+                    there is nothing to rank by on the plate, so it goes back to
+                    doing what a number on a contact sheet does — telling you
+                    which frame you are looking at. */}
+                <span className="tif-micro tif-tabular">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <span
                   className="tif-row-title tif-caption line-clamp-2"

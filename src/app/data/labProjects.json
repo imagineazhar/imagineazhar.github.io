@@ -1,0 +1,64 @@
+{
+  "_comment": "Hand-maintained, unlike tableauProjects.json — nothing overwrites this at build time. One entry per chart in the generator repo (charts/<slug>/), not per seeded subject: every chart reads ?subject= and its own alias at runtime, so a country is a link, not a build.",
+  "source": {
+    "name": "Open-Meteo",
+    "url": "https://open-meteo.com/",
+    "note": "Fetched live in the reader's browser, not baked into the page."
+  },
+  "projects": [
+    {
+      "slug": "country-heat-anomaly",
+      "file": "/viz/country-heat-anomaly.html",
+      "title": "How unusual was last month?",
+      "dek": "Take a country's six largest cities and ask how far last month ran from its ten-year normal for the same dates — ranked, paired, and strip by strip.",
+      "method": "Six cities per country. Each month's mean is measured against the average of the same calendar month across the previous ten years. The archive is reanalysis and trails real time by about five days, so the latest month on offer is always one that has certainly finished landing.",
+      "queryParam": "country",
+      "subjectNoun": "country",
+      "defaultSubject": "Saudi Arabia",
+      "examples": [
+        "Saudi Arabia",
+        "Japan",
+        "Pakistan",
+        "Australia",
+        "Kenya"
+      ],
+      "poster": "/viz/posters/country-heat-anomaly.png"
+    },
+    {
+      "slug": "country-strips",
+      "file": "/viz/country-strips.html",
+      "title": "Six cities, thirty days, one country",
+      "dek": "Daily temperature range for a country's six largest cities, stacked so the cities can be read against each other rather than each against its own history.",
+      "method": "A thirty-day rolling window ending today. No normal band here on purpose — six rows already carry six comparisons, and the question this chart asks is how the cities sit relative to one another.",
+      "queryParam": "country",
+      "subjectNoun": "country",
+      "defaultSubject": "Saudi Arabia",
+      "examples": [
+        "Saudi Arabia",
+        "Japan",
+        "Pakistan",
+        "Australia",
+        "Kenya"
+      ],
+      "poster": "/viz/posters/country-strips.png"
+    },
+    {
+      "slug": "climate-ring",
+      "file": "/viz/climate-ring.html",
+      "title": "Thirty days of temperature, as a ring",
+      "dek": "One city's daily highs and lows wrapped into a ring, set against the ten-year normal band for the same dates — so an ordinary month and an unusual one look different at a glance.",
+      "method": "A thirty-day rolling window ending today, with the normal band averaged across ten years of archive for the same calendar dates. Reading clockwise from the top, each spoke is one day.",
+      "queryParam": "city",
+      "subjectNoun": "city",
+      "defaultSubject": "Tokyo",
+      "examples": [
+        "Tokyo",
+        "Riyadh",
+        "Karachi",
+        "London",
+        "Nairobi"
+      ],
+      "poster": "/viz/posters/climate-ring.png"
+    }
+  ]
+}

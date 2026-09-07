@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Archive, ArrowUpRight, Mail } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { AboutSection } from "@/app/components/blog/AboutSection";
-import { MetricBand } from "@/app/components/blog/MetricBand";
+import { LabShowcase } from "@/app/components/blog/LabShowcase";
 import { FeaturedPost, FeaturedPostSkeleton } from "@/app/components/blog/PostCard";
 import { PostList, PostListSkeleton } from "@/app/components/blog/PostList";
 import { VizShowcase } from "@/app/components/blog/VizShowcase";
@@ -73,15 +73,19 @@ export function BlogHome({ feed }: { feed: FeedState }) {
 
         <hr className="tif-hairline" style={{ marginBlock: "var(--space-5)" }} />
 
-        {/* ---- The number the work adds up to --------------------------- */}
-        {/* Carries its own closing rule, so it can return null on an empty
-            snapshot without leaving a doubled hairline behind. */}
-        <MetricBand />
-
         {/* ---- The work first, the writing about it after --------------- */}
         {/* Wrapper carries the anchor so VizShowcase stays a section component
             that doesn't need to know it is a navigation target. */}
+        {/* Two tiers, hosted before linked: the charts that run on this domain
+            come first, and the Tableau contact sheet below them is a set of
+            doors to another site. Ordering them the other way round would bury
+            the only work on the page a reader can actually touch. The hairline
+            between is the same rule that separates every other section. */}
         <div id="work" className="tif-anchor">
+          <LabShowcase />
+
+          <hr className="tif-hairline" style={{ marginBlock: "var(--space-5)" }} />
+
           <VizShowcase />
         </div>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Archive, Home, Mail, Linkedin, Github } from "lucide-react";
+import { Archive, Home, LineChart, Mail, Linkedin, Github } from "lucide-react";
 import { FEED_SOURCES } from "@/app/data/feeds";
 import { sourceIcon } from "@/app/components/blog/sourceIcons";
 
@@ -42,6 +42,17 @@ export function SiteFooter({ postCount }: { postCount: number }) {
                 <Link to="/" className={LINK}>
                   <Home aria-hidden="true" className="h-4 w-4 shrink-0" />
                   Home
+                </Link>
+              </li>
+              {/* A section, not a route — the charts have no index page of
+                  their own, so this lands on the plates in #work that go
+                  straight to them. The masthead's "Work" is the same target;
+                  this says what is in it, which matters most from a chart
+                  page, where the masthead is the only way back. */}
+              <li>
+                <Link to="/#work" className={LINK}>
+                  <LineChart aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  Interactive charts
                 </Link>
               </li>
               <li>

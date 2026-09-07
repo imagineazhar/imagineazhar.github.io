@@ -7,6 +7,7 @@
   "scripts": {
     "prebuild": "node scripts/fetch-tableau-projects.mjs",
     "build": "vite build",
+    "posters": "node scripts/render-viz-posters.mjs",
     "dev": "vite",
     "lint": "eslint .",
     "predeploy": "npm run build",

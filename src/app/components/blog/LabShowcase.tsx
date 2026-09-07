@@ -89,7 +89,8 @@ export function LabShowcase() {
           className="tif-lede"
           style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-body)" }}
         >
-          Live visualizations you can explore, reshape, and take with you.
+          Live visualizations you can explore, reshape, and take with you — each one
+          fetches its data straight from the source the moment it opens.
         </p>
       </div>
 

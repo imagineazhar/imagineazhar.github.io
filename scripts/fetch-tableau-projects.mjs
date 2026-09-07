@@ -1,8 +1,13 @@
-// Fetches all public vizzes from the Tableau Public profile and writes them to
-// src/app/data/tableauProjects.json. Runs automatically before `vite build`
-// (see the "prebuild" script in package.json). Tableau's API sends no CORS
-// headers, so this data can't be fetched from the browser — it has to be
-// baked in at build time.
+// eslint.config.js declares globals for the TS/TSX sources only, so a Node
+// script has to name the ones it uses or every line of output is a no-undef.
+/* global fetch, console, process */
+
+/**
+ * Writes the Tableau Public profile to src/app/data/tableauProjects.json.
+ *
+ * Runs as the `prebuild` script because Tableau's API sends no CORS headers —
+ * the browser cannot read it, so the snapshot has to be baked in at build time.
+ */
 import { writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
@@ -52,8 +57,8 @@ try {
   writeFileSync(OUT_FILE, JSON.stringify(payload, null, 2) + "\n");
   console.log(`tableau: wrote ${payload.projects.length} projects to ${OUT_FILE}`);
 } catch (err) {
-  // Never fail the build over a network hiccup — the committed snapshot is a
-  // good-enough fallback. Only fail if no snapshot exists at all.
+  // A network hiccup must not fail the build — the committed snapshot is a
+  // good-enough fallback. Only fail when there is no snapshot at all.
   if (existsSync(OUT_FILE)) {
     console.warn(`tableau: fetch failed (${err.message}); keeping existing snapshot`);
   } else {

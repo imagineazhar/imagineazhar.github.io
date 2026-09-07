@@ -11,12 +11,10 @@ export interface FeedSource {
 }
 
 /**
- * Every writing source the site aggregates, newest-first across all of them.
+ * Every writing source the site aggregates, merged newest-first.
  *
- * Adding Substack later is a one-line change: set `enabled: true` below (and
- * correct the subdomain if the publication uses a different one). Nothing in
- * the UI is Medium-specific — cards, the archive and the source filter all
- * read from this array.
+ * Nothing in the UI is Medium-specific — cards, the archive and the source
+ * filter all read from this array, so adding a source is a one-entry change.
  */
 export const FEED_SOURCES: FeedSource[] = [
   {

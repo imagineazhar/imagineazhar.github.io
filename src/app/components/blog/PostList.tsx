@@ -1,13 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
-import { NewTabNote, outboundProps } from "@/app/components/blog/PostCard";
+import { NewTabNote } from "@/app/components/blog/PostCard";
+import { outboundProps } from "@/app/utils/outbound";
 import type { Post } from "@/app/hooks/useFeed";
 
 /* Rows show "Jul 30" — the year lives in the group's margin label. Only the
    archive dates its rows; the home ledger runs undated. */
 const rowDate = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" });
 
-/* "6 min read" is right for a byline but too wide for a margin column, where
-   it sits beside a title competing for the same line. */
+/* "6 min read" is right for a byline but too wide for a margin column, where it
+   sits beside a title competing for the same line. */
 const shortReadTime = (readTime: string) => readTime.replace(/\sread$/, "");
 
 /** Newest year first, posts already sorted newest-first inside each group. */
@@ -24,13 +25,10 @@ const groupByYear = (posts: Post[]) => {
 
 /**
  * The sighted half of the "opens in a new tab" note the link name carries.
- * Every row on this site leaves for Medium or Substack, and until now only the
- * featured block said so visually.
  *
- * Set inline, running with the title text, so it wraps with the last word
- * instead of needing a column of its own — and so revealing it changes no
- * geometry at all. `.tif-row-out` fades it in on hover and focus and parks it
- * visible on touch, where there is no hover to discover it with.
+ * Inline with the title text so it wraps with the last word rather than taking
+ * a column of its own — revealing it changes no geometry. `.tif-row-out` fades
+ * it in on hover and focus, and parks it visible on touch.
  */
 function OutMark() {
   return (
@@ -43,7 +41,7 @@ function OutMark() {
 }
 
 /** One line of the dense archive list; the whole row is the outbound link. */
-export function PostRow({ post, showDate = false }: { post: Post; showDate?: boolean }) {
+function PostRow({ post, showDate = false }: { post: Post; showDate?: boolean }) {
   return (
     <a
       {...outboundProps(post)}
@@ -72,12 +70,10 @@ export function PostRow({ post, showDate = false }: { post: Post; showDate?: boo
 /**
  * A home-ledger entry: title, a two-line dek, and read time in the margin.
  *
- * The dek is what makes the list scannable — a column of bare titles gives a
- * reader nothing to choose on. Clamped to two lines so rows stay a uniform
- * height and the skeleton can reserve the right box; the full piece is one
- * click away, so there's nothing to expand in place.
+ * Clamped to two lines so rows stay a uniform height and the skeleton can
+ * reserve the right box.
  */
-export function PostEntry({ post }: { post: Post }) {
+function PostEntry({ post }: { post: Post }) {
   return (
     <a {...outboundProps(post)} className="tif-row block py-4">
       <div className="flex items-baseline justify-between gap-4">
@@ -94,9 +90,6 @@ export function PostEntry({ post }: { post: Post }) {
           {post.excerpt}
         </p>
       )}
-      {/* Closes the row rather than interrupting it: the title, the read time
-          and the dek are all part of the link's name now, and this is the last
-          thing a reader needs to hear about it. */}
       <NewTabNote />
     </a>
   );
@@ -115,8 +108,7 @@ export function PostList({ posts }: { posts: Post[] }) {
   );
 }
 
-/** Year-grouped rows with the year standing in the left margin, ledger style.
-    The archive is explicitly a chronological index, so it keeps its dates. */
+/** Year-grouped rows with the year standing in the left margin, ledger style. */
 export function PostListByYear({ posts }: { posts: Post[] }) {
   return (
     <>
@@ -127,9 +119,8 @@ export function PostListByYear({ posts }: { posts: Post[] }) {
           style={{ marginBottom: "var(--space-4)" }}
         >
           {/* Parks at the same offset in-page anchors use, so a pinned year sits
-              exactly where a jumped-to heading would rather than at a second,
-              unrelated distance from the sticky bar. `top` is inert while the
-              element is static below md. */}
+              where a jumped-to heading would rather than at a second, unrelated
+              distance from the sticky bar. `top` is inert while static below md. */}
           <h2
             className="tif-micro tif-tabular pt-3 md:sticky md:self-start"
             style={{ top: "var(--anchor-offset)" }}

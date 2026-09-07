@@ -3,14 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, BarChart3, Menu, PenLine, User, X } from "lucide-react";
 import { useActiveSection } from "@/app/hooks/useActiveSection";
 
-/* Sections of the home page, in document order. The order is not cosmetic: the
-   active indicator only reads as "you are here" if the nav sequence matches the
-   scroll sequence — otherwise the highlight moves non-monotonically on the way
-   down the page and reads as a bug.
-
-   Targets are absolute paths so one set of links serves both routes. From the
-   archive they navigate home and then scroll, which the hash effect in App.tsx
-   handles centrally. */
+/* Must stay in document order: the active indicator only reads as "you are
+   here" while the nav sequence matches the scroll sequence. Absolute paths so
+   one set of links serves both routes — from the archive they navigate home
+   and then scroll, which the hash effect in App.tsx handles centrally. */
 const SECTIONS = [
   { id: "about", label: "About", Icon: User },
   { id: "work", label: "Work", Icon: BarChart3 },
@@ -26,9 +22,8 @@ const SECTION_IDS = SECTIONS.map((section) => section.id);
 const TAP_TARGET = 44;
 
 /* Both states carry the border so switching the active item never shifts the
-   row. Weight and colour are .tif-accent-rule's — the same slate bar that marks
-   every section heading — so the nav reads as part of the system rather than as
-   a browser-default underline. */
+   row. Weight and colour are .tif-accent-rule's, so the nav reads as part of
+   the system rather than as a browser-default underline. */
 const navItemStyle = (isActive: boolean) => ({
   color: isActive ? "var(--ink)" : "var(--gray)",
   borderBottom: `var(--rule-accent) solid ${isActive ? "var(--slate)" : "transparent"}`,
@@ -41,11 +36,8 @@ export function Masthead() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  /* Only the home page has sections to track. */
   const activeSection = useActiveSection(SECTION_IDS, location.pathname === "/");
 
-  /* Escape closes the sheet — a disclosure the keyboard can open needs a way
-     out that isn't "go find the toggle again". */
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -57,16 +49,14 @@ export function Masthead() {
 
   /* Clicking the wordmark at the top of the home page produces no location
      change to react to, so return to the top explicitly. No behavior option:
-     the CSS scroll-behavior governs, and that is already auto under reduced
-     motion. */
+     the CSS scroll-behavior governs, already auto under reduced motion. */
   const onWordmarkClick = () => {
     setOpen(false);
     if (location.pathname === "/" && !location.hash) window.scrollTo(0, 0);
   };
 
-  /* Icons ride in the sheet only. On the bar, four labelled icons at 15px turn
-     an editorial rule into clutter; in the sheet each row has the width for one
-     and they speed up scanning. */
+  /* Icons ride in the sheet only — on the bar, labelled icons at 15px turn an
+     editorial rule into clutter. */
   const sectionLinks = (onBar: boolean) =>
     SECTIONS.map(({ id, label, Icon }) => {
       const isActive = activeSection === id;
@@ -76,7 +66,7 @@ export function Masthead() {
           to={`/#${id}`}
           onClick={() => setOpen(false)}
           /* "location" rather than "page": these are places within a document.
-             The archive link below is the one that is genuinely a page. */
+             The archive link is the one that is genuinely a page. */
           aria-current={isActive ? "location" : undefined}
           className={onBar ? BAR_ITEM : SHEET_ITEM}
           style={onBar ? { ...navItemStyle(isActive), minHeight: TAP_TARGET } : navItemStyle(isActive)}
@@ -95,15 +85,6 @@ export function Masthead() {
       );
     });
 
-  /* The archive is reached from the writing section's own "Everything, newest
-     first" button and from the footer, which is present on every route — so
-     pulling it out of the bar leaves it reachable without giving a secondary
-     index the same weight as the page's own sections. */
-
-  /* Quiet rather than solid: as the filled slate button this outweighed the
-     wordmark and the section links combined, which is the wrong emphasis for a
-     header whose job is orientation. Hairline border keeps it legible as the
-     one action here without shouting. */
   const contactCta = (className: string, style?: React.CSSProperties) => (
     <Link to="/#contact" onClick={() => setOpen(false)} className={className} style={style}>
       Get in touch
@@ -115,17 +96,16 @@ export function Masthead() {
     <header
       className="sticky top-0 z-50"
       style={{
-        /* Opaque canvas, no backdrop blur: the rest of the site is flat paper
-           and hairlines, and blur is reserved for dismissible surfaces. */
+        /* Opaque canvas, no backdrop blur: blur is reserved for dismissible
+           surfaces, and the rest of the site is flat paper and hairlines. */
         backgroundColor: "var(--canvas)",
         borderBottom: "var(--rule-hairline) solid var(--hairline-color)",
       }}
     >
-      {/* Three columns rather than a flex row: equal 1fr flanks put the nav at
-          the centre of the header itself, not at the midpoint between a short
-          wordmark and a wider button — which is where justify-between would
-          leave it, visibly off-centre. minmax(0,1fr) so the flanks can shrink
-          instead of forcing the bar wider than the shell. */}
+      {/* Three columns rather than a flex row: equal 1fr flanks centre the nav
+          on the header itself, not on the midpoint between a short wordmark and
+          a wider button — where justify-between would leave it, visibly off.
+          minmax(0,1fr) so the flanks shrink instead of widening the bar. */}
       <div
         className="tif-shell grid items-center gap-4"
         style={{
@@ -133,9 +113,6 @@ export function Masthead() {
           gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr)",
         }}
       >
-        {/* The wordmark is identity, not metadata — display face, like every
-            heading on the site. Mono is kept for dates, counts and the footer
-            colophon. */}
         <Link
           to="/"
           onClick={onWordmarkClick}
@@ -152,18 +129,14 @@ export function Masthead() {
           Muhammad Azhar
         </Link>
 
-        {/* Centre column. Hidden below md, where the grid collapses to wordmark
-            and toggle with an empty middle. */}
+        {/* Hidden below md, where the grid collapses to wordmark and toggle. */}
         <nav aria-label="Primary" className="hidden items-center justify-center md:flex">
           {sectionLinks(true)}
         </nav>
 
-        {/* Right column holds whichever control the breakpoint calls for. The
-            CTA is an action rather than a destination, so it sits outside the
-            nav landmark. */}
+        {/* The CTA is an action rather than a destination, so it sits outside
+            the nav landmark. */}
         <div className="col-start-3 flex items-center justify-end">
-          {/* Tighter than the default button padding — 44px stays as the touch
-              floor, the horizontal bulk is what made it dominate the bar. */}
           {contactCta("tif-btn tif-btn--quiet hidden md:inline-flex", { paddingInline: 16 })}
 
           <button

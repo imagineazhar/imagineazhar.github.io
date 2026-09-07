@@ -1,10 +1,5 @@
 {
   "_comment": "Hand-maintained, unlike tableauProjects.json — nothing overwrites this at build time. One entry per chart in the generator repo (charts/<slug>/), not per seeded subject: every chart reads ?subject= and its own alias at runtime, so a country is a link, not a build.",
-  "source": {
-    "name": "Open-Meteo",
-    "url": "https://open-meteo.com/",
-    "note": "Fetched live in the reader's browser, not baked into the page."
-  },
   "projects": [
     {
       "slug": "country-heat-anomaly",

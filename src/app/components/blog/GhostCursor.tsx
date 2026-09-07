@@ -2,18 +2,11 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react";
 
 /**
- * A cursor companion: the site's ghost lazily trails the pointer on a spring,
- * bobs, and blinks every few seconds.
+ * A cursor companion: the site's ghost trails the pointer on a spring, bobs,
+ * and blinks.
  *
- * The mark is the same lucide "Ghost" the favicon carries — it is the one
- * figurative thing the site owns now that the masthead is a plain wordmark.
- * It stays hand-written SVG rather than <Ghost /> from lucide-react because
- * the blink animates the eyes on their own, and the packaged component gives
- * no handle on them.
- *
- * Painted from the tokens rather than hex, so it tracks the palette the rest
- * of the page is drawn from. Desktop mice only, skipped outright under
- * prefers-reduced-motion, and pointer-events-none so it can never take a click.
+ * Hand-written SVG rather than lucide's <Ghost /> because the blink animates
+ * the eyes on their own, and the packaged component gives no handle on them.
  */
 export function GhostCursor() {
   const prefersReducedMotion = useReducedMotion();
@@ -21,7 +14,6 @@ export function GhostCursor() {
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  // Loose spring = the ghost drifts after the cursor instead of sticking to it
   const springX = useSpring(x, { stiffness: 110, damping: 15, mass: 0.7 });
   const springY = useSpring(y, { stiffness: 110, damping: 15, mass: 0.7 });
 
@@ -39,7 +31,7 @@ export function GhostCursor() {
          would let a finger drag summon a companion meant for a mouse. */
       if (event.pointerType !== "mouse") return;
 
-      // Trail below-right of the cursor so it never covers what's being read
+      // Below-right of the cursor, so it never covers what is being read.
       x.set(event.clientX + 16);
       y.set(event.clientY + 20);
 
@@ -57,16 +49,15 @@ export function GhostCursor() {
   if (prefersReducedMotion || !active) return null;
 
   return (
-    /* Above the sticky masthead and the progress floor, below the skip link.
-       A companion that slides under the page chrome and vanishes reads as a
-       bug rather than as depth, and with pointer-events off it can't get in
-       the way of the nav it passes over. */
+    /* Above the sticky masthead and the progress floor, below the skip link: a
+       companion that slides under the page chrome reads as a bug rather than as
+       depth. pointer-events-none so it can never take a click. */
     <motion.div
       className="pointer-events-none fixed left-0 top-0 z-[55]"
       style={{ x: springX, y: springY }}
       aria-hidden="true"
     >
-      {/* Gentle idle bob, independent of the follow spring */}
+      {/* Idle bob, independent of the follow spring. */}
       <motion.div
         animate={{ y: [0, -3, 0] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
@@ -85,7 +76,7 @@ export function GhostCursor() {
             d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"
             fill="var(--paper)"
           />
-          {/* Eyes blink by collapsing vertically for a beat every few seconds */}
+          {/* Blink: the eyes collapse vertically for a beat every few seconds. */}
           <motion.g
             style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
             animate={{ scaleY: [1, 1, 0.15, 1, 1] }}

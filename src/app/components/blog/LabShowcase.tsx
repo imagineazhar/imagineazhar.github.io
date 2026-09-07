@@ -1,30 +1,17 @@
 import { Link } from "react-router-dom";
 import { labProjects, type LabProject } from "@/app/data/lab";
 
-/* Deliberately the same two constants VizShowcase uses, not an import of them:
-   the two grids sit one above the other in #work and have to read as one
-   contact sheet, but they answer to different data and neither should be able
-   to restyle the other by accident. If one moves, move both.
-
-   The plate ratio is Tableau's preview crop (736x454). These charts export at
-   their own ratios, so a poster is cropped to fit rather than the grid being
-   given a second shape — two ratios stacked in one section would read as two
-   sections. */
+/* Duplicated from VizShowcase rather than imported: the two grids stack in
+   #work and have to read as one contact sheet, but they answer to different
+   data and neither should be able to restyle the other. If one moves, move
+   both. The ratio is Tableau's preview crop, which these posters are cut to. */
 const CELL_RING = { boxShadow: "0 0 0 var(--rule-hairline) var(--hairline-color)" } as const;
 const PLATE = { aspectRatio: "736 / 454", backgroundColor: "var(--raised)" } as const;
-
-/* Matches VizShowcase's two-line title reservation so cells in a row are equal
-   height whichever grid they belong to. */
 const TITLE_TWO_LINES = { minHeight: "calc(2 * 1.35em)" } as const;
 
-/**
- * The plate itself. A poster is the chart's own PNG export, so the still and
- * the live page cannot disagree about what the chart looks like.
- *
- * Until one exists the plate is typographic rather than a broken image or a
- * grey void — the title set in the display face on the raised ground, which is
- * legible, on-system, and obviously deliberate.
- */
+/** A poster is the chart's own PNG export, so the still and the live page
+    cannot disagree. Until one exists the plate is typographic rather than a
+    broken image or a grey void. */
 function LabPlate({ project }: { project: LabProject }) {
   return (
     <div className="w-full overflow-hidden" style={PLATE}>
@@ -57,16 +44,9 @@ function LabPlate({ project }: { project: LabProject }) {
   );
 }
 
-/**
- * The grid.
- *
- * Cells are react-router <Link>s, unlike VizShowcase's outbound anchors: these
- * open the chart on this site rather than sending the reader to another one,
- * which is the whole difference between work that is linked to and work that
- * is hosted. /lab/:slug is the chart itself running under the masthead — there
- * is no page in between describing it first.
- */
-export function LabPlateGrid({ projects }: { projects: LabProject[] }) {
+/* Cells are react-router <Link>s, unlike VizShowcase's outbound anchors: these
+   open the chart on this site under the masthead, at /lab/:slug. */
+function LabPlateGrid({ projects }: { projects: LabProject[] }) {
   return (
     <ul className="grid grid-cols-1 gap-px sm:grid-cols-2 md:grid-cols-3">
       {projects.map((project) => (
@@ -75,9 +55,6 @@ export function LabPlateGrid({ projects }: { projects: LabProject[] }) {
             <LabPlate project={project} />
 
             <div className="flex flex-col gap-1 p-3 md:p-4">
-              {/* Where VizShowcase puts a rank and a view count, this puts the
-                  two facts that actually distinguish these pieces: they run,
-                  and they run on whatever subject you name. */}
               <span className="tif-micro tif-tabular flex flex-wrap items-baseline justify-between gap-x-3">
                 <span>Interactive</span>
                 <span className="whitespace-nowrap">Any {project.subjectNoun}</span>
@@ -96,14 +73,6 @@ export function LabPlateGrid({ projects }: { projects: LabProject[] }) {
   );
 }
 
-/**
- * The interactive tier of #work, above the Tableau contact sheet.
- *
- * It goes first because it is the only work on this page that runs here — the
- * Tableau sheet below it is a set of doors to another site, and putting the
- * hosted work under the linked work would bury the distinction the section is
- * making.
- */
 export function LabShowcase() {
   if (labProjects.length === 0) return null;
 
@@ -120,15 +89,11 @@ export function LabShowcase() {
           className="tif-lede"
           style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-body)" }}
         >
-          Live climate charts, built and hosted here. Pick a country or a city
-          and they redraw from current data &mdash; then hand you the SVG.
+          Live visualizations you can explore, reshape, and take with you.
         </p>
       </div>
 
-      {/* No CTA under this grid, unlike the two sections around it. Those
-          point somewhere the section is only showing part of — the archive,
-          the Tableau profile. This grid is the whole of the interactive work,
-          and every plate on it already goes to the thing itself. */}
+      {/* No CTA under this grid: every plate already goes to the thing itself. */}
       <LabPlateGrid projects={labProjects} />
     </section>
   );

@@ -35,18 +35,16 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 function AnimatedRoutes({ feed }: { feed: FeedState }) {
   const location = useLocation();
 
-  /* Navigation lands wherever the URL says, and focus follows it or a screen
-     reader stays parked in the old position.
-
-     The hash is handled here rather than in the masthead so every route into a
-     section behaves identically: a link from the archive, a pasted /#work, and
-     the back button all run this one path. Depending on hash as well as pathname
-     is what makes a same-page section jump work at all — the pathname never
-     changes for those.
+  /* Hash navigation lives here rather than in the masthead so every route into
+     a section behaves identically — a link from the archive, a pasted /#work,
+     and the back button all run this one path. Depending on hash as well as
+     pathname is what makes a same-page section jump work at all: the pathname
+     never changes for those.
 
      Neither scroll call passes a behavior option, so the CSS scroll-behavior
-     governs and reduced-motion readers get an instant jump without a second
-     code path here. */
+     governs and reduced-motion readers get an instant jump with no second code
+     path. waitForElement, not a direct lookup: arriving from another route,
+     this effect fires while the outgoing page is still mounted. */
   useEffect(() => {
     const toTop = () => {
       window.scrollTo(0, 0);
@@ -59,17 +57,14 @@ function AnimatedRoutes({ feed }: { feed: FeedState }) {
       return;
     }
 
-    /* waitForElement, not a direct lookup: arriving from another route, this
-       effect fires while the outgoing page is still mounted and the section
-       does not exist yet. An unresolvable hash falls back to the top. */
     return waitForElement(
       id,
       (target) => {
         target.scrollIntoView();
-        /* Sections aren't focusable by default; the attribute makes this one
+        /* Sections aren't focusable by default; tabIndex -1 makes this one
            programmatically focusable without adding it to the tab order.
-           preventScroll because scrollIntoView has already positioned the page —
-           focus() would otherwise scroll it again and undo the anchor offset. */
+           preventScroll because scrollIntoView has already positioned the
+           page — focus() would otherwise undo the anchor offset. */
         target.tabIndex = -1;
         target.focus({ preventScroll: true });
       },
@@ -96,13 +91,9 @@ function AnimatedRoutes({ feed }: { feed: FeedState }) {
             </PageTransition>
           }
         />
-        {/* One interactive chart, running full-bleed between the masthead and
-            the footer. There is no /lab index above it: the plates in #work on
-            the home page are the index, and a card goes straight here.
-
-            The route is the frame, not the chart — the bundle it loads is a
-            real file under public/viz/ that never enters the router. Must sit
-            above the catch-all; a "*" declared first would swallow it. */}
+        {/* The route is the frame, not the chart — the bundle it loads is a real
+            file under public/viz/ that never enters the router. Must sit above
+            the catch-all; a "*" declared first would swallow it. */}
         <Route
           path="/lab/:slug"
           element={
@@ -112,7 +103,7 @@ function AnimatedRoutes({ feed }: { feed: FeedState }) {
           }
         />
         {/* Unknown URLs — including links to the retired /case-study/* pages —
-            land on the essays index instead of a blank shell. */}
+            land on the index instead of a blank shell. */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
@@ -141,13 +132,12 @@ function Shell() {
 
       <SiteFooter postCount={feed.posts.length} />
 
-      {/* Sits above the footer's last rule; the spacer keeps the fixed floor
-          from covering the final line of content. */}
+      {/* Spacer keeps the fixed floor from covering the final line of content. */}
       <div aria-hidden="true" style={{ height: "var(--floor-tick-height)" }} />
       <ProgressFloor />
 
-      {/* Last, and outside every scrolling region — it is fixed to the viewport
-          and follows the pointer across whichever route is mounted. */}
+      {/* Last, and outside every scrolling region — fixed to the viewport, and
+          it follows the pointer across whichever route is mounted. */}
       <GhostCursor />
     </div>
   );

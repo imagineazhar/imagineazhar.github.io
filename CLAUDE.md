@@ -10,11 +10,16 @@ Personal portfolio site for imagineazhar.com (Muhammad Azhar, data analytics spe
 
 ```
 npm run dev       # start Vite dev server
-npm run build     # type-check-free production build (vite build) -> dist/
+npm run build     # production build (vite build) -> dist/; does NOT type-check
+npm run lint      # eslint .
+npm run typecheck # tsc --noEmit
+npm run posters   # re-render public/viz/posters/*.png via headless Chrome (manual)
 npm run deploy    # build then publish dist/ to the gh-pages branch (gh-pages -d dist)
 ```
 
-There is no lint script, no test runner, and no tsconfig.json in this repo — TypeScript is transpiled by Vite/esbuild without a separate type-check step. Don't invent `npm test`/`npm run lint` commands; they don't exist.
+There is no test runner — don't invent an `npm test` command. `build` transpiles
+through Vite/esbuild and never type-checks, so `typecheck` is a separate step;
+CI runs neither, so run both locally before pushing.
 
 ## Deployment
 
@@ -27,11 +32,11 @@ Two independent deploy paths exist — be aware of both when changing build outp
 ## Architecture
 
 - **Entry**: `src/main.tsx` → `src/app/App.tsx`. App.tsx wires up `react-router-dom` (`BrowserRouter`) with `Masthead` + `SiteFooter` + `ProgressFloor` persistent around two routes — `/` (`BlogHome`) and `/archive` (`ArchivePage`) — plus a `*` catch-all that redirects unknown URLs home. It also centralises hash navigation: every route into a section runs one effect, which waits for the target to mount before scrolling and moves focus to it.
-- **Path alias**: `@` → `src` (configured in `vite.config.ts`). Always import via `@/app/...`, not relative paths across directories.
-- **Pages compose sections**: `BlogHome.tsx` is a sequence of section components from `src/app/components/blog/` (`AboutSection`, `MetricBand`, `VizShowcase`, then the writing ledger), separated by `.tif-hairline` rules. Each is self-contained; the only shared state is the feed, fetched once in `App.tsx` and passed down so navigating to `/archive` doesn't re-hit the syndication API.
-- **Portfolio is data-driven**: `src/app/data/tableauProjects.json` is a snapshot of the Tableau Public profile, refreshed on every build by `scripts/fetch-tableau-projects.mjs` (the `prebuild` npm script). `VizShowcase.tsx` renders the six most-viewed entries and `MetricBand.tsx` sums the whole file for the page's headline figure — don't hand-edit the JSON, it gets overwritten.
+- **Path alias**: `@` → `src`, declared twice — `vite.config.ts` (what the bundler uses) and `tsconfig.json` `paths` (what the editor and `npm run typecheck` use). Change one and you must change the other. Always import via `@/app/...`, not relative paths across directories.
+- **Pages compose sections**: `BlogHome.tsx` is a sequence of section components from `src/app/components/blog/` (`AboutSection`, `LabShowcase`, `VizShowcase`, then the writing ledger), separated by `.tif-hairline` rules. Each is self-contained; the only shared state is the feed, fetched once in `App.tsx` and passed down so navigating to `/archive` doesn't re-hit the syndication API.
+- **Portfolio is data-driven**: `src/app/data/tableauProjects.json` is a snapshot of the Tableau Public profile, refreshed on every build by `scripts/fetch-tableau-projects.mjs` (the `prebuild` npm script). `VizShowcase.tsx` renders the nine most-viewed entries — don't hand-edit the JSON, it gets overwritten. `src/app/data/labProjects.json` is the hand-maintained companion for the self-hosted charts under `public/viz/`; nothing overwrites that one.
 - **Manual SEO, no SSR**: `src/app/utils/seo.ts` (`setPageMeta`, `buildUrl`) imperatively sets `document.title`, canonical link, and OG/Twitter meta tags client-side via `useEffect` on each page. Since there's no server-side rendering, crawlers relying on initial HTML meta tags only see the defaults baked into `index.html`; per-page meta is a progressive enhancement for client-rendered visits.
-- **UI primitives**: there is no component library. The design system is CSS: `.tif-*` classes in `src/styles/tokens.css` (`.tif-btn`, `.tif-card`, `.tif-row`, `.tif-metric`, the type steps) composed directly in feature components. The vendored shadcn/ui set was removed once nothing routed reached it; `npx shadcn add <name>` re-vendors a single component if one is ever needed, but it would arrive expecting the `--background`/`--border` token names that went with `theme.css`.
+- **UI primitives**: there is no component library. The design system is CSS: `.tif-*` classes in `src/styles/tokens.css` (`.tif-btn`, `.tif-card`, `.tif-row`, the type steps) composed directly in feature components. The vendored shadcn/ui set was removed once nothing routed reached it; `npx shadcn add <name>` re-vendors a single component if one is ever needed, but it would arrive expecting the `--background`/`--border` token names that went with `theme.css`.
 - **Styling**: Tailwind v4 (via `@tailwindcss/vite`, not a `tailwind.config.js`). Design tokens (colors, type scale, spacing, line-heights, motion) are CSS custom properties in `src/styles/tokens.css` — "The Insight Floor" system — which also holds the `.tif-*` primitives in `@layer components` (deliberately layered, so Tailwind utilities still win over them). `src/styles/tailwind.css` pulls in Tailwind itself; both are imported from `src/styles/index.css`. Web fonts are **not** loaded from CSS — the Google Fonts `<link>` lives in `index.html` so the faces download in parallel with the bundle instead of chaining behind it.
 - **Animation**: uses the `motion` package imported as `motion/react` (Framer Motion's new package name) — not `framer-motion`.
 - **Images**: plain `<img>` with explicit `width`/`height` (or `aspect-ratio`) so nothing reflows when an image lands. Remote Tableau thumbnails carry `loading="lazy"`. `public/og-card.png` is the 1200x630 share card, regenerated by hand rather than at build time.
@@ -39,5 +44,4 @@ Two independent deploy paths exist — be aware of both when changing build outp
 ## Content notes
 
 - `guidelines/Guidelines.md` is an unfilled Figma Make template (no actual project-specific rules in it currently).
-- `LOGO_DESIGN_RATIONALE.md` documents the reasoning behind the earlier custom logo/wordmark. `Logo.tsx` and `DataVizLogo.tsx` are gone — the masthead is now a plain display-face wordmark — so read it as history, not as a description of the code.
 - `ATTRIBUTIONS.md` tracks third-party asset licensing — update it if you add new externally-sourced assets/components.

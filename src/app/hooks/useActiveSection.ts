@@ -1,49 +1,40 @@
 import { useEffect, useState } from "react";
 import { waitForElement } from "@/app/utils/waitForElement";
 
-/* The masthead is 64px; a section counts as current once its top edge has
-   passed under the bar. Same number --nav-height carries in CSS, which keeps
-   the highlight in step with where an anchor jump actually parks the heading. */
+/* Must stay in step with --nav-height, or the highlight changes at a different
+   scroll position than the one an anchor jump parks a heading at. */
 const NAV_LINE = 64;
 
 /**
- * Reports which of `ids` the reader is currently inside, for the masthead's
- * active state. Returns null above the first section, so nothing is highlighted
- * while the page is still on its opening statement.
+ * Which of `ids` the reader is currently inside, for the masthead's active
+ * state. Null above the first section.
  *
- * An IntersectionObserver rather than a scroll listener: the callback fires
- * when a section boundary crosses the nav line, not on every frame of every
- * scroll. Positions are re-read from the DOM inside the callback rather than
- * accumulated from entry deltas, so a fast flick that crosses two boundaries
- * in one frame still resolves to the right section.
+ * Positions are re-read from the DOM on every callback rather than accumulated
+ * from entry deltas, so a flick that crosses two boundaries in one frame still
+ * resolves to the right section.
  *
- * @param ids Section element ids, in document order.
- * @param enabled False on routes with no sections (the archive), where there
- *   would be nothing to observe.
+ * @param enabled False on routes with no sections, where there is nothing to
+ *   observe. The return is derived from it, so disabling never leaves a stale
+ *   id highlighted.
  */
 export function useActiveSection(ids: readonly string[], enabled: boolean) {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!enabled) {
-      setActive(null);
-      return;
-    }
+    if (!enabled) return;
 
     let observer: IntersectionObserver | null = null;
 
-    /* Returning to the home page runs this effect while the archive is still
-       mounted, so the sections aren't in the document yet — looking them up
-       directly would find nothing and the indicator would stay dead for the rest
-       of the visit. Waiting on the first section covers the rest: they mount in
-       the same commit. */
+    /* Returning home runs this effect while the archive is still mounted, so
+       the sections do not exist yet and a direct lookup would find nothing —
+       leaving the indicator dead for the rest of the visit. They all mount in
+       the same commit, so waiting on the first covers the rest. */
     const cancel = waitForElement(ids[0], () => {
       const elements = ids
         .map((id) => document.getElementById(id))
         .filter((el): el is HTMLElement => el !== null);
 
-      /* Walking in document order leaves the deepest crossed boundary standing,
-         which is the section the reader is inside. */
+      // Document order leaves the deepest crossed boundary standing.
       const resolve = () => {
         let current: string | null = null;
         for (const el of elements) {
@@ -64,5 +55,5 @@ export function useActiveSection(ids: readonly string[], enabled: boolean) {
     };
   }, [ids, enabled]);
 
-  return active;
+  return enabled ? active : null;
 }

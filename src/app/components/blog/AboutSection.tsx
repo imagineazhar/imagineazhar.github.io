@@ -7,38 +7,17 @@ type AboutLink = {
   href: string;
 };
 
-/* Two links, where this row used to carry six.
-
-   Medium, Substack, GitHub and email were all repeated from the Let's Connect
-   block and the footer, which put most accounts on the page two or three times
-   over — and a row of pills that long reads as a link dump rather than as
-   evidence. What stays is what the bio above is actually claiming: the
-   professional record, and the work itself. Everything cut is still one scroll
-   away in the footer, which is the page's complete index by design.
-
-   Module scope, not built per render — nothing here depends on state. */
 const LINKS: AboutLink[] = [
   { label: "LinkedIn", Icon: Linkedin, href: "https://linkedin.com/in/imagineazhar" },
   { label: "Tableau Public", Icon: BarChart3, href: tableauData.profileUrl },
 ];
 
-/**
- * Who is writing this: portrait, two-sentence bio, and the two places the claim
- * can be checked — each one an icon-led pill rather than a bare text link.
- */
 export function AboutSection() {
   return (
     <section id="about" aria-labelledby="about-heading" className="tif-anchor">
       <div className="grid gap-8 md:grid-cols-[160px_minmax(0,1fr)] md:gap-10">
-        {/* Explicit box + aspect-ratio so the portrait reserves its space and
-            the bio beside it never reflows when the image lands.
-
-            Served at 320px — 2x the 160px box, so it stays sharp on retina —
-            and pre-cropped square to the same centre crop object-cover was
-            doing at runtime. The full-resolution portrait.png is no longer
-            referenced by anything shipped: og-card.png is its own 1200x630
-            composition, and this is the only place the face appears on the
-            site. */}
+        {/* Explicit box + aspect-ratio so the bio beside it never reflows when
+            the image lands. Served at 2x the 160px box, pre-cropped square. */}
         <img
           src="/portrait.webp"
           alt="Portrait of Muhammad Azhar"
@@ -61,14 +40,14 @@ export function AboutSection() {
             className="tif-lede"
             style={{ marginTop: "var(--space-2)", fontSize: "var(--fs-body)" }}
           >
-            I work with data in environments where clarity matters and decisions
-            carry real consequences. My focus isn&rsquo;t producing dashboards
-            &mdash; it&rsquo;s shaping analysis to support sound judgment.
+            <span className="block" style={{ marginBottom: "var(--space-2)" }}>
+              I&rsquo;m a data analytics professional with a designer&rsquo;s eye
+              and a lawyer&rsquo;s instinct.
+            </span>
+            I&rsquo;m particularly interested in the space between &ldquo;here&rsquo;s
+            the data&rdquo; and &ldquo;here&rsquo;s what it means.&rdquo;
           </p>
 
-          {/* Full button padding now the row is two items rather than six — the
-              tighter inline padding only existed to stop the long row wrapping,
-              and these now match every other CTA on the page. */}
           <ul className="flex flex-wrap gap-3" style={{ marginTop: "var(--space-3)" }}>
             {LINKS.map(({ label, Icon, href }) => (
               <li key={label}>

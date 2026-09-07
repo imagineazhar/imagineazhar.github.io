@@ -57,7 +57,6 @@
   --ff-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
 
   /* --- Type scale (canvas px x 0.45, fluid above the h2 step) ----------- */
-  --fs-metric: clamp(4rem, 11vw, 7.875rem);        /* 280 -> 126 */
   --fs-display-xl: clamp(2.75rem, 7vw, 4.1875rem); /* 148 -> 67  */
   --fs-display: clamp(2.25rem, 5.5vw, 3.0625rem);  /* 108 -> 49  */
   --fs-h1: clamp(1.875rem, 4vw, 2.25rem);          /*  80 -> 36  */
@@ -67,14 +66,12 @@
   --fs-caption: 0.9375rem;                         /*  34 -> 15  */
   --fs-micro: 0.8125rem;                           /*  28 -> 13  */
 
-  --lh-metric: 0.95;
   --lh-display: 1.05;
   --lh-h1: 1.1;
   --lh-h2: 1.15;
   --lh-body-lg: 1.35;
   --lh-body: 1.4;
 
-  --ls-metric: -0.03em;
   --ls-display: -0.02em;
   --ls-h1: -0.01em;
   --ls-micro: 0.08em;
@@ -197,27 +194,6 @@ html {
    place and all anchors follow. */
 .tif-anchor {
   scroll-margin-top: var(--anchor-offset);
-}
-
-/* One step above .tif-display, and the largest thing the scale can set. It is
-   for a single figure — the token file's metric step exists for exactly one
-   number per page, and the size only reads as emphasis while nothing else
-   competes with it.
-
-   Slate rather than ink: at this size an ink figure is a wall of text weight,
-   where slate puts the number in the same family as the accent rule and the
-   progress marker — a data mark rather than a sentence. 6.24:1 on --canvas.
-
-   Tabular figures are baked in rather than composed with .tif-tabular, since
-   this class never sets anything but numerals. */
-.tif-metric {
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-size: var(--fs-metric);
-  line-height: var(--lh-metric);
-  letter-spacing: var(--ls-metric);
-  font-variant-numeric: tabular-nums;
-  color: var(--slate);
 }
 
 .tif-display {

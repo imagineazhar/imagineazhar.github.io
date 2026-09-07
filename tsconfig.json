@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    // main.tsx imports "./app/App.tsx" by its real filename; Vite resolves that
+    // fine, and this stops tsc rejecting the extension.
+    "allowImportingTsExtensions": true,
+    // Declares the CSS side-effect import and import.meta.env.
+    "types": ["vite/client"],
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Must stay in step with the alias in vite.config.ts, or the editor and the
+    // bundler disagree about what "@/app/..." resolves to. No baseUrl: it is
+    // deprecated in TS 6, and paths resolve relative to this file without it.
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "include": ["src"]
+}

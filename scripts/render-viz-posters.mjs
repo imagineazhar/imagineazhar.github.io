@@ -3,20 +3,12 @@
 /* global process, console */
 
 /**
- * Renders a still of each chart in public/viz/ into public/viz/posters/.
+ * Renders a still of each chart in public/viz/ into public/viz/posters/ — the
+ * plates on the home page's interactive tier.
  *
- * These stills are the plates on the home page's interactive tier. They are
- * screenshots of the chart actually running — not artwork drawn to resemble
- * one — so a plate and the page behind it cannot disagree about what the chart
- * looks like.
- *
- * Deliberately NOT wired into `prebuild`. It drives a real Chrome and pulls
- * live observations from Open-Meteo, which is the wrong thing to put in the
- * path of every `npm run build` and of CI. Run it by hand when a chart's
- * design changes:
- *
- *   npm run posters
- *
+ * Deliberately NOT wired into `prebuild`: it drives a real Chrome and pulls
+ * live observations from Open-Meteo, which has no business in the path of every
+ * build and of CI. Run `npm run posters` by hand when a chart's design changes.
  * The output is committed, so a build never depends on this having run.
  */
 import { execFileSync } from "node:child_process";
@@ -29,8 +21,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = join(ROOT, "public");
 const OUT_DIR = join(PUBLIC, "viz", "posters");
 
-/* The plate's ratio in VizShowcase/LabShowcase (736x454), shot at 2x so the
-   still holds up on a retina display without being a 4x file nobody needs. */
+// The plate's ratio in VizShowcase/LabShowcase, shot at 2x for retina.
 const WIDTH = 736;
 const HEIGHT = 454;
 const SCALE = 2;
@@ -63,15 +54,12 @@ function findChrome() {
  * The page, rewritten into a poster of itself.
  *
  * Injected rather than built into the charts: this is how the site wants a
- * still to look, and the generator repo has no business knowing that. It waits
- * on the chart's own "ready" signal — the export buttons enable only once a
- * panel has drawn — then throws away every piece of furniture except the panel
- * and lets the panel's viewBox scale it into the frame.
+ * still to look, and the generator repo has no business knowing that. Waits on
+ * the chart's own ready signal — the export buttons enable only once a panel
+ * has drawn — then strips every piece of furniture except the panel.
  *
- * `meet`, not `slice`: the three charts are a ring, a stack of strips and a
- * ranked column, and only a fit that clips nothing composes all three. Margins
- * land on the chart's own paper colour, so the still reads as a plate rather
- * than as a screenshot with bars.
+ * `meet`, not `slice`: the charts are a ring, a stack of strips and a ranked
+ * column, and only a fit that clips nothing composes all three.
  */
 const POSTER_SCRIPT = `
 (() => {
@@ -93,10 +81,9 @@ const POSTER_SCRIPT = `
     panel.setAttribute("preserveAspectRatio", "xMidYMid meet");
     panel.style.cssText = "display:block;width:100%;height:100%";
 
-    /* A mat, not a bleed. Without it the widest chart's outermost axis label
-       sits exactly on the frame edge and reads as a crop rather than as a
-       plate — and the plate is 330px wide on the home page, where an edge-lit
-       label is the first thing to look like an accident. */
+    /* A mat, not a bleed. Without the padding the widest chart's outermost axis
+       label sits on the frame edge and reads as a crop — and the plate is 330px
+       wide on the home page, where that looks like an accident. */
     document.documentElement.style.cssText = "margin:0;padding:0;height:100%";
     document.body.style.cssText =
       "margin:0;box-sizing:border-box;padding:3vmin;width:100vw;height:100vh;" +
@@ -106,7 +93,7 @@ const POSTER_SCRIPT = `
 
   /* Polling rather than a fixed delay: under --virtual-time-budget a timer
      costs nothing while the network is idle, so this resolves the moment the
-     chart is done instead of on a guess about how long it takes. */
+     chart is done instead of on a guess. */
   const tick = () => (ready() ? compose() : setTimeout(tick, 100));
   tick();
 })();

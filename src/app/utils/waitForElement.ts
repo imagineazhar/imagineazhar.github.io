@@ -1,24 +1,19 @@
-/* Route transitions run through AnimatePresence with mode="wait", which holds
-   the outgoing page mounted for the length of its exit animation and mounts the
-   incoming one only after. So anything reacting to a location change — scrolling
-   to a hash, attaching an observer to sections — can run a few hundred
-   milliseconds before its target element exists.
-
-   Waiting on frames rather than a fixed setTimeout tracks the actual mount
-   instead of a duration copied from the transition config, which would go stale
-   the moment that duration changed. */
-
 const DEADLINE_MS = 1200;
 
 /**
  * Calls `onFound` as soon as an element with `id` is in the document —
  * synchronously if it already is.
  *
- * @param onMissing Runs if the deadline passes without the element appearing,
- *   which means a hash pointing at nothing. Callers use it to fall back to a
- *   predictable position rather than leaving the reader wherever they were.
- * @returns A cancel function; call it from effect cleanup so a second
- *   navigation doesn't leave an earlier search running.
+ * Exists because AnimatePresence runs mode="wait": the outgoing page stays
+ * mounted for its exit animation, so anything reacting to a location change can
+ * run a few hundred milliseconds before its target exists. Polling frames
+ * rather than a fixed timeout tracks the actual mount instead of a duration
+ * copied from the transition config, which would go stale the moment that
+ * duration changed.
+ *
+ * @param onMissing Runs if the deadline passes — a hash pointing at nothing.
+ * @returns Cancel function; call it from effect cleanup so a second navigation
+ *   doesn't leave an earlier search running.
  */
 export function waitForElement(
   id: string,

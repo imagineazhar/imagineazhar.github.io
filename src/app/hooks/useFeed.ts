@@ -52,17 +52,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 const collapse = (raw: string) => raw.replace(/\s+/g, " ").trim();
 
 /**
- * Parse feed HTML inertly. DOMParser builds a detached document that never
+ * Parse feed HTML inertly — DOMParser builds a detached document that never
  * fetches images or runs script, unlike assigning to innerHTML.
  *
- * `text` is the whole body flattened, and it is only fit for counting words.
- * Excerpting from it fuses blocks together, because textContent drops the
- * boundaries between them: Medium opens every piece with an <h4> standfirst,
- * so the dek came out as "Building Radial Arc Visualizations from Scratch This
- * tutorial teaches you to build…" — two sentences run together with no
- * punctuation, in the first line the reader reads. `lead` takes the first real
- * paragraph instead, which across both live feeds is a clean opening sentence
- * every time, and drops the standfirst and the "Introduction:" headings with it.
+ * `text` is the flattened body and is only fit for counting words: textContent
+ * drops block boundaries, so excerpting from it fuses Medium's <h4> standfirst
+ * onto the first paragraph with no punctuation between them. `lead` takes the
+ * first real paragraph instead.
  */
 const readHtml = (html: string) => {
   const doc = new DOMParser().parseFromString(html, "text/html");
@@ -88,8 +84,7 @@ const toPost = (item: Rss2JsonItem, source: FeedSource): Post | null => {
   const published = parseDate(item.pubDate);
   const words = text ? text.split(/\s+/).length : 0;
 
-  /* Falls back to the flattened body for a feed that carries no paragraphs at
-     all — a plain-text <description> still has to produce some dek. */
+  // Falls back to the flattened body for a feed carrying no paragraphs at all.
   const summary = lead ?? text;
 
   return {
@@ -135,25 +130,25 @@ export interface FeedState {
 /**
  * Pulls every enabled source in parallel and merges them newest-first.
  *
- * Uses allSettled rather than all: when Substack is switched on, one flaky
- * feed must not blank out the other's posts.
+ * allSettled rather than all: one flaky feed must not blank out the other's
+ * posts.
  */
 export function useFeed(): FeedState {
-  const [state, setState] = useState<FeedState>({
+  /* enabledSources() reads a module constant, so "nothing to fetch" is known
+     before the first paint and belongs in the initial state — setting it from
+     the effect instead would be a second render carrying no new information. */
+  const [state, setState] = useState<FeedState>(() => ({
     posts: [],
-    loading: true,
+    loading: enabledSources().length > 0,
     failedSources: [],
     allFailed: false,
-  });
+  }));
 
   useEffect(() => {
-    const controller = new AbortController();
     const sources = enabledSources();
+    if (sources.length === 0) return;
 
-    if (sources.length === 0) {
-      setState({ posts: [], loading: false, failedSources: [], allFailed: false });
-      return;
-    }
+    const controller = new AbortController();
 
     (async () => {
       const results = await Promise.allSettled(
@@ -173,9 +168,9 @@ export function useFeed(): FeedState {
         }
       });
 
-      // The same piece cross-posted to Medium and Substack carries a different
-      // link on each platform, so dedupe on normalised title — sorted first,
-      // so the newer copy is the one that survives.
+      // A piece cross-posted to Medium and Substack carries a different link on
+      // each, so dedupe on normalised title — sorted first, so the newer copy
+      // is the one that survives.
       const seen = new Set<string>();
       const deduped = posts
         .sort((a, b) => b.timestamp - a.timestamp)

@@ -3,67 +3,44 @@ import tableauData from "@/app/data/tableauProjects.json";
 
 const SHOW_COUNT = 9;
 
-/* A 1px ring on every cell, with a 1px grid gap for the rings to meet in.
-   Adjacent rings coincide into single shared rules, so the plates read as one
-   contact sheet instead of six floating cards — and an orphaned cell on the
-   2-column breakpoint still closes its own frame. */
+/* A 1px ring on every cell with a 1px grid gap for the rings to meet in, so
+   adjacent rings coincide into shared rules and the plates read as one contact
+   sheet. An orphaned cell at the 2-column breakpoint still closes its frame. */
 const CELL_RING = { boxShadow: "0 0 0 var(--rule-hairline) var(--hairline-color)" } as const;
 
-/* Tableau's preview endpoint is named `4_3.png` but does not serve 4:3 — every
-   viz on the profile comes back as a 736x454 (1.62:1) crop of the sheet's
-   top-left corner, full-bleed with no bars of its own. Framing that in a 4:3
-   plate spent ~18% of each plate's height on empty letterbox, so the plate takes
-   the source's ratio verbatim and the image fills it edge to edge. */
+/* Tableau's preview endpoint is named `4_3.png` but serves 736x454 (1.62:1) —
+   a full-bleed crop of the sheet's top-left corner. Framing that in a real 4:3
+   plate spent ~18% of the height on letterbox, so the plate takes the source's
+   ratio verbatim. */
 const PLATE = { aspectRatio: "736 / 454", backgroundColor: "var(--raised)" } as const;
 
-/* Two lines are reserved for every title so cells in a row are equal height.
-   Without it a one-line title leaves a gap of dead canvas at the foot of its
-   ring while the neighbour that wraps sets the row height. 1.35 is the
-   line-height .tif-caption already carries. */
+/* Reserved so cells in a row are equal height — without it a one-line title
+   leaves dead canvas while the neighbour that wraps sets the row height.
+   1.35 is the line-height .tif-caption already carries. */
 const TITLE_TWO_LINES = { minHeight: "calc(2 * 1.35em)" } as const;
 
-/**
- * The Tableau back catalogue as a numbered contact sheet — square corners,
- * hairline gutters, no card chrome.
- *
- * Captions sit under the plate rather than over it. The reference this follows
- * sets its metadata straight onto the imagery, which works for architectural
- * renders with large areas of empty sky; a Tableau thumbnail is dense to the
- * edges, so type over it would be unreadable and unpredictable.
- */
 export function VizShowcase() {
-  /* Still sorted on viewCount, though the count itself no longer reaches the
-     page: it is the only signal in the snapshot that separates the work worth
-     leading with from a one-off workout chart, and Tableau's own profile order
-     buries the former under the latter. A hidden sort key, not a displayed
-     metric. Spread before sorting — the JSON import is a shared module object
-     and other consumers read it in its original order. */
+  /* viewCount is a hidden sort key, not a displayed metric: it is the only
+     signal in the snapshot separating the work worth leading with from a
+     one-off, and Tableau's own profile order buries the former. Spread before
+     sorting — the JSON import is a shared module object other consumers read
+     in its original order. */
   const projects = [...tableauData.projects]
     .sort((a, b) => b.viewCount - a.viewCount)
     .slice(0, SHOW_COUNT);
 
-  /* Same opener as the writing section — accent rule, short headline, lede —
-     so the two read as peers. The old single sentence was carrying eyebrow,
-     headline and body all at once at h2 size.
-
-     This used to be the whole of #work, and read as "what I build when nobody's
-     asking me to". LabShowcase now sits above it making that claim for work
-     that runs on this domain, so the claim has moved up and this tier says the
-     narrower, still-true thing: it is the back catalogue, and it is somewhere
-     else. */
   const heading = (
     <>
       <div className="tif-accent-rule mb-6" />
       <h2 className="tif-h1" style={{ color: "var(--ink)" }}>
-        The back catalogue lives on{" "}
-        <em className="tif-accent-em">Tableau Public</em>.
+        Data, made <em className="tif-accent-em">Visible</em>.
       </h2>
       <p
         className="tif-lede"
         style={{ marginTop: "var(--space-3)", fontSize: "var(--fs-body)" }}
       >
-        Personal projects, published open &mdash; a selection from the
-        profile, which holds the rest.
+        A selection of visualizations exploring data, design, and the stories
+        between them.
       </p>
     </>
   );
@@ -100,16 +77,12 @@ export function VizShowcase() {
     <section aria-label="Data visualisation work">
       <div className="mb-8">{heading}</div>
 
-      {/* Three across rather than five: at the shell's width that takes each
-          plate from roughly 194px to 330px — near enough three times the area
-          — without reaching back for a bento. Six items flow 3 + 3. */}
       <ul className="grid grid-cols-2 gap-px md:grid-cols-3">
         {projects.map((project, index) => (
           <li key={project.vizUrl} style={CELL_RING}>
-            {/* .tif-row is the ledger's hover hook — it recolours
-                .tif-row-title on hover and focus, so the gallery answers to
-                the pointer exactly like a row in the writing list, with no
-                lift and no zoom. */}
+            {/* .tif-row is the ledger's hover hook — it recolours .tif-row-title
+                on hover and focus, so the gallery answers to the pointer exactly
+                like a row in the writing list, with no lift and no zoom. */}
             <a
               href={project.vizUrl}
               target="_blank"
@@ -119,10 +92,9 @@ export function VizShowcase() {
             >
               <div className="w-full overflow-hidden" style={PLATE}>
                 {/* `cover` rather than `contain`: at the matched ratio the two
-                    render identically, but cover also guarantees a filled plate
-                    if Tableau ever changes the preview size — it would trim a
-                    sliver instead of reopening the bars. Anchored to the top so
-                    any such trim comes off the foot, never the viz title. */}
+                    render identically, but cover keeps the plate filled if
+                    Tableau ever changes the preview size. Anchored to the top so
+                    any trim comes off the foot, never the viz title. */}
                 <img
                   src={project.thumbnailUrl}
                   alt=""
@@ -132,11 +104,7 @@ export function VizShowcase() {
               </div>
 
               <div className="flex flex-col gap-1 p-3 md:p-4">
-                {/* A plate number, not a rank. It used to carry the view count
-                    opposite it and read as a leaderboard; without the count
-                    there is nothing to rank by on the plate, so it goes back to
-                    doing what a number on a contact sheet does — telling you
-                    which frame you are looking at. */}
+                {/* A plate number, not a rank — nothing on the plate ranks it. */}
                 <span className="tif-micro tif-tabular">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -152,9 +120,6 @@ export function VizShowcase() {
         ))}
       </ul>
 
-      {/* A quiet button rather than a text link, matching the archive CTA
-          under the writing ledger — and carrying more weight than 15px grey
-          at the foot of the section. */}
       <a
         href={tableauData.profileUrl}
         target="_blank"

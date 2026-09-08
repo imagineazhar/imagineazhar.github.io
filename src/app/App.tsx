@@ -10,7 +10,6 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Masthead } from "@/app/components/blog/Masthead";
 import { SiteFooter } from "@/app/components/blog/SiteFooter";
 import { ProgressFloor } from "@/app/components/blog/TheFloor";
-import { GhostCursor } from "@/app/components/blog/GhostCursor";
 import { BlogHome } from "@/app/pages/BlogHome";
 import { ArchivePage } from "@/app/pages/ArchivePage";
 import { VizPage } from "@/app/pages/VizPage";
@@ -135,10 +134,6 @@ function Shell() {
       {/* Spacer keeps the fixed floor from covering the final line of content. */}
       <div aria-hidden="true" style={{ height: "var(--floor-tick-height)" }} />
       <ProgressFloor />
-
-      {/* Last, and outside every scrolling region — fixed to the viewport, and
-          it follows the pointer across whichever route is mounted. */}
-      <GhostCursor />
     </div>
   );
 }

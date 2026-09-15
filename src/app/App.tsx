@@ -16,15 +16,38 @@ import { VizPage } from "@/app/pages/VizPage";
 import { useFeed, type FeedState } from "@/app/hooks/useFeed";
 import { waitForElement } from "@/app/utils/waitForElement";
 
+/* Module scope rather than a ref: AnimatePresence mounts a fresh
+   PageTransition for every navigation, so a per-instance flag would read
+   "first render" each time and no route would ever fade in. */
+let hasRenderedARoute = false;
+
 function PageTransition({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
+
+  /* The first route render IS the page load, where the home statement is
+     already running its own entrance underneath. Fading the whole route on top
+     of that compounds the two opacities into a soft, slow first paint. Later
+     navigations still cross-fade.
+
+     Not AnimatePresence's own initial={false}: that propagates through the
+     presence context and would kill the home entrance outright. */
+  const skipEnter = prefersReducedMotion || !hasRenderedARoute;
+
+  useEffect(() => {
+    hasRenderedARoute = true;
+  }, []);
+
   return (
     <motion.div
-      initial={prefersReducedMotion ? undefined : { opacity: 0 }}
+      initial={skipEnter ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={prefersReducedMotion ? undefined : { opacity: 0 }}
-      // Exit runs shorter than enter so navigation never feels held up.
-      transition={{ duration: 0.2, ease: [0.45, 0, 0.55, 1] }}
+      /* A small fixed rise, not the container's height: enough to say where the
+         page went without competing for attention the reader has already moved
+         on from. Exit runs shorter than enter so navigation never feels held
+         up, and ease-out governs both directions — an ease-in-out exit lingers
+         at the start, which is exactly where the reader has already left. */
+      exit={prefersReducedMotion ? undefined : { opacity: 0, y: -12 }}
+      transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
     >
       {children}
     </motion.div>

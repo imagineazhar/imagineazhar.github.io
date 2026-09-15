@@ -23,12 +23,8 @@ export function AboutSection() {
           alt="Portrait of Muhammad Azhar"
           width={160}
           height={160}
-          className="w-full max-w-[160px] object-cover"
-          style={{
-            aspectRatio: "1 / 1",
-            borderRadius: "var(--radius-card)",
-            border: "var(--rule-hairline) solid var(--paper-line)",
-          }}
+          className="tif-image-edge w-full max-w-[160px] object-cover"
+          style={{ aspectRatio: "1 / 1", borderRadius: "var(--radius-card)" }}
         />
 
         <div className="min-w-0">
@@ -58,7 +54,7 @@ export function AboutSection() {
                   /* The icon is decorative, so the anchor carries the only
                      warning that the link leaves the site. */
                   aria-label={`${label} (opens in a new tab)`}
-                  className="tif-btn tif-btn--quiet"
+                  className="tif-btn tif-btn--quiet tif-btn--icon-lead"
                 >
                   <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                   {label}

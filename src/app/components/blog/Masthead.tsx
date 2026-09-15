@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, BarChart3, Menu, PenLine, User, X } from "lucide-react";
 import { useActiveSection } from "@/app/hooks/useActiveSection";
 
@@ -23,14 +24,51 @@ const TAP_TARGET = 44;
 
 /* Both states carry the border so switching the active item never shifts the
    row. Weight and colour are .tif-accent-rule's, so the nav reads as part of
-   the system rather than as a browser-default underline. */
+   the system rather than as a browser-default underline.
+
+   The transition rides here rather than on a Tailwind transition-colors
+   utility: that one carries Tailwind's own 150ms cubic-bezier(0.4, 0, 0.2, 1),
+   which is not the curve the rest of the site moves on, and it watches four
+   properties that never change. These two are the ones that do. */
 const navItemStyle = (isActive: boolean) => ({
   color: isActive ? "var(--ink)" : "var(--gray)",
   borderBottom: `var(--rule-accent) solid ${isActive ? "var(--slate)" : "transparent"}`,
+  transition:
+    "color var(--motion-fast) var(--ease-out-soft), border-color var(--motion-fast) var(--ease-out-soft)",
 });
 
-const BAR_ITEM = "tif-caption inline-flex items-center gap-2 px-3 transition-colors";
-const SHEET_ITEM = "tif-caption flex items-center gap-2 px-1 transition-colors";
+const BAR_ITEM = "tif-caption inline-flex items-center gap-2 px-3";
+const SHEET_ITEM = "tif-caption flex items-center gap-2 px-1";
+
+/* The one glyph on the site that swaps on a state change, so it cross-fades
+   instead of cutting. initial={false} keeps it still on page load: the bar
+   renders closed, which is a default state and not a transition into one.
+
+   popLayout pulls the outgoing icon out of flow so the pair never widens the
+   button mid-swap. It does that by positioning that icon absolutely, which is
+   why the button below is relative — without it the exiting glyph would be
+   placed against whatever ancestor happened to be positioned. */
+function ToggleIcon({ open }: { open: boolean }) {
+  const prefersReducedMotion = useReducedMotion();
+  const Glyph = open ? X : Menu;
+
+  if (prefersReducedMotion) return <Glyph className="h-5 w-5" />;
+
+  return (
+    <AnimatePresence mode="popLayout" initial={false}>
+      <motion.span
+        key={open ? "close" : "open"}
+        className="flex"
+        initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+        exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+        transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+      >
+        <Glyph className="h-5 w-5" />
+      </motion.span>
+    </AnimatePresence>
+  );
+}
 
 export function Masthead() {
   const [open, setOpen] = useState(false);
@@ -75,7 +113,7 @@ export function Masthead() {
             label
           ) : (
             <>
-              <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
+              <Icon aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 shrink-0" />
               <span className="flex items-center" style={{ minHeight: TAP_TARGET }}>
                 {label}
               </span>
@@ -86,7 +124,12 @@ export function Masthead() {
     });
 
   const contactCta = (className: string, style?: React.CSSProperties) => (
-    <Link to="/#contact" onClick={() => setOpen(false)} className={className} style={style}>
+    <Link
+      to="/#contact"
+      onClick={() => setOpen(false)}
+      className={`${className} tif-btn--icon-trail`}
+      style={style}
+    >
       Get in touch
       <ArrowRight aria-hidden="true" className="h-4 w-4" />
     </Link>
@@ -137,7 +180,9 @@ export function Masthead() {
         {/* The CTA is an action rather than a destination, so it sits outside
             the nav landmark. */}
         <div className="col-start-3 flex items-center justify-end">
-          {contactCta("tif-btn tif-btn--quiet hidden md:inline-flex", { paddingInline: 16 })}
+          {contactCta("tif-btn tif-btn--quiet hidden md:inline-flex", {
+            paddingInline: "16px 14px",
+          })}
 
           <button
             type="button"
@@ -145,10 +190,10 @@ export function Masthead() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="primary-nav-sheet"
-            className="tif-btn tif-btn--quiet md:hidden"
+            className="tif-btn tif-btn--quiet relative md:hidden"
             style={{ padding: 10, minWidth: TAP_TARGET }}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <ToggleIcon open={open} />
           </button>
         </div>
       </div>

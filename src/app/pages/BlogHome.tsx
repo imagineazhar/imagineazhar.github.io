@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Archive, ArrowUpRight, Mail } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { AboutSection } from "@/app/components/blog/AboutSection";
 import { LabShowcase } from "@/app/components/blog/LabShowcase";
 import { FeaturedPost, FeaturedPostSkeleton } from "@/app/components/blog/PostCard";
@@ -14,6 +14,27 @@ import { buildUrl, setPageMeta } from "@/app/utils/seo";
 /* The home ledger is a curated invitation, not an index — six entries with
    deks read faster than twelve bare titles, and the archive holds the rest. */
 const LIST_COUNT = 6;
+
+/* The page's one staged entrance, split into two chunks rather than fading the
+   block whole: the 100ms gap is what makes the statement read as the thing
+   being said and the lede as the note under it. Animating the container alone
+   costs the same and says less.
+
+   The literals repeat --motion-slow and --ease-out-soft, which framer cannot
+   read out of CSS. Change those tokens and these move with them. */
+const EASE_OUT_SOFT: [number, number, number, number] = [0.25, 1, 0.5, 1];
+
+const HERO_STAGGER: Variants = { visible: { transition: { staggerChildren: 0.1 } } };
+
+const HERO_ITEM: Variants = {
+  hidden: { opacity: 0, y: 12, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.3, ease: EASE_OUT_SOFT },
+  },
+};
 
 export function BlogHome({ feed }: { feed: FeedState }) {
   const prefersReducedMotion = useReducedMotion();
@@ -39,16 +60,19 @@ export function BlogHome({ feed }: { feed: FeedState }) {
         style={{ paddingTop: "var(--space-5)", paddingBottom: "var(--space-6)" }}
       >
         {/* ---- Masthead statement -------------------------------------- */}
+        {/* initial={false} under reduced motion mounts both chunks already at
+            their visible values, so there is no entrance to sit through. */}
         <motion.div
-          initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
-          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+          variants={HERO_STAGGER}
+          initial={prefersReducedMotion ? false : "hidden"}
+          animate="visible"
         >
           {/* No accent rule here: the rule marks a section within the page, and
               the sections below wear it. This is the page's own voice, and at
               display-XL it is the one thing on the page at this size — which is
               what makes the sections read as subordinate to it. */}
-          <h1
+          <motion.h1
+            variants={HERO_ITEM}
             className="tif-display"
             style={{
               fontSize: "var(--fs-display-xl)",
@@ -58,12 +82,16 @@ export function BlogHome({ feed }: { feed: FeedState }) {
           >
             I help leaders see what their data{" "}
             <em className="tif-accent-em">is actually saying</em>.
-          </h1>
+          </motion.h1>
 
-          <p className="tif-lede" style={{ marginTop: "var(--space-3)" }}>
+          <motion.p
+            variants={HERO_ITEM}
+            className="tif-lede"
+            style={{ marginTop: "var(--space-3)" }}
+          >
             Dashboards and reports are easy to build. Knowing what to do next is
             the hard part &mdash; that&rsquo;s what I&rsquo;m here for.
-          </p>
+          </motion.p>
         </motion.div>
 
         <hr className="tif-hairline" style={{ marginBlock: "var(--space-5)" }} />
@@ -149,7 +177,7 @@ export function BlogHome({ feed }: { feed: FeedState }) {
                   <PostList posts={recent} />
                   <Link
                     to="/archive"
-                    className="tif-btn tif-btn--quiet"
+                    className="tif-btn tif-btn--quiet tif-btn--icon-lead"
                     style={{ marginTop: "var(--space-3)" }}
                   >
                     <Archive aria-hidden="true" className="h-4 w-4" />
@@ -175,7 +203,7 @@ export function BlogHome({ feed }: { feed: FeedState }) {
                   href={primary.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="tif-btn tif-btn--primary"
+                  className="tif-btn tif-btn--primary tif-btn--icon-trail"
                 >
                   Read on {primary.name}
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
@@ -222,13 +250,18 @@ export function BlogHome({ feed }: { feed: FeedState }) {
                 href={source.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`tif-btn ${index === 0 ? "tif-btn--primary" : "tif-btn--quiet"}`}
+                className={`tif-btn tif-btn--icon-trail ${
+                  index === 0 ? "tif-btn--primary" : "tif-btn--quiet"
+                }`}
               >
                 Follow on {source.name}
                 <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
               </a>
             ))}
-            <a href="mailto:2muhammadazhar@gmail.com" className="tif-btn tif-btn--quiet">
+            <a
+              href="mailto:2muhammadazhar@gmail.com"
+              className="tif-btn tif-btn--quiet tif-btn--icon-lead"
+            >
               <Mail aria-hidden="true" className="h-4 w-4" />
               Email Me
             </a>

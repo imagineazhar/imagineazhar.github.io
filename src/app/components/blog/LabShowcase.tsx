@@ -20,7 +20,7 @@ function LabPlate({ project }: { project: LabProject }) {
           src={project.poster}
           alt=""
           loading="lazy"
-          className="h-full w-full object-cover object-top"
+          className="tif-image-edge h-full w-full object-cover object-top"
         />
       ) : (
         <div

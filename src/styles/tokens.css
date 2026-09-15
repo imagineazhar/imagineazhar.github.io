@@ -29,6 +29,12 @@
   --paper: #ffffff;
   --paper-line: #ddd9d3;
 
+  /* Image edge. Pure black at 10%, deliberately NOT one of the tinted
+     neutrals above: a warm outline picks up the surface under it and reads as
+     dirt along the image edge rather than as a separator. Light mode only —
+     the site paints no dark theme, so there is no white counterpart. */
+  --image-edge: oklch(0 0 0 / 0.1);
+
   /* Contrast, measured against every surface the site actually paints text on
      rather than --canvas alone. The figures the source token file carried were
      off in both directions (it quoted slate at 5.0 and gray at 5.6; both are
@@ -113,8 +119,9 @@
      The CSS transitions below read these directly. The framer transitions in
      App.tsx and BlogHome.tsx cannot — they take seconds and a bezier array —
      so they carry the same numbers as literals: 0.3s/ease-out-soft on the home
-     statement, 0.2s/ease-in-out-soft on the route fade. Change a value here and
-     those two literals have to move with it. */
+     statement, 0.2s/ease-out-soft on the route fade. Both directions of both
+     run on ease-out. Change a value here and those literals have to move with
+     it. */
   --motion-fast: 150ms;
   --motion-base: 220ms;
   --motion-slow: 300ms;
@@ -313,7 +320,30 @@ html {
   transition:
     background-color var(--motion-base) var(--ease-out-soft),
     border-color var(--motion-base) var(--ease-out-soft),
-    color var(--motion-base) var(--ease-out-soft);
+    color var(--motion-base) var(--ease-out-soft),
+    scale var(--motion-fast) var(--ease-out-soft);
+}
+
+/* Tactile press. 0.96 exactly — below 0.95 reads as a flinch rather than a
+   press. .tif-btn--static opts out where the motion would distract. */
+.tif-btn:active {
+  scale: 0.96;
+}
+
+.tif-btn--static:active {
+  scale: 1;
+}
+
+/* Optical alignment: an icon carries less visual weight than the edge of a
+   word, so symmetric padding leaves it looking pushed out of the button. Trim
+   2px on whichever side the icon sits. Icon-only buttons are exempt — they are
+   centred on themselves and set their own padding at the call site. */
+.tif-btn--icon-lead {
+  padding-inline: 20px 22px;
+}
+
+.tif-btn--icon-trail {
+  padding-inline: 22px 20px;
 }
 
 .tif-btn--primary {
@@ -378,6 +408,16 @@ html {
   }
 }
 
+/* --- Images ------------------------------------------------------------ */
+
+/* outline rather than border: it costs no layout at any offset, and the
+   negative offset draws the ring just inside the edge so it follows whatever
+   radius the image carries. */
+.tif-image-edge {
+  outline: var(--rule-hairline) solid var(--image-edge);
+  outline-offset: -1px;
+}
+
 /* --- Card -------------------------------------------------------------- */
 
 .tif-card {
@@ -386,13 +426,21 @@ html {
   background-color: var(--paper);
   border: var(--rule-hairline) solid var(--paper-line);
   border-radius: var(--radius-card);
+}
+
+/* The lift is opt-in. Every .tif-card on the site today is a dashed
+   empty-state box that goes nowhere, and a card that rises to meet the pointer
+   promises a click target that isn't there. Anything that is genuinely a link
+   or a button wears this as well.
+
+   Lift uses transform only — never width/height/top — so nothing reflows. */
+.tif-card--interactive {
   transition:
     border-color var(--motion-base) var(--ease-out-soft),
     transform var(--motion-base) var(--ease-out-soft);
 }
 
-/* Lift uses transform only — never width/height/top — so nothing reflows. */
-.tif-card:hover {
+.tif-card--interactive:hover {
   border-color: var(--slate-soft);
   transform: translateY(-3px);
 }
@@ -405,15 +453,14 @@ html {
     scroll-behavior: auto;
   }
 
-  .tif-card:hover {
+  .tif-card--interactive:hover {
     transform: none;
   }
 
-  /* The card's lift is nulled above; the thumbnail zoom has to go with it.
-     Killing transition-duration alone only makes the scale instant, not
-     absent. Unlayered, so it outranks the Tailwind utility that sets it. */
-  .tif-card:hover img {
-    transform: none;
+  /* Killing transition-duration alone only makes the press instant, not
+     absent. Unlayered, so it outranks the layered rule that sets it. */
+  .tif-btn:active {
+    scale: 1;
   }
 
   .tif *,

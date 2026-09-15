@@ -63,7 +63,11 @@ export function VizPage() {
             the plate was clicked from whether the visitor came from there or
             landed on a shared link, and App.tsx's hash effect parks them on
             the section rather than at the top of the page. */}
-        <Link to="/#work" className="tif-btn tif-btn--quiet" style={{ paddingInline: 16 }}>
+        <Link
+          to="/#work"
+          className="tif-btn tif-btn--quiet tif-btn--icon-lead"
+          style={{ paddingInline: "14px 16px" }}
+        >
           <ArrowLeft aria-hidden="true" className="h-4 w-4" />
           Back to charts
         </Link>

@@ -24,7 +24,8 @@ export function ProgressFloor() {
     damping: 40,
     restDelta: 0.001,
   });
-  const left = useTransform(
+  // A percentage of the track, not of the marker — see the track element below.
+  const travel = useTransform(
     prefersReducedMotion ? scrollYProgress : smoothed,
     [0, 1],
     ["0%", "100%"]
@@ -46,22 +47,31 @@ export function ProgressFloor() {
                 backgroundColor: "var(--hairline-color)",
               }}
             />
-            {/* Track inset by one marker width so left:100% lands the marker
-                flush with the right edge instead of overflowing. */}
-            <div
+            {/* Track inset by one marker width so full travel lands the marker
+                flush with the right edge instead of overflowing.
+
+                The translate rides the track rather than the marker, because a
+                percentage inside a CSS transform resolves against the element's
+                own width — and the track's width is exactly the distance the
+                marker has to cover. Translating the marker itself by 100% would
+                move it one marker-width and stop.
+
+                transform also composites on the GPU, where the left this
+                replaces forced layout on every frame of every scroll, for the
+                whole length of the page. */}
+            <motion.div
               className="absolute bottom-0"
-              style={{ left: 0, right: "var(--floor-marker-width)" }}
+              style={{ left: 0, right: "var(--floor-marker-width)", x: travel }}
             >
-              <motion.span
-                className="absolute bottom-0 block"
+              <span
+                className="absolute bottom-0 left-0 block"
                 style={{
-                  left,
                   width: "var(--floor-marker-width)",
                   height: "var(--rule-marker)",
                   backgroundColor: "var(--floor-marker-color)",
                 }}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

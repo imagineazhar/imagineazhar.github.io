@@ -63,7 +63,7 @@ export function VizShowcase() {
             href={tableauData.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="tif-btn tif-btn--primary"
+            className="tif-btn tif-btn--primary tif-btn--icon-trail"
           >
             View on Tableau Public
             <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
@@ -99,7 +99,7 @@ export function VizShowcase() {
                   src={project.thumbnailUrl}
                   alt=""
                   loading="lazy"
-                  className="h-full w-full object-cover object-top"
+                  className="tif-image-edge h-full w-full object-cover object-top"
                 />
               </div>
 
@@ -125,7 +125,7 @@ export function VizShowcase() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`View all ${tableauData.projects.length} vizzes on Tableau Public (opens in a new tab)`}
-        className="tif-btn tif-btn--quiet"
+        className="tif-btn tif-btn--quiet tif-btn--icon-lead"
         style={{ marginTop: "var(--space-3)" }}
       >
         <BarChart3 aria-hidden="true" className="h-4 w-4" />

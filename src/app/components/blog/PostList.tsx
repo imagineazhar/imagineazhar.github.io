@@ -34,6 +34,7 @@ function OutMark() {
   return (
     <ArrowUpRight
       aria-hidden="true"
+      strokeWidth={1.5}
       className="tif-row-out ml-1 inline-block h-3.5 w-3.5"
       style={{ verticalAlign: "-0.125em" }}
     />

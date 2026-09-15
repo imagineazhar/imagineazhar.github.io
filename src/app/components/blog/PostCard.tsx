@@ -58,7 +58,7 @@ export function FeaturedPost({ post }: { post: Post }) {
             alt=""
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-contain"
+            className="tif-image-edge h-full w-full object-contain"
           />
         </div>
       )}
@@ -73,7 +73,7 @@ export function FeaturedPost({ post }: { post: Post }) {
             in Name) or voice control cannot act on "click Read the essay".
             Naming the piece keeps this and the headline distinct in a link list. */}
         <span className="sr-only">: {post.title}</span>
-        <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+        <ArrowUpRight aria-hidden="true" strokeWidth={1.5} className="h-4 w-4" />
         <NewTabNote />
       </a>
     </article>

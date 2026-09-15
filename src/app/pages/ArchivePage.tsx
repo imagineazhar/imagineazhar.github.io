@@ -96,7 +96,7 @@ export function ArchivePage({ feed }: { feed: FeedState }) {
                 href={source.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="tif-btn tif-btn--primary"
+                className="tif-btn tif-btn--primary tif-btn--icon-trail"
               >
                 Read on {source.name}
                 <ArrowUpRight aria-hidden="true" className="h-4 w-4" />

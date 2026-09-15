@@ -40,7 +40,7 @@ export function SiteFooter({ postCount }: { postCount: number }) {
                   carried. The essays themselves are the archive, below. */}
               <li>
                 <Link to="/" className={LINK}>
-                  <Home aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  <Home aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 shrink-0" />
                   Home
                 </Link>
               </li>
@@ -51,13 +51,13 @@ export function SiteFooter({ postCount }: { postCount: number }) {
                   page, where the masthead is the only way back. */}
               <li>
                 <Link to="/#work" className={LINK}>
-                  <LineChart aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  <LineChart aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 shrink-0" />
                   Interactive charts
                 </Link>
               </li>
               <li>
                 <Link to="/archive" className={LINK}>
-                  <Archive aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  <Archive aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 shrink-0" />
                   Archive
                 </Link>
               </li>
@@ -72,7 +72,7 @@ export function SiteFooter({ postCount }: { postCount: number }) {
                       aria-label={`${source.name} (opens in a new tab)`}
                       className={LINK}
                     >
-                      <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
+                      <Icon aria-hidden="true" strokeWidth={1.5} className="h-4 w-4 shrink-0" />
                       {source.name}
                     </a>
                   </li>

@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { NewTabNote } from "@/app/components/blog/PostCard";
+import { NewTabNote } from "@/app/components/blog/NewTabNote";
 import { outboundProps } from "@/app/utils/outbound";
 import type { Post } from "@/app/hooks/useFeed";
 

@@ -4,7 +4,11 @@ import { Archive, ArrowUpRight, Mail } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { AboutSection } from "@/app/components/blog/AboutSection";
 import { LabShowcase } from "@/app/components/blog/LabShowcase";
-import { FeaturedPost, FeaturedPostSkeleton } from "@/app/components/blog/PostCard";
+import {
+  FEATURED_COUNT,
+  FeaturedRow,
+  FeaturedRowSkeleton,
+} from "@/app/components/blog/FeaturedRow";
 import { PostList, PostListSkeleton } from "@/app/components/blog/PostList";
 import { VizShowcase } from "@/app/components/blog/VizShowcase";
 import { enabledSources } from "@/app/data/feeds";
@@ -39,8 +43,8 @@ const HERO_ITEM: Variants = {
 export function BlogHome({ feed }: { feed: FeedState }) {
   const prefersReducedMotion = useReducedMotion();
   const primary = enabledSources()[0];
-  const [featured, ...rest] = feed.posts;
-  const recent = rest.slice(0, LIST_COUNT);
+  const featured = feed.posts.slice(0, FEATURED_COUNT);
+  const recent = feed.posts.slice(FEATURED_COUNT, FEATURED_COUNT + LIST_COUNT);
 
   useEffect(() => {
     setPageMeta({
@@ -146,7 +150,7 @@ export function BlogHome({ feed }: { feed: FeedState }) {
               <p className="sr-only" role="status">
                 Loading recent writing…
               </p>
-              <FeaturedPostSkeleton />
+              <FeaturedRowSkeleton />
               <div style={{ marginTop: "var(--space-5)" }}>
                 {/* Was hard-coded to 7 against a list of LIST_COUNT, so the
                     skeleton the comments describe as keeping the page still was
@@ -168,9 +172,9 @@ export function BlogHome({ feed }: { feed: FeedState }) {
             </div>
           )}
 
-          {!feed.loading && featured && (
+          {!feed.loading && featured.length > 0 && (
             <>
-              <FeaturedPost post={featured} />
+              <FeaturedRow posts={featured} />
 
               {recent.length > 0 && (
                 <div style={{ marginTop: "var(--space-5)" }}>
@@ -188,7 +192,7 @@ export function BlogHome({ feed }: { feed: FeedState }) {
             </>
           )}
 
-          {!feed.loading && !featured && (
+          {!feed.loading && featured.length === 0 && (
             <div className="tif-card items-start gap-4 p-8" style={{ borderStyle: "dashed" }}>
               <p className="tif-h2" style={{ fontSize: "var(--fs-body-lg)" }}>
                 {feed.allFailed ? "The feed did not load" : "No writing published yet"}

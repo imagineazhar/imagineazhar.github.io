@@ -29,6 +29,15 @@
   --paper: #ffffff;
   --paper-line: #ddd9d3;
 
+  /* Featured colour blocks. Pastels, and deliberately outside the slate family:
+     the art that sits on them is thresholded to pure black and white, and a
+     mid-tone ground would lose the black half of every picture. Decorative
+     grounds only — no type is ever set on them, so they carry no contrast
+     obligation. Warm enough not to read as a foreign palette on --canvas. */
+  --pastel-slate: #c3d3e2;
+  --pastel-lilac: #cfc4ea;
+  --pastel-clay: #f0b3a6;
+
   /* Image edge. Pure black at 10%, deliberately NOT one of the tinted
      neutrals above: a warm outline picks up the surface under it and reads as
      dirt along the image edge rather than as a separator. Light mode only —
@@ -444,6 +453,137 @@ html {
   border-color: var(--slate-soft);
   transform: translateY(-3px);
 }
+/* --- Featured row -------------------------------------------------------
+   Three cards under the writing heading: a pastel colour block carrying the
+   post's thumbnail, a headline set white-on-black one box per line, and a mono
+   meta line. The device throughout is overhang — the art and the headline both
+   sit a few pixels left of the colour block and break out of its bounds, which
+   is what makes the card read as assembled rather than as a photo with a
+   caption under it. */
+
+.tif-feat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .tif-feat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .tif-feat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Positioned so the headline's stretched ::after can cover the whole card.
+   Column, because grid stretches every card to the tallest in the row and the
+   meta line has to sit on one baseline across all three — headlines run four
+   lines or six depending on the title, and letting each meta float up under
+   its own headline turns the row into a staircase. */
+.tif-feat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* overflow stays visible on purpose: the art is meant to escape the block.
+
+   The graph-paper grid does two jobs. It is in the reference, sitting under
+   the art and reading as the sheet the collage was pasted onto. And it is what
+   carries a card whose post has no thumbnail at all — most Substack items
+   arrive without one, and a bare rectangle of pastel reads as a failed image
+   rather than as a choice. Ink at 6% rather than --grid, because the pastels
+   are three different hues and a fixed warm grey goes muddy on the clay one.
+   background-color stays free for the per-card tone set on the element. */
+.tif-feat-panel {
+  position: relative;
+  aspect-ratio: 7 / 5;
+  margin-left: 12px;
+  background-image:
+    repeating-linear-gradient(to right, rgb(29 28 26 / 0.06) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(to bottom, rgb(29 28 26 / 0.06) 0 1px, transparent 1px 14px);
+}
+
+/* Width is set on the element rather than here, and it has to be a definite
+   length: an absolutely positioned replaced element with left, right and
+   `width: auto` drops `right` and falls back to the image's intrinsic width,
+   which is how the art stopped spanning its block at all. */
+.tif-feat-art {
+  position: absolute;
+  object-fit: cover;
+}
+
+/* Pulled up over the foot of the art. The negative margin is in em so it
+   tracks the headline's own size rather than a px guess made at one width. */
+.tif-feat-title {
+  position: relative;
+  z-index: 1;
+  margin-top: -1.9em;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 1.75rem);
+  letter-spacing: var(--ls-h1);
+  /* 1.5 is the floor that keeps consecutive black boxes from fusing: the
+     inline content area is ~1.2em and the clone padding adds 0.24em. */
+  line-height: 1.5;
+  /* Balancing would even the lines out and kill the ragged right edge that
+     makes the stack of boxes read as a stack. */
+  text-wrap: initial;
+}
+
+/* box-decoration-break is what gives one black box per line instead of one
+   box behind the whole block. */
+.tif-feat-mark {
+  display: inline;
+  background-color: var(--ink);
+  color: var(--paper);
+  padding: 0.12em 0.22em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-decoration: none;
+  transition: background-color var(--motion-base) var(--ease-out-soft);
+}
+
+/* Stretched link: the card's one anchor, covering the card's whole box. */
+.tif-feat-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* The card's only hover affordance now that the Read tag is gone, so it
+   carries the whole "this is a link" signal on its own. */
+.tif-feat-card:hover .tif-feat-mark,
+.tif-feat-mark:focus-visible {
+  background-color: var(--slate-deep);
+}
+
+/* Mono like .tif-micro, but neither uppercased nor tracked out: the reference
+   device is a code comment, and "// AUG 31, 2026" reads as a label instead. */
+.tif-feat-meta {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--gray);
+  /* auto, not a fixed top margin: this is what parks it on the row's shared
+     baseline. The padding keeps its distance from a headline that does run
+     the full height. */
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.tif-feat-topic {
+  text-transform: capitalize;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: var(--rule-hairline);
+}
+
 } /* end @layer components */
 
 /* Left unlayered so the !important reset always wins. */
